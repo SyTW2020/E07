@@ -1,9 +1,19 @@
-const databaseHost = '172.16.117.1';
-const databasePort = '27017';
-const databaseUser = 'AdminGamingIt';
-const databasePassword = 'admin';
-const databaseName = 'gamingit';
-const databaseConnectionOpts = '';
+const fs = require('fs');
+const file = `/home/usuario/.deployment.env`;
+
+const deploymentEnv = fs.readFileSync(file, 'utf8');
+let lines = deploymentEnv.split('\n');
+for (var line of lines) {
+    let splited = line.split(' = ');
+    process.env[splited[0]] = splited[1].replace(/\"/g, "");
+}
+
+const databaseHost = process.env.DATABASE_HOST;
+const databasePort = process.env.DATABASE_PORT;
+const databaseUser = process.env.DATABASE_USER;
+const databasePassword = process.env.DATABASE_PASSWORD;
+const databaseName = process.env.DATABASE_NAME;
+const databaseConnectionOpts = process.env.DATABASE_CONNECTION_OPTIONS;
 
 module.exports = {
     remoteUrl: `mongodb://${databaseUser}:${databasePassword}@${databaseHost}:${databasePort}/${databaseName}?${databaseConnectionOpts}`,
