@@ -130,15 +130,12 @@ router.put('/:id', async (req, res) => {
 });
 
 router.delete('/', async (req, res) => {
-    const users = await User.find();
-    for (x of users)
-        await User.findByIdAndRemove(x._id);
+    await User.remove({});
     res.json({
         "response": [
             {
                 "request": req.body,
-                "deletedUsers": users,
-                "numberOfUsers": users.length
+                "deletedUsers": req.body
             }
         ],
         "links": [

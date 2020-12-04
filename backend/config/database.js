@@ -1,4 +1,4 @@
-const databaseHost = '172.16.134.1';
+const databaseHost = '172.16.117.1';
 const databasePort = '27017';
 const databaseUser = 'AdminGamingIt';
 const databasePassword = 'admin';

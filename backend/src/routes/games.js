@@ -69,7 +69,6 @@ router.get('/:id', async (req, res) => {
     });
 });
 
-
 router.post('/', async (req, res) => {
     const game = new Game(req.body);
     game.id = await setId(Game);
@@ -131,15 +130,12 @@ router.put('/:id', async (req, res) => {
 });
 
 router.delete('/', async (req, res) => {
-    const games = await Game.find();
-    for (x of games)
-        await Game.findByIdAndRemove(x._id);
+    await Game.remove({});
     res.json({
         "response": [
             {
                 "request": req.body,
-                "deletedGames": games,
-                "numberOfGames": games.length
+                "deletedGames": req.body
             }
         ],
         "links": [
