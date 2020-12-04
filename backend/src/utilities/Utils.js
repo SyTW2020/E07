@@ -1,16 +1,15 @@
 // Función para borrar el id de mongo
-async function getMongoIdById(id, User) {
-    const users = await User.find();
-    for (x of users) 
+async function getMongoIdById(id, Model) {
+    const users = await Model.find();
+    for (x of users)
         if (id == x.id)
             return x._id;
-    console.log('no hay return')
 }
 
-async function setId(User) {
-    const users = await User.find();
+async function setId(Model) {
+    const users = await Model.find();
     let max = 0;
-    for (x of users) 
+    for (x of users)
         if (x.id > max)
             max = x.id;
     return max + 1;

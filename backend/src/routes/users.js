@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('../models/User');
 const { getMongoIdById, setId } = require('./../utilities/Utils');
 
-router.get('/', async(req, res) => { 
+router.get('/', async (req, res) => {
     const users = await User.find();
     res.json({
         "response": [
@@ -30,16 +30,14 @@ router.get('/', async(req, res) => {
     });
 });
 
-router.get('/:id', async(req, res) => { 
+router.get('/:id', async (req, res) => {
     mongoId = await getMongoIdById(req.params.id, User);
-    console.log(mongoId)
     const user = await User.findById(mongoId);
     res.json({
         "response": [
             {
                 "request": req.body,
-                "user": user,
-                "userId": user.id
+                "user": user
             }
         ],
         "links": [
@@ -54,7 +52,7 @@ router.get('/:id', async(req, res) => {
                 "href": `/users/${user.id + 1}`,                // Tal vez el id + 1 haya sido eliminado
                 "method": "GET",
                 "description": `View user ${user.id + 1} information`
-            }, 
+            },
             {
                 "rel": "users",
                 "href": "/users",
@@ -74,17 +72,16 @@ router.get('/:id', async(req, res) => {
 router.post('/', async (req, res) => {
     const user = new User(req.body);
     user.id = await setId(User);
-    await user.save(); 
-    res.json({ 
+    await user.save();
+    res.json({
         _id: user._id,
         id: user.id,
         datos: req.body,
-        status: "Guardado usuario nuevo",
+        status: "New user saved",
         "response": [
             {
                 "request": req.body,
-                "user": user,
-                "userId": user.id
+                "user": user
             }
         ],
         "links": [
@@ -100,34 +97,33 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     mongoId = await getMongoIdById(req.params.id, User);
-    await User.findByIdAndUpdate(mongoId, req.body, {new: true});
+    await User.findByIdAndUpdate(mongoId, req.body, { new: true });
     res.json({
         "response": [
             {
                 "request": req.body,
-                "user": user,
-                "userId": users.id,
-                "userInformation": user.body
+                "user": req.body.user,
+                "userInformation": req.body
             }
         ],
         "links": [
             {
                 "rel": "self",
-                "href": `/users/${user.id}`,
+                "href": `/users/${req.body.id}`,
                 "method": "PUT",
-                "description": `Modify user ${user.id}`
+                "description": `Modify user ${req.body.id}`
             },
             {
                 "rel": "get_user",
-                "href": `/users/${user.id}`,
+                "href": `/users/${req.body.id}`,
                 "method": "GET",
-                "description": `View user ${user.id}`
+                "description": `View user ${req.body.id}`
             },
             {
                 "rel": "delete_user",
-                "href": `/users/${user.id}`,
+                "href": `/users/${req.body.id}`,
                 "method": "DELETE",
-                "description": `Delete user ${user.id}`
+                "description": `Delete user ${req.body.id}`
             }
         ]
     });
@@ -141,7 +137,7 @@ router.delete('/', async (req, res) => {
         "response": [
             {
                 "request": req.body,
-                "allUsers": users,
+                "deletedUsers": users,
                 "numberOfUsers": users.length
             }
         ],
@@ -154,9 +150,9 @@ router.delete('/', async (req, res) => {
             }
         ]
     });
-})
+});
 
-router.delete('/:id', async(req, res) => {
+router.delete('/:id', async (req, res) => {
     mongoId = await getMongoIdById(req.params.id, User);
     await User.findByIdAndRemove(mongoId);
     res.json({
