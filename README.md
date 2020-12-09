@@ -1,7 +1,7 @@
 
 # Gaming It
 
-# Equipo 07:
+## Equipo 07:
 
 * Elena Montserrat Sacramento Delgado
 * Míriam Nuñez García
