@@ -1,9 +1,9 @@
 <template>
   <div class = "bodyHome">
     <div class = "containerHome">
-      <h1 class="txtHome"> Gaming It </h1>
-      <a class="btn-neon"><b> > PLAY </b></a><br/>
-      <!-- <button type="button" class="btn-funky-moon"> Inicia sesión </button><br/> -->
+      <!-- <h1 class="txtHome"> Gaming It</h1> -->
+      <a class="btn-neon"><b> > Play </b></a><br/>
+      <router-link to="/signin" class="btn-neon btn-secundary"><b> > Inicia sesión o regístrate </b></router-link><br/>
     </div>
   </div>
 </template>
@@ -39,7 +39,7 @@ export default {
   padding: 10%;
   margin: auto;
   align-items: center;
-  background-color: rgb(0, 0, 0, 0.7);
+  background-color: rgb(0, 0, 0, 0.8);
 }
 
 .btn-funky-moon {
@@ -53,21 +53,23 @@ export default {
   margin: auto;
 }
 .btn-neon { 
-    background-color: rgb(0, 0, 0, 0.2);
-    padding: 20px 20px; 
-    display: inline-block; 
-    color: #008000; 
-    letter-spacing: 2px; 
-    /* text-transform: uppercase; 
-    text-decoration: none;  */
-    font-size: 3em; 
-    overflow: hidden; 
+  background-color: rgb(0, 0, 0, 0.7);
+  padding: 20px 20px; 
+  display: inline-block; 
+  color: whitesmoke; 
+  letter-spacing: 2px; 
+  font-size: 2em; 
+  overflow: hidden; 
 } 
 
 /*creating animation effect*/ 
 .btn-neon:hover { 
-    color: #111; 
-    background: #39ff14; 
-    box-shadow: 0 0 50px #39ff14; 
+  color: #111; 
+  background: #57E2E5; 
+  box-shadow: 0 0 50px #57E2E5; 
+} 
+
+.btn-secundary {  
+  font-size: 1.5em; 
 } 
 </style>

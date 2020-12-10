@@ -1,28 +1,19 @@
 <template>
   <div class="flex parent">
     <form @submit.prevent="registerUser" class="form-signup">
-      <div class="flex"> <img class="flex" src="https://cdn.pixabay.com/photo/2020/07/14/15/12/controller-5404616_960_720.png" alt="" width="96" height="72"/></div>
+      <div class="flex"> <img class="flex" src="https://cdn.pixabay.com/photo/2020/07/14/15/12/controller-5404616_960_720.png"
+        width="96" height="72"/></div>
       <h1 class="title flex"> Regístrate </h1>
 
       <label class="form-label"> Introduce tu correo electrónico: </label>
-      <input type="email" v-model="user.email" id="inputEmail" class="form-input" placeholder="Dirección de correo" required="" autofocus=""/>
-      <br/>
-
+      <input type="email" v-model="user.email" id="inputEmail" class="form-input" placeholder="Dirección de correo" required="" autofocus=""/><br/>
       <label class="form-label"> Introduce tu nombre: </label>
-      <input type="text" v-model="user.nickname" id="inputText" class="form-input" placeholder="Nombre" required=""/>
-      <br/>
-
+      <input type="text" v-model="user.nickname" id="inputText" class="form-input" placeholder="Nombre" required=""/><br/>
       <label class="form-label"> Contraseña: </label>
-      <input type="password" v-model="user.password1" name="inputPassword" class="form-input" placeholder="Contraseña" required=""/>
-      <br/>
-
+      <input type="password" v-model="user.password1" name="inputPassword" class="form-input" placeholder="Contraseña" required=""/><br/>
       <label class="form-label"> Repite la contraseña: </label>
-      <input type="password" v-model="user.password2" name="inputPassword2" class="form-input" placeholder="Repite la contraseña" required=""/>
-      <br/>
-
-      <div class="flex"> <button type="submit" class="register-btn"> Regístrate </button></div>
-      <br/>
-
+      <input type="password" v-model="user.password2" name="inputPassword2" class="form-input" placeholder="Repite la contraseña" required=""/><br/>
+      <div class="flex"> <button type="submit" class="register-btn"> Regístrate </button></div><br/>
       <p class="copyright flex"> © GamingIt 2020 </p>
     </form>
   </div>
@@ -40,7 +31,6 @@ class User {
 
 export default {
   name: "SignUp",
-
   data() {
     return {
       user: new User(),
@@ -60,7 +50,6 @@ export default {
 </script>
 
 <style>
-
 .parent {
   display: -ms-flexbox;
   display: flex;

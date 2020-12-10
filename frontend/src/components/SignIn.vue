@@ -1,47 +1,16 @@
 <template>
   <div class="bodySignIn">
     <form @submit.prevent="addUser" class="formSignIn"><br/>
-      <img
-        id="signinimg"
-        src="https://cdn.pixabay.com/photo/2020/07/14/15/12/controller-5404616_960_720.png"
-        alt=""
-        width="96"
-        height="72"
-      />
+      <img id="signinimg" src="https://cdn.pixabay.com/photo/2020/07/14/15/12/controller-5404616_960_720.png" width="96" height="72"/>
       <h1> ¡Inicia sesión Gamer! </h1>
 
       <label> Introduce tu correo electrónico: </label>
-      <input
-        type="email"
-        v-model="user.email"
-        id="inputEmail"
-        class="form-control"
-        placeholder="Dirección de correo"
-        required=""
-        autofocus=""
-      /><br/>
-
+      <input type="email" v-model="user.email" id="inputEmail" class="form-control" placeholder="Dirección de correo" required="" autofocus=""/><br/>
       <label> Contraseña </label>
-      <input
-        type="password"
-        v-model="user.password"
-        id="inputPassword"
-        class="form-control"
-        placeholder="Contraseña"
-        required=""
-      /><br/><br/>
-
-      <button
-        type="submit"
-        class="btn-funky-moon"
-      >
-        Inicia sesión
-      </button><br/>
-      <router-link to="/signup" type="button" class="btn-link">
-        ¿Olvidaste tu contraseña? </router-link>
-      <router-link to="/signup" type="button" class="btn-link">
-        Regístrate </router-link
-      ><br/>
+      <input type="password" v-model="user.password" id="inputPassword" class="form-control" placeholder="Contraseña" required=""/><br/><br/>
+      <button type="submit" class="btn-funky-moon"> Inicia sesión </button><br/>
+      <router-link to="/signup" type="button" class="btn-link"> ¿Olvidaste tu contraseña? </router-link>
+      <router-link to="/signup" type="button" class="btn-link"> Regístrate </router-link><br/>
       <p id="copyright"> © Gaming It 2020 </p>
     </form>
   </div>
