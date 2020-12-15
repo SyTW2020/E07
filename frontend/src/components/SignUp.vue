@@ -1,5 +1,5 @@
 <template>
-  <div class="flex parent">
+  <div class="parent">
     <form @submit.prevent="registerUser" class="form-signup">
       <div class="flex"> <img class="flex" src="https://cdn.pixabay.com/photo/2020/07/14/15/12/controller-5404616_960_720.png"
         width="96" height="72"/></div>
@@ -62,11 +62,15 @@ export default {
 }
 
 .form-signup {
-  padding: 2% 2% 0 2%;
+  display: flex;
+  flex-direction: column;
+
+  padding: 20px;
+  margin: auto;
   border: 4px outset #f61067;
   background-color: #1c221f;
   color: #dedede;
-  width: 600px;
+  width: 330px;
 }
 
 .icon {
@@ -89,6 +93,10 @@ export default {
   height: 30px;
 }
 
+.form-input::-webkit-input-placeholder {
+  font-family: serif;
+}
+
 .copyright {
   color: #e8e8e8;
   font-size: 12px;
@@ -101,7 +109,6 @@ export default {
   border: 3px solid #dedede;
   border-radius: 35px;
   padding: 10px; /* Cambiar por responsive */
-  margin: 20px 0;
-  width: 80%;
+  margin: auto;
 }
 </style>

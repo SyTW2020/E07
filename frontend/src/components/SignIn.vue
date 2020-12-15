@@ -11,7 +11,7 @@
       <button type="submit" class="btn-funky-moon"> Inicia sesión </button><br/>
       <router-link to="/signup" type="button" class="btn-link"> ¿Olvidaste tu contraseña? </router-link>
       <router-link to="/signup" type="button" class="btn-link"> Regístrate </router-link><br/>
-      <p id="copyright"> © Gaming It 2020 </p>
+      <p id="copyright" class="copyright"> © Gaming It 2020 </p>
     </form>
   </div>
 </template>
@@ -105,9 +105,19 @@ export default {
   padding: 10px; /* Cambiar por responsive */
   margin: auto;
 }
+
 .btn-link, #signinimg, #copyright {
   color: #dedede; 
   padding: 10px; /* Cambiar por responsive */
   margin: auto;
+}
+
+.copyright {
+  color: #e8e8e8;
+  font-size: 12px;
+}
+
+.form-control::-webkit-input-placeholder {
+  font-family: serif;
 }
 </style>

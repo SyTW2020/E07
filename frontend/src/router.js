@@ -14,17 +14,17 @@ export default new Router({
         {
             path: "/signin",
             name: "signin",
-            component: () => import("./views/SignIn.vue"),
+            component: () => import("./components/SignIn.vue"),
         },
         {
             path: "/signup",
             name: "signup",
-            component: () => import("./views/SignUp.vue")
+            component: () => import("./components/SignUp.vue")
         },
         {
             path: "/myuser",        // CAMBIAR NOMBRES
             name: "myuser",
-            component: () => import("./views/User.vue")
+            component: () => import("./components/User.vue")
         }
     ]
 });

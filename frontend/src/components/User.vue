@@ -110,4 +110,8 @@ export default {
 .user-photo {
     margin: auto;
 }
+
+.form-control::-webkit-input-placeholder {
+  font-family: serif;
+}
 </style>
