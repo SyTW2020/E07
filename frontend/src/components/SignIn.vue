@@ -4,8 +4,8 @@
       <img id="signinimg" src="https://cdn.pixabay.com/photo/2020/07/14/15/12/controller-5404616_960_720.png" width="96" height="72"/>
       <h1> ¡Inicia sesión Gamer! </h1>
 
-      <label> Introduce tu correo electrónico: </label>
-      <input type="email" v-model="user.email" id="inputEmail" class="form-control" placeholder="Dirección de correo" required="" autofocus=""/><br/>
+      <!-- <label id="prueba"> Introduce tu correo electrónico: </label> -->
+      <input type="email" v-model="user.email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Dirección de correo" required="" autofocus=""/><br/>
       <label> Contraseña </label>
       <input type="password" v-model="user.password" id="inputPassword" class="form-control" placeholder="Contraseña" required=""/><br/><br/>
       <button type="submit" class="btn-funky-moon"> Inicia sesión </button><br/>
