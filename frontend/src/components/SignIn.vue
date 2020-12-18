@@ -39,15 +39,28 @@ export default {
       fetch(`/users/${this.user.nickname}&${this.user.password}`)
         .then(res => {
           if (res.status == 400)
+            return 400;
+          else 
+            return res.json();
+        })
+        .then(data => {
+          if (data == 400)
             window.alert('Usuario o contraseña incorrectos');
           else {
-            // Hacer algo jwt
-            this.$store.dispatch('signInAction');
+            this.$store.dispatch('signInAction', {
+              token: data.response[0].token
+            });
             this.$router.push('/games');
           }
         })
         .catch(err => console.log(err));
     }
+
+    // fetch(`/users/${this.user.nickname}&${this.user.password}`)
+    //     .then(res => { 
+    //       return res.json()
+    //     })
+    //     .then(data => console.log(data.response[0].token));
   }
 };
 </script>

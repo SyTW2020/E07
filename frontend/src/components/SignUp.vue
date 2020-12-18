@@ -5,12 +5,14 @@
         width="96" height="72"/></div>
       <h1 class="title flex"> Regístrate </h1>
 
+      <label class="form-label"> Introduce tu nombre de usuario: </label>
+      <input type="text" v-model="user.nickname" id="inputNickname" class="form-input" placeholder="Nombre de usuario" required=""/><br/>
       <label class="form-label"> Introduce tu correo electrónico: </label>
       <input type="email" v-model="user.email" id="inputEmail" class="form-input" placeholder="Dirección de correo" required="" autofocus=""/><br/>
       <label class="form-label"> Introduce tu nombre: </label>
-      <input type="text" v-model="user.nickname" id="inputNickname" class="form-input" placeholder="Nombre" required=""/><br/>
-      <label class="form-label"> Contraseña: </label>
-      <input type="password" v-model="user.password1" id="inputPassword1" class="form-input" placeholder="Contraseña" required=""/><br/>
+      <input type="text" v-model="user.name" id="inputName" class="form-input" placeholder="Nombre" required=""/><br/>
+      <label class="form-label"> Introduce tu contraseña: </label>
+      <input type="password" v-model="user.password" id="inputPassword1" class="form-input" placeholder="Contraseña" required=""/><br/>
       <label class="form-label"> Repite la contraseña: </label>
       <input type="password" v-model="user.password2" id="inputPassword2" class="form-input" placeholder="Repite la contraseña" required=""/><br/>
       <div class="flex"> <button type="submit" class="register-btn"> Regístrate </button></div><br/>
@@ -21,9 +23,10 @@
 
 <script>
 class User {
-  constructor(email = '', password1 = '', password2 = '', nickname = '') {
+  constructor(email = '', name = '', password = '', password2 = '', nickname = '') {
     this.email = email;
-    this.password1 = password1;
+    this.name = name;
+    this.password = password;
     this.password2 = password2;
     this.nickname = nickname;
   }
@@ -41,10 +44,11 @@ export default {
     registerUser() {
       if (!this.checkPasswords()) {
         window.alert('Las contraseñas no coinciden');
-        this.user.password1 = '';
+        this.user.password = '';
         this.user.password2 = '';
       }
       else {
+
         fetch("/users", {
           method: "POST",
           body: JSON.stringify(this.user),
@@ -64,10 +68,11 @@ export default {
           });
       }
     },
+    
     checkPasswords() {
-      return this.user.password1 == this.user.password2 ? true: false;
-    },
-  },
+      return this.user.password == this.user.password2 ? true: false;
+    }
+  }
 };
 </script>
 

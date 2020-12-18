@@ -20,6 +20,7 @@
         </template>
       </div>
     </div>
+    <!-- <p> {{ $store.getters.token }} </p> -->
   </div>
 </template>
 
