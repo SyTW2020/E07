@@ -38,6 +38,19 @@ export default {
   },
 
   methods: {
+    // addUser() {
+    //   fetch("/users", {
+    //     method: "POST",
+    //     body: JSON.stringify(this.user),
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-type": "application/json",
+    //     },
+    //   }).then((res) => res.json());
+    //   // .then(data => this.getUsers());
+    //   this.user = new User();
+    // },
+
     registerUser() {
       if (this.user.password1 == this.user.password2) {
         alert("las contraseñas coinciden, puedes registrarte");

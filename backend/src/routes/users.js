@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
-const { getMongoIdById, setId } = require('./../utilities/Utils');
+const { getMongoIdById, getMongoIdByNicknameAndPassword, setId} = require('./../utilities/Utils');
 
 router.get('/', async (req, res) => {
     const users = await User.find();
@@ -29,8 +29,9 @@ router.get('/', async (req, res) => {
         ]
     });
 });
-
+/*
 router.get('/:id', async (req, res) => {
+    console.log('DEBUG -- GET {:id}')
     mongoId = await getMongoIdById(req.params.id, User);
     const user = await User.findById(mongoId);
     res.json({
@@ -67,6 +68,52 @@ router.get('/:id', async (req, res) => {
             },
         ]
     });
+});
+*/
+
+router.get('/:nickname&:password', async (req, res) => {
+
+    mongoNickname = await getMongoIdByNicknameAndPassword(req.params.nickname, req.params.password, User);
+    if (!mongoNickname)
+        res.status(400).send({ "response": [ { "code": 400, "error": "Usuario no encontrado" } ] } );
+    else {
+        const user = await User.findById(mongoNickname);
+        res.send({
+            "response": [
+                {
+                    "code": 200,
+                    "request": req.body,
+                    "user": user
+                }
+            ],
+            "links": [
+                {
+                    "rel": "self",
+                    "href": `/users/${user.nickname}`,
+                    "method": "GET",
+                    "description": `View user ${user.nickname} information`
+                },
+ /*               {
+                    "rel": "next",
+                    "href": `/users/${user.id + 1}`,                // Tal vez el id + 1 haya sido eliminado
+                    "method": "GET",
+                    "description": `View user ${user.id + 1} information`
+                },
+*/                {
+                    "rel": "users",
+                    "href": "/users",
+                    "method": "GET",
+                    "description": `View all users`
+                },
+                {
+                    "rel": "users",
+                    "href": "/users",
+                    "method": "DELETE",
+                    "description": `Delete user ${user.nickname}`
+                },
+            ]
+        });
+    }
 });
 
 router.post('/', async (req, res) => {

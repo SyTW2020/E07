@@ -10,9 +10,14 @@
       <div class="items">
         <router-link to="/games" active-class="active"> Juegos </router-link>
         <router-link to="/rankings" active-class="active"> Rankings </router-link>
-        <router-link to="/myuser" active-class="active"> Perfil </router-link>
-        <router-link to="/signin" active-class="active" class="nav-items"> <i class="material-icons">account_circle</i> Inicia sesión </router-link>
-        <router-link to="/signup" active-class="active" class="border nav-items"> <i class="material-icons">create</i> Regístrate </router-link>
+        <template v-if="$store.getters.loggedin === true">
+          <router-link to="/myuser" active-class="active" class="nav-items"><i class="material-icons">account_circle</i> Perfil </router-link>
+          <button @click="userLogOut" active-class="active" class="nav-items"><i class="material-icons">exit_to_app</i> Cerrar sesión </button>
+        </template>
+        <template v-else>
+          <router-link to="/signin" active-class="active" class="nav-items"><i class="material-icons">account_circle</i> Inicia sesión </router-link>
+          <router-link to="/signup" active-class="active" class="border nav-items"><i class="material-icons">create</i> Regístrate </router-link>
+        </template>
       </div>
     </div>
   </div>
@@ -20,7 +25,13 @@
 
 <script>
 export default {
-  name: "Menu"
+  name: "Menu",
+  methods: {
+    userLogOut() {
+      this.$store.dispatch('logOutAction');
+      this.$router.push('/signin');
+    }
+  }
 };
 </script>
 
@@ -29,13 +40,20 @@ export default {
   overflow: hidden;
   color: #dedede;
   background-color: #1c221f;
-  padding: 10px 10px;
+  padding: 10px 50px;
 
   display: block;
   margin: 0 auto;
 }
 
-.headerMenu a {
+button {
+  color: #dedede;
+  background-color: #1c221f;
+  border: 0;
+  font-family: serif;
+}
+
+.headerMenu a, .headerMenu button {
   float: left;
   color: #dedede;
   padding: 12px;
@@ -45,12 +63,12 @@ export default {
   border-radius: 2px;
 }
 
-.headerMenu a:hover {
+.headerMenu a:hover, .headerMenu button:hover {
   background-color: #4d5451;
   color: #dedede;
 }
 
-.headerMenu a.active {
+.headerMenu a.active, .headerMenu button:active {
   background-color: #4d5451;
   color: #dedede;
 }
@@ -62,8 +80,9 @@ export default {
 
 .home {
   display: flex;
-  margin: 0 0 0 20px;
+  /*margin: 0 0 0 20px;*/
   align-items: center;
+  background-col: pink;
 }
 
 .logo-img {
@@ -77,7 +96,7 @@ export default {
 }
 
 .border {
-  margin: 0 50px 0 0;
+  /*margin: 0 50px 0 0;*/
   border: 1px solid #dedede;
 }
 

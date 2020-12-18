@@ -1,12 +1,12 @@
 <template>
   <div class="bodySignIn">
-    <form @submit.prevent="addUser" class="formSignIn"><br/>
+    <form @submit.prevent="userSignIn" class="formSignIn"><br/>
       <img id="signinimg" src="https://cdn.pixabay.com/photo/2020/07/14/15/12/controller-5404616_960_720.png" width="96" height="72"/>
       <h1> ¡Inicia sesión Gamer! </h1>
 
-      <!-- <label id="prueba"> Introduce tu correo electrónico: </label> -->
-      <input type="email" v-model="user.email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Dirección de correo" required="" autofocus=""/><br/>
-      <label> Contraseña </label>
+      <label> Introduce tu usuario: </label>
+      <input v-model="user.nickname" id="inputNickname" class="form-control" placeholder="Usuario" required="" autofocus=""/><br/>
+      <label> Introduce tu contraseña </label>
       <input type="password" v-model="user.password" id="inputPassword" class="form-control" placeholder="Contraseña" required=""/><br/><br/>
       <button type="submit" class="btn-funky-moon"> Inicia sesión </button><br/>
       <router-link to="/signup" type="button" class="btn-link"> ¿Olvidaste tu contraseña? </router-link>
@@ -18,8 +18,8 @@
 
 <script>
 class User {
-  constructor(email, password) {
-    this.email = email;
+  constructor(nickname, password) {
+    this.nickname = nickname;
     this.password = password;
   }
 }
@@ -28,37 +28,27 @@ export default {
   name: "SignIn",
   data() {
     return {
-      user: new User(),
-      // users : []
+      user: new User()
     };
   },
 
-  // created() {
-  //     this.getUsers();
-  // },
-
   methods: {
-    addUser() {
-      fetch("/users", {
-        method: "POST",
-        body: JSON.stringify(this.user),
-        headers: {
-          Accept: "application/json",
-          "Content-type": "application/json",
-        },
-      }).then((res) => res.json());
-      // .then(data => this.getUsers());
-      this.user = new User();
-    },
-    // getUsers() {
-    //     fetch('/users')
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             this.users = data;
-    //             console.log(this.users);
-    //         });
-    // }
-  },
+    // Pruebas
+    userSignIn() { 
+      // Accedemos a la API
+      fetch(`/users/${this.user.nickname}&${this.user.password}`)
+        .then(res => {
+          if (res.status == 400)
+            window.alert('Usuario o contaseña incorrectos');
+          else {
+            // Hacer algo jwt
+            this.$store.dispatch('signInAction');
+            this.$router.push('/games');
+          }
+        })
+        .catch(err => console.log(err))
+    }
+  }
 };
 </script>
 
