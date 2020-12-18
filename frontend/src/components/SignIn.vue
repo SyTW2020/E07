@@ -8,7 +8,7 @@
       <input v-model="user.nickname" id="inputNickname" class="form-control" placeholder="Usuario" required="" autofocus=""/><br/>
       <label> Introduce tu contraseña </label>
       <input type="password" v-model="user.password" id="inputPassword" class="form-control" placeholder="Contraseña" required=""/><br/><br/>
-      <button type="submit" class="btn-funky-moon"> Inicia sesión </button><br/>
+      <button type="submit" class="btn-funky-moon" id="submitButton"> Inicia sesión </button><br/>
       <router-link to="/signup" type="button" class="btn-link"> ¿Olvidaste tu contraseña? </router-link>
       <router-link to="/signup" type="button" class="btn-link"> Regístrate </router-link><br/>
       <p id="copyright" class="copyright"> © Gaming It 2020 </p>
@@ -39,14 +39,14 @@ export default {
       fetch(`/users/${this.user.nickname}&${this.user.password}`)
         .then(res => {
           if (res.status == 400)
-            window.alert('Usuario o contaseña incorrectos');
+            window.alert('Usuario o contraseña incorrectos');
           else {
             // Hacer algo jwt
             this.$store.dispatch('signInAction');
             this.$router.push('/games');
           }
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
     }
   }
 };
@@ -77,7 +77,6 @@ export default {
 
   border: 4px outset #f61067;
   background-color: #1c221f;
-
 }
 
 .formSignIn .form-control {

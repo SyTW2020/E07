@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
-const { getMongoIdById, getMongoIdByNicknameAndPassword, setId} = require('./../utilities/Utils');
+const { getMongoIdById, getUser, isUser, setId } = require('./../utilities/Utils');
 
 router.get('/', async (req, res) => {
     const users = await User.find();
@@ -50,7 +50,7 @@ router.get('/:id', async (req, res) => {
             },
             {
                 "rel": "next",
-                "href": `/users/${user.id + 1}`,                // Tal vez el id + 1 haya sido eliminado
+                "href": `/users/${user.id + 1}`, // Tal vez el id + 1 haya sido eliminado
                 "method": "GET",
                 "description": `View user ${user.id + 1} information`
             },
@@ -72,12 +72,10 @@ router.get('/:id', async (req, res) => {
 */
 
 router.get('/:nickname&:password', async (req, res) => {
-
-    mongoNickname = await getMongoIdByNicknameAndPassword(req.params.nickname, req.params.password, User);
-    if (!mongoNickname)
-        res.status(400).send({ "response": [ { "code": 400, "error": "Usuario no encontrado" } ] } );
+    let user = await getUser(req.params.nickname, req.params.password, User);
+    if (!user)
+        res.status(400).send({ "response": [{ "code": 400, "error": "Usuario o contraseña incorrectos" }] });
     else {
-        const user = await User.findById(mongoNickname);
         res.send({
             "response": [
                 {
@@ -117,29 +115,31 @@ router.get('/:nickname&:password', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const user = new User(req.body);
-    user.id = await setId(User);
-    await user.save();
-    res.json({
-        _id: user._id,
-        id: user.id,
-        datos: req.body,
-        status: "New user saved",
-        "response": [
-            {
-                "request": req.body,
-                "user": user
-            }
-        ],
-        "links": [
-            {
-                "rel": "self",
-                "href": "/users",
-                "method": "POST",
-                "description": `Insert a user: ${user.nickname} in data base`
-            }
-        ]
-    });
+    let userexists = await isUser(req.body.nickname, User);
+    if (userexists)
+        res.status(400).send({ "response": [{ "code": 400, "error": "Este usuario ya existe" }] });
+    else {
+        const user = new User(req.body);
+        user.id = await setId(User);
+        await user.save();
+        res.json({
+            "response": [
+                {
+                    "code": 200,
+                    "request": req.body,
+                    "user": user
+                }
+            ],
+            "links": [
+                {
+                    "rel": "self",
+                    "href": "/users",
+                    "method": "POST",
+                    "description": `Insert a user: ${user.nickname} in data base`
+                }
+            ]
+        });
+    }
 });
 
 router.put('/:id', async (req, res) => {
@@ -229,4 +229,4 @@ router.delete('/:id', async (req, res) => {
     });
 });
 
-module.exports = router;
+module.exports = router; module.exports = router;

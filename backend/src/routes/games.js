@@ -74,10 +74,6 @@ router.post('/', async (req, res) => {
     game.id = await setId(Game);
     await game.save();
     res.json({
-        _id: game._id,
-        id: game.id,
-        datos: req.body,
-        status: "New game saved",
         "response": [
             {
                 "request": req.body,

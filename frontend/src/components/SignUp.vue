@@ -8,11 +8,11 @@
       <label class="form-label"> Introduce tu correo electrónico: </label>
       <input type="email" v-model="user.email" id="inputEmail" class="form-input" placeholder="Dirección de correo" required="" autofocus=""/><br/>
       <label class="form-label"> Introduce tu nombre: </label>
-      <input type="text" v-model="user.nickname" id="inputText" class="form-input" placeholder="Nombre" required=""/><br/>
+      <input type="text" v-model="user.nickname" id="inputNickname" class="form-input" placeholder="Nombre" required=""/><br/>
       <label class="form-label"> Contraseña: </label>
-      <input type="password" v-model="user.password1" name="inputPassword" class="form-input" placeholder="Contraseña" required=""/><br/>
+      <input type="password" v-model="user.password1" id="inputPassword1" class="form-input" placeholder="Contraseña" required=""/><br/>
       <label class="form-label"> Repite la contraseña: </label>
-      <input type="password" v-model="user.password2" name="inputPassword2" class="form-input" placeholder="Repite la contraseña" required=""/><br/>
+      <input type="password" v-model="user.password2" id="inputPassword2" class="form-input" placeholder="Repite la contraseña" required=""/><br/>
       <div class="flex"> <button type="submit" class="register-btn"> Regístrate </button></div><br/>
       <p class="copyright flex"> © GamingIt 2020 </p>
     </form>
@@ -38,25 +38,34 @@ export default {
   },
 
   methods: {
-    // addUser() {
-    //   fetch("/users", {
-    //     method: "POST",
-    //     body: JSON.stringify(this.user),
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-type": "application/json",
-    //     },
-    //   }).then((res) => res.json());
-    //   // .then(data => this.getUsers());
-    //   this.user = new User();
-    // },
-
     registerUser() {
-      if (this.user.password1 == this.user.password2) {
-        alert("las contraseñas coinciden, puedes registrarte");
-      } else {
-        alert("las contraseñas no coinciden, vuelve a rellenarlas");
+      if (!this.checkPasswords()) {
+        window.alert('Las contraseñas no coinciden');
+        this.user.password1 = '';
+        this.user.password2 = '';
       }
+      else {
+        fetch("/users", {
+          method: "POST",
+          body: JSON.stringify(this.user),
+          headers: {
+            "Accept": "application/json",
+            "Content-type": "application/json",
+          },
+        })
+          .then((res) => {
+            if (res.status == 400)
+                window.alert('Ese usuario ya existe');
+            else {
+              // Hacer algo jwt
+              this.$store.dispatch('signInAction');
+              this.$router.push('/games');
+            } 
+          });
+      }
+    },
+    checkPasswords() {
+      return this.user.password1 == this.user.password2 ? true: false;
     },
   },
 };

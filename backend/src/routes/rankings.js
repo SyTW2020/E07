@@ -74,10 +74,6 @@ router.post('/', async (req, res) => {
     ranking.id = await setId(Ranking);
     await ranking.save();
     res.json({
-        _id: ranking._id,
-        id: ranking.id,
-        datos: req.body,
-        status: "New ranking saved",
         "response": [
             {
                 "request": req.body,
