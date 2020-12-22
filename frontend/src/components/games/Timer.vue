@@ -163,6 +163,21 @@ body {
   color: $color;
   //text-shadow: 0px 0px 25px $color;
 
+  color: $color;
+  //text-shadow: 0px 0px 25px $color;
+
+  color: $color;
+  //text-shadow: 0px 0px 25px $color;
+
+  color: $color;
+  //text-shadow: 0px 0px 25px $color;
+
+  color: $color;
+  //text-shadow: 0px 0px 25px $color;
+
+  color: $color;
+  //text-shadow: 0px 0px 25px $color;
+
   .time {
     font-size: 6.5em;
   }
