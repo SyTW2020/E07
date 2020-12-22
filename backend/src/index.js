@@ -33,3 +33,12 @@ app.use(express.static(__dirname + '/../../frontend/public')) // Agregamos los f
 app.listen(app.get('port'), () => {
     console.log('Server on port', app.get('port'));
 });
+
+// function createToken(user) {
+//     const payload = {
+//         sub: user.id,
+//         iat: moment().unix(),
+//         exp: moment().add(1,'hour').unix(),
+//     }
+//    return jwt.encode(payload, config.SECRET_TOKEN )
+// }

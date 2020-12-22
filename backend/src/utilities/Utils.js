@@ -4,6 +4,17 @@ async function getMongoIdById(id, Model) {
     for (x of users)
         if (id == x.id)
             return x._id;
+    return false;
+}
+
+async function getUser(nickname, password, Model) {
+    const user = await Model.find({ "nickname": nickname, "password": password });
+    return user.length == 1 ? user[0] : null;
+}
+
+async function isUser(nickname, Model) {
+    const user = await Model.find({ "nickname": nickname });
+    return user.length != 0 ? true : false;
 }
 
 async function setId(Model) {
@@ -16,4 +27,6 @@ async function setId(Model) {
 }
 
 module.exports.getMongoIdById = getMongoIdById;
+module.exports.getUser = getUser;
+module.exports.isUser = isUser;
 module.exports.setId = setId;
