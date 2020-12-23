@@ -11,8 +11,8 @@ const app = express();
 
 // Connecting to MongoDB
 mongoose.connect(database.remoteUrl, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }) // Para que no nos aparezcan los warnings
-    .then(db => console.log('Conectado a mongodb'))
-    .catch(err => console.log(`Error con mongo: ${err}`));
+  .then(db => console.log('Conectado a mongodb'))
+  .catch(err => console.log(`Error con mongo: ${err}`));
 
 // Settings
 app.set('port', process.env.PORT || 3000);      // Puerto de NGINX, más adelante, puerto que conecta con el frontend
@@ -31,14 +31,14 @@ app.use(express.static(__dirname + '/../../frontend/public')) // Agregamos los f
 
 // Server is listening
 app.listen(app.get('port'), () => {
-    console.log('Server on port', app.get('port'));
+  console.log('Server on port', app.get('port'));
 });
 
 // function createToken(user) {
-//     const payload = {
-//         sub: user.id,
-//         iat: moment().unix(),
-//         exp: moment().add(1,'hour').unix(),
-//     }
-//    return jwt.encode(payload, config.SECRET_TOKEN )
+//   const payload = {
+//     sub: user.id,
+//     iat: moment().unix(),
+//     exp: moment().add(1,'hour').unix(),
+//   }
+//   return jwt.encode(payload, config.SECRET_TOKEN )
 // }

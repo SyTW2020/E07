@@ -8,12 +8,6 @@
 * Adán de la Rosa Lugo
 * Paula Elena Expósito Estévez
 
-
-* Elena Montserrat Sacramento Delgado
-* Míriam Nuñez García
-* Adán de la Rosa Lugo
-* Paula Elena Expósito Estévez
-
 ### IPs de las MV NGINX
 
 * [Elena](http://10.6.128.118/)

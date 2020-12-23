@@ -4,8 +4,8 @@ const file = `/home/usuario/.deployment.env`;
 const deploymentEnv = fs.readFileSync(file, 'utf8');
 let lines = deploymentEnv.split('\n');
 for (var line of lines) {
-    let splited = line.split(' = ');
-    process.env[splited[0]] = splited[1].replace(/\"/g, "");
+  let splited = line.split(' = ');
+  process.env[splited[0]] = splited[1].replace(/\"/g, "");
 }
 
 const databaseHost = process.env.DATABASE_HOST;
@@ -16,6 +16,6 @@ const databaseName = process.env.DATABASE_NAME;
 const databaseConnectionOpts = process.env.DATABASE_CONNECTION_OPTIONS;
 
 module.exports = {
-    remoteUrl: `mongodb://${databaseUser}:${databasePassword}@${databaseHost}:${databasePort}/${databaseName}?${databaseConnectionOpts}`,
-    localUrl: 'mongodb://localhost/gamingit'
+  remoteUrl: `mongodb://${databaseUser}:${databasePassword}@${databaseHost}:${databasePort}/${databaseName}?${databaseConnectionOpts}`,
+  localUrl: 'mongodb://localhost/gamingit'
 };
