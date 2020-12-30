@@ -48,7 +48,6 @@ export default {
         this.user.password2 = '';
       }
       else {
-
         fetch("/users", {
           method: "POST",
           body: JSON.stringify(this.user),
@@ -58,11 +57,18 @@ export default {
           },
         })
           .then((res) => {
-            if (res.status == 400)
-                window.alert('Ese usuario ya existe');
+            if (res.status != 200)
+              return res.status;
+            return res.json();
+          })
+          .then(data => {
+            if (data == 404)
+              window.alert('Ese usuario ya existe');
             else {
-              // Hacer algo jwt
-              this.$store.dispatch('signInAction');
+              this.$store.dispatch('signInAction', {
+                token: data.response[0].token,
+                nickname: data.response[0].user.nickname
+              });
               this.$router.push('/games');
             } 
           });

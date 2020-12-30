@@ -33,34 +33,26 @@ export default {
   },
 
   methods: {
-    // Pruebas
-    userSignIn() { 
-      // Accedemos a la API
+    userSignIn() {
       fetch(`/users/${this.user.nickname}&${this.user.password}`)
         .then(res => {
-          if (res.status == 400)
-            return 400;
-          else 
-            return res.json();
+          if (res.status != 200)
+            return res.status;
+          return res.json();
         })
         .then(data => {
-          if (data == 400)
+          if (data == 404)
             window.alert('Usuario o contraseña incorrectos');
           else {
             this.$store.dispatch('signInAction', {
-              token: data.response[0].token
+              token: data.response[0].token,
+              nickname: data.response[0].user.nickname
             });
             this.$router.push('/games');
           }
         })
         .catch(err => console.log(err));
     }
-
-    // fetch(`/users/${this.user.nickname}&${this.user.password}`)
-    //     .then(res => { 
-    //       return res.json()
-    //     })
-    //     .then(data => console.log(data.response[0].token));
   }
 };
 </script>
