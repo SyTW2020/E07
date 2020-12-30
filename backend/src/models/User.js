@@ -9,8 +9,7 @@ const User = new Schema({
   name: String,
   photo: String,
   birthDate: Date,
-  description: String,
-  id: Number
+  description: String
 });
 
 User.methods.encryptPass = async (password) => {

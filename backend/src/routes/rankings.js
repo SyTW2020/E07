@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Ranking = require('../models/Ranking');
-const { getMongoIdById, setId } = require('./../utilities/Utils');
+const { rankingsOfUser, rankingsOfGame } = require('./../utilities/Utils');
 
 router.get('/', async (req, res) => {
   const rankings = await Ranking.find();
@@ -30,48 +30,80 @@ router.get('/', async (req, res) => {
   });
 });
 
-router.get('/:id', async (req, res) => {
-  mongoId = await getMongoIdById(req.params.id, Ranking);
-  const ranking = await Ranking.findById(mongoId);
-  res.json({
-    "response": [
-      {
-        "request": req.body,
-        "ranking": ranking
-      }
-    ],
-    "links": [
-      {
-        "rel": "self",
-        "href": `/rankings/${ranking.id}`,
-        "method": "GET",
-        "description": `View rankings ${ranking.id} information`
-      },
-      {
-        "rel": "next",
-        "href": `/rankings/${ranking.id + 1}`,                // Tal vez el id + 1 haya sido eliminado
-        "method": "GET",
-        "description": `View ranking ${ranking.id + 1} information`
-      },
-      {
-        "rel": "rankings",
-        "href": "/rankings",
-        "method": "GET",
-        "description": `View all rankings`
-      },
-      {
-        "rel": "rankings",
-        "href": "/rankings",
-        "method": "DELETE",
-        "description": `Delete ranking ${ranking.id}`
-      }
-    ]
-  });
+router.get('/user/:nickname', async (req, res) => {
+  const ranking = await rankingsOfUser(req.params.nickname, Ranking);
+  if (!ranking)
+    res.status(404).send({ "response": [{ "code": 404, "error": "El usuario no tiene rankings." }] });
+  else {
+    res.json({
+      "response": [
+        {
+          "request": req.body,
+          "ranking": ranking
+        }
+      ],
+      "links": [
+        {
+          "rel": "self",
+          "href": `/rankings/user/${ranking.nickname}`,
+          "method": "GET",
+          "description": `View rankings ${ranking.nickname} information`
+        },
+        {
+          "rel": "rankings",
+          "href": "/rankings",
+          "method": "GET",
+          "description": `View all rankings`
+        },
+        {
+          "rel": "rankings",
+          "href": "/rankings",
+          "method": "DELETE",
+          "description": `Delete ranking ${ranking.nickname}`
+        }
+      ]
+    });
+  }
+});
+
+router.get('/:game', async (req, res) => {
+  const ranking = await rankingsOfGame(req.params.game, Ranking);
+  if (!ranking)
+    res.status(404).send({ "response": [{ "code": 404, "error": "El juego no tiene rankings." }] });
+  else {
+    res.json({
+      "response": [
+        {
+          "request": req.body,
+          "ranking": ranking
+        }
+      ],
+      "links": [
+        {
+          "rel": "self",
+          "href": `/rankings/user/${ranking.game}`,
+          "method": "GET",
+          "description": `View rankings ${ranking.game} information`
+        },
+        {
+          "rel": "rankings",
+          "href": "/rankings",
+          "method": "GET",
+          "description": `View all rankings`
+        },
+        {
+          "rel": "rankings",
+          "href": "/rankings",
+          "method": "DELETE",
+          "description": `Delete ranking ${ranking.game}`
+        }
+      ]
+    });
+  }
 });
 
 router.post('/', async (req, res) => {
   const ranking = new Ranking(req.body);
-  ranking.id = await setId(Ranking);
   await ranking.save();
   res.json({
     "response": [
@@ -91,35 +123,35 @@ router.post('/', async (req, res) => {
   });
 });
 
-router.put('/:id', async (req, res) => {
-  mongoId = await getMongoIdById(req.params.id, Ranking);
-  await Ranking.findByIdAndUpdate(mongoId, req.body, { new: true });
+router.put('/:nickname', async (req, res) => {
+  const ranking = await rankingsOfUser(req.params.nickname, Ranking);
+  await Ranking.findByIdAndUpdate(ranking, req.body, { new: true });
   res.json({
     "response": [
       {
         "request": req.body,
-        "ranking": req.body.name,
+        "ranking": ranking.nickname,
         "rankingInformation": req.body
       }
     ],
     "links": [
       {
         "rel": "self",
-        "href": `/rankings/${req.body.id}`,
+        "href": `/rankings/${ranking.nickname}`,
         "method": "PUT",
-        "description": `Modify ranking ${req.body.id}`
+        "description": `Modify ranking ${ranking.nickname}`
       },
       {
         "rel": "get_rankings",
-        "href": `/rankings/${req.body.id}`,
+        "href": `/rankings/${ranking.nickname}`,
         "method": "GET",
-        "description": `View ranking ${req.body.id}`
+        "description": `View ranking ${ranking.nickname}`
       },
       {
         "rel": "delete_rankings",
-        "href": `/rankings/${req.body.id}`,
+        "href": `/rankings/${ranking.nickname}`,
         "method": "DELETE",
-        "description": `Delete ranking ${req.body.id}`
+        "description": `Delete ranking ${ranking.nickname}`
       }
     ]
   });
