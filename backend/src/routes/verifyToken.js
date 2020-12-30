@@ -11,11 +11,11 @@ async function verifyToken(req, res, next) {
   try {
     const decoded = await jwt.verify(token, config.secret);
     let user = await isUser(req.params.nickname, User);
-    if (decoded.id == user._id) 
-      next();
-    else
+    if (decoded.id != user._id)
       return res.status(401).send({ auth: false, message: 'Token incorrecto' });
-  } catch (err) {
+    next();
+  }
+  catch (err) {
     return res.status(401).send({ auth: false, message: 'Token incorrecto' });
   }
 }

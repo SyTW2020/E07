@@ -6,9 +6,7 @@ const Game = new Schema({
   multiplayer: Boolean,
   music: String,
   rating: Number,
-  timesPlayed: Number,
-  image: String,
-  id: Number,
+  image: String
 });
 
 module.exports = mongoose.model('Game', Game);

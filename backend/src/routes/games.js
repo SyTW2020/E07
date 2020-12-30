@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Game = require('../models/Game');
-const { getMongoIdById, setId } = require('./../utilities/Utils');
+const { isGame } = require('./../utilities/Utils');
 
 router.get('/', async (req, res) => {
   const games = await Game.find();
@@ -30,9 +30,11 @@ router.get('/', async (req, res) => {
   });
 });
 
-router.get('/:id', async (req, res) => {
-  mongoId = await getMongoIdById(req.params.id, Game);
-  const game = await Game.findById(mongoId);
+router.get('/:name', async (req, res) => {
+  const game = await isGame(req.params.name, Game);
+  if (!game)
+    res.status(404).send({ "response": [{ "code": 404, "error": "El juego no existe." }] });
+    
   res.json({
     "response": [
       {
@@ -43,15 +45,9 @@ router.get('/:id', async (req, res) => {
     "links": [
       {
         "rel": "self",
-        "href": `/games/${game.id}`,
+        "href": `/games/${game.name}`,
         "method": "GET",
-        "description": `View games ${game.id} information`
-      },
-      {
-        "rel": "next",
-        "href": `/games/${game.id + 1}`,                // Tal vez el id + 1 haya sido eliminado
-        "method": "GET",
-        "description": `View game ${game.id + 1} information`
+        "description": `View games ${game.name} information`
       },
       {
         "rel": "games",
@@ -63,7 +59,7 @@ router.get('/:id', async (req, res) => {
         "rel": "games",
         "href": "/games",
         "method": "DELETE",
-        "description": `Delete game ${game.id}`
+        "description": `Delete game ${game.name}`
       }
     ]
   });
@@ -71,7 +67,6 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const game = new Game(req.body);
-  game.id = await setId(Game);
   await game.save();
   res.json({
     "response": [
@@ -91,35 +86,38 @@ router.post('/', async (req, res) => {
   });
 });
 
-router.put('/:id', async (req, res) => {
-  mongoId = await getMongoIdById(req.params.id, Game);
-  await Game.findByIdAndUpdate(mongoId, req.body, { new: true });
+router.put('/:name', async (req, res) => {
+  const game = await isGame(req.params.name, Game);
+  if (!game)
+    res.status(404).send({ "response": [{ "code": 404, "error": "El juego no existe." }] });
+    
+  await Game.findByIdAndUpdate(game, req.body, { new: true });
   res.json({
     "response": [
       {
         "request": req.body,
-        "game": req.body.name,
-        "gameInformation": req.body
+        "game": game.name,
+        "gameInformation": game
       }
     ],
     "links": [
       {
         "rel": "self",
-        "href": `/games/${req.body.id}`,
+        "href": `/games/${game.name}`,
         "method": "PUT",
-        "description": `Modify game ${req.body.id}`
+        "description": `Modify game ${game.name}`
       },
       {
         "rel": "get_game",
-        "href": `/games/${req.body.id}`,
+        "href": `/games/${game.name}`,
         "method": "GET",
-        "description": `View game ${req.body.id}`
+        "description": `View game ${game.name}`
       },
       {
         "rel": "delete_game",
-        "href": `/games/${req.body.id}`,
+        "href": `/games/${game.name}`,
         "method": "DELETE",
-        "description": `Delete game ${req.body.id}`
+        "description": `Delete game ${game.name}`
       }
     ]
   });
@@ -145,22 +143,22 @@ router.delete('/', async (req, res) => {
   });
 });
 
-router.delete('/:id', async (req, res) => {
-  mongoId = await getMongoIdById(req.params.id, Game);
-  await Game.findByIdAndRemove(mongoId);
+router.delete('/:name', async (req, res) => {
+  const game = await isGame(req.params.name, Game);
+  await Game.findByIdAndRemove(game);
   res.json({
     "response": [
       {
         "request": req.body,
-        "status": `Deleted game ${req.params.id}`
+        "status": `Deleted game ${game.name}`
       }
     ],
     "links": [
       {
         "rel": "self",
-        "href": `/games/${req.params.id}`,
+        "href": `/games/${game.name}`,
         "method": "DELETE",
-        "description": `Delete game ${req.params.id}`
+        "description": `Delete game ${game.name}`
       },
       {
         "rel": "get_games",

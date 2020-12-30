@@ -41,146 +41,141 @@ router.get('/:nickname&:password', async (req, res) => {
     pass = await user.validatePass(req.params.password);
   if (!pass)
     res.status(404).send({ "response": [{ "code": 404, "error": "Usuario o contraseña incorrectos" }] });
-  else {
-    const token = jwt.sign({ id: user._id }, config.secret, {
-      expiresIn: 60 * 60 * 24
-    });
 
-    res.send({
-      "response": [
-        {
-          "code": 200,
-          "request": req.body,
-          "user": user,
-          "token": token
-        }
-      ],
-      "links": [
-        {
-          "rel": "users",
-          "href": "/users",
-          "method": "GET",
-          "description": `View all users`
-        },
-        {
-          "rel": "users",
-          "href": "/users",
-          "method": "DELETE",
-          "description": `Delete user ${user.nickname}`
-        },
-      ]
-    });
-  }
+  const token = jwt.sign({ id: user._id }, config.secret, {
+    expiresIn: 60 * 60 * 24
+  });
+
+  res.send({
+    "response": [
+      {
+        "request": req.body,
+        "user": user,
+        "token": token
+      }
+    ],
+    "links": [
+      {
+        "rel": "users",
+        "href": "/users",
+        "method": "GET",
+        "description": `View all users`
+      },
+      {
+        "rel": "users",
+        "href": "/users",
+        "method": "DELETE",
+        "description": `Delete user ${user.nickname}`
+      },
+    ]
+  });
 });
 
 router.get('/:nickname', verifyToken, async (req, res) => {
   const user = await isUser(req.params.nickname, User);
   if (!user)
     res.status(404).send({ "response": [{ "code": 404, "error": "Usuario no existe" }] }); 
-  else {
-    res.json({
-      "response": [
-				{
-					"user": user.nickname,
-          "userInformation": user
-        }
-      ],
-      "links": [
-        {
-          "rel": "self",
-          "href": `/users/${user.nickname}`,
-          "method": "GET",
-          "description": `List user ${user.nickname} information`
-        },
-        {
-          "rel": "modify_users",
-          "href": `/users/${user.nickname}`,
-          "method": "PUT",
-          "description": `Modify user ${user.nickname}`
-        },
-        {
-          "rel": "delete_user",
-          "href": `/users/${user.nickname}`,
-          "method": "DELETE",
-          "description": `Delete user ${user.nickname}`
-        }
-      ]
-    });
-  }
+
+  res.json({
+    "response": [
+      {
+        "user": user.nickname,
+        "userInformation": user
+      }
+    ],
+    "links": [
+      {
+        "rel": "self",
+        "href": `/users/${user.nickname}`,
+        "method": "GET",
+        "description": `List user ${user.nickname} information`
+      },
+      {
+        "rel": "modify_users",
+        "href": `/users/${user.nickname}`,
+        "method": "PUT",
+        "description": `Modify user ${user.nickname}`
+      },
+      {
+        "rel": "delete_user",
+        "href": `/users/${user.nickname}`,
+        "method": "DELETE",
+        "description": `Delete user ${user.nickname}`
+      }
+    ]
+  });
 });
 
 router.post('/', async (req, res) => {
-  const user = await isUser(req.body.nickname, User);
+  let user = await isUser(req.body.nickname, User);
   if (user)
     res.status(404).send({ "response": [{ "code": 404, "error": "Este usuario ya existe" }] });
-  else {
-    const user = new User(req.body);
-    user.password = await user.encryptPass(user.password);
-    const token = jwt.sign({ id: user._id }, config.secret, {
-      expiresIn: 60 * 60 * 24
-    })
-    await user.save();
-    
-    res.json({
-      "response": [
-        {
-          "code": 200,
-          "request": req.body,
-          "user": user,
-          "token": token
-        }
-      ],
-      "links": [
-        {
-          "rel": "self",
-          "href": "/users",
-          "method": "POST",
-          "description": `Insert a user: ${user.nickname} in data base`
-        }
-      ]
-    });
-  }
+
+  user = new User(req.body);
+  user.password = await user.encryptPass(user.password);
+  const token = jwt.sign({ id: user._id }, config.secret, {
+    expiresIn: 60 * 60 * 24
+  })
+  await user.save();
+  
+  res.json({
+    "response": [
+      {
+        "request": req.body,
+        "user": user,
+        "token": token
+      }
+    ],
+    "links": [
+      {
+        "rel": "self",
+        "href": "/users",
+        "method": "POST",
+        "description": `Insert a user: ${user.nickname} in data base`
+      }
+    ]
+  });
+
 });
 
 router.put('/:nickname', verifyToken, async (req, res) => {
   const user = await isUser(req.params.nickname, User);
   if (!user)
   	res.status(404).send({ "response": [{ "code": 404, "error": "Este usuario no existe" }] }); 
-  else {
-    user = await User.findByIdAndUpdate(user._id, req.body, { new: true });
-    user.password = await user.encryptPass(user.password);
-    await user.save();
 
-    res.json({
-      "response": [
-        {
-          "request": req.body,
-          "user": user.nickname,
-          "userInformation": user
-        }
-      ],
-      "links": [
-        {
-          "rel": "self",
-          "href": `/users/${user.nickname}`,
-          "method": "PUT",
-          "description": `Modify user ${user.nickname}`
-        },
-        {
-          "rel": "get_user", 
-          "href": `/users/${user.nickname}`,
-          "method": "GET",
-          "description": `View user ${user.nickname}`
-        },
-        {
-          "rel": "delete_user",
-          "href": `/users/${user.nickname}`,
-          "method": "DELETE",
-          "description": `Delete user ${user.nickname}`
-        }
-      ]
-    });
-  }
+  user = await User.findByIdAndUpdate(user._id, req.body, { new: true });
+  user.password = await user.encryptPass(user.password);
+  await user.save();
+
+  res.json({
+    "response": [
+      {
+        "request": req.body,
+        "user": user.nickname,
+        "userInformation": user
+      }
+    ],
+    "links": [
+      {
+        "rel": "self",
+        "href": `/users/${user.nickname}`,
+        "method": "PUT",
+        "description": `Modify user ${user.nickname}`
+      },
+      {
+        "rel": "get_user", 
+        "href": `/users/${user.nickname}`,
+        "method": "GET",
+        "description": `View user ${user.nickname}`
+      },
+      {
+        "rel": "delete_user",
+        "href": `/users/${user.nickname}`,
+        "method": "DELETE",
+        "description": `Delete user ${user.nickname}`
+      }
+    ]
+  });
 });
 
 router.delete('/', async (req, res) => {
@@ -213,45 +208,44 @@ router.delete('/:nickname', verifyToken, async (req, res) => {
   const user = await isUser(req.params.nickname, User);
   if (!user)
   	res.status(404).send({ "response": [{ "code": 404, "error": "Este usuario no existe" }] });
-  else {
-    await User.findByIdAndRemove(user);
-    res.json({
-      "response": [
-        {
-          "request": req.body,
-          "status": `Deleted user ${user.nickname}`
-        }
-      ],
-      "links": [
-        {
-          "rel": "self",
-          "href": `/users/${user.nickname}`,
-          "method": "DELETE",
-          "description": `Delete user ${user.nickname}`
-        },
-        {
-          "rel": "get_users",
-          "href": `/users/`,
-          "method": "GET",
-          "description": `View all users`
-        },
-        {
-          "rel": "delete_all_users",
-          "href": `/users/`,
-          "method": "DELETE",
-          "description": `Delete all users`
-        }
-      ]
-    });
-  }
+  
+  await User.findByIdAndRemove(user);
+  res.json({
+    "response": [
+      {
+        "request": req.body,
+        "status": `Deleted user ${user.nickname}`
+      }
+    ],
+    "links": [
+      {
+        "rel": "self",
+        "href": `/users/${user.nickname}`,
+        "method": "DELETE",
+        "description": `Delete user ${user.nickname}`
+      },
+      {
+        "rel": "get_users",
+        "href": `/users/`,
+        "method": "GET",
+        "description": `View all users`
+      },
+      {
+        "rel": "delete_all_users",
+        "href": `/users/`,
+        "method": "DELETE",
+        "description": `Delete all users`
+      }
+    ]
+  });
 });
 
 router.get('/logout/:nickname', verifyToken, async (req, res) => {
   const user = await isUser(req.params.nickname, User);
   if (!user)
     res.status(404).send({ "response": [{ "code": 404, "error": "Este usuario no existe" }] });
-  else
-    res.status(200).send({ auth: false, token: null });
+
+  res.status(200).send({ auth: false, token: null });
 });
 
 module.exports = router;
