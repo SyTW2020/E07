@@ -6,12 +6,11 @@ cache:
     - node_modules
 before_script:
   - cd frontend/
-# install:
-  # - npm install -g @vue/cli-service
-  # - @vue/cli-plugin-unit-jest
 script:
   - npm install -g @vue/cli
   - npm install
   - npm run test:unit
 on:
   branch: ci/paula
+notifications:
+  slack: sytw-07gamingit:hevaRMSoko92Uf6uDRVLzQ6o
