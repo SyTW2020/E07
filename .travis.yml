@@ -8,7 +8,7 @@ before_script:
   - cd frontend/
 install:
   - npm install
-  - npm install -g @vue/cli
+  - npm install -g @vue/cli-service
 script:
   - npm run test:unit
 on:
