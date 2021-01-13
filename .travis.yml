@@ -4,7 +4,7 @@ node_js:
 cache:
   directories:
     - node_modules
-before_script:
+before_install:
   - cd frontend/
 install:
   - npm install -g @vue/cli
@@ -12,6 +12,7 @@ install:
   # - npm install -g @vue/cli-service
   # - @vue/cli-plugin-unit-jest
 script:
+  - pwd
   - npm run test:unit
 on:
   branch: ci/paula
