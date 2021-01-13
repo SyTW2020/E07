@@ -6,9 +6,10 @@ cache:
     - node_modules
 before_script:
   - cd frontend/
-install:
   - npm install
-  - npm install -g @vue/cli-service
+# install:
+#   - npm install -g @vue/cli-service
+#   - @vue/cli-plugin-unit-jest
 script:
   - npm run test:unit
 on:
