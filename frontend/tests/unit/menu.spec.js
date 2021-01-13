@@ -6,6 +6,6 @@ describe("Menu.vue", () => {
     // wrapper.find("#LogOut").trigger("click");
     // await flushPromises();
     // expect($router.replace).lastCalledWith({});
-    expect(true).toBe(true);
+    expect(true).toBe(false);
   });
 });

@@ -18,17 +18,17 @@ describe("SignIn.vue", () => {
   });
 
   it("Comprobando que SignIn funciona", async () => {
-    expect(nickname.element.value).toBe("test");
-    expect(pass.element.value).toBe("test123");
+    expect(nickname.element.value).not.toBe("test");
+    expect(pass.element.value).not.toBe("test123");
   });
 
   it("Comprobando que SignIn funciona - fallo", async () => {
-    expect(nickname.element.value).toBe("test");
-    expect(pass.element.value).not.toBe("test");
+    expect(nickname.element.value).not.toBe("test");
+    expect(pass.element.value).toBe("test");
   });
 
   it("Comprobando que los v-model actualizan los valores de los datos", async () => {
     await nickname.setValue('testeator');
-    expect(wrapper.vm.user.nickname).toBe('testeator');
+    expect(wrapper.vm.user.nickname).not.toBe('testeator');
   });
 });

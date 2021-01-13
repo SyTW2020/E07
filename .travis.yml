@@ -6,7 +6,7 @@ cache:
     - node_modules
 before_script:
   - cd frontend/
-script:
+script:D
   - npm install -g @vue/cli
   - npm install
   - npm run test:unit

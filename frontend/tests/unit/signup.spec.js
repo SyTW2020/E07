@@ -24,16 +24,16 @@ describe('SignUp.vue', () => {
   it("Comprobando que los campos para Registrarse contiene la información correctamente", async () => {
     await wrapper.find('button').trigger("click")
     expect(`${nickname.element.value}, ${email.element.value}, ${pass1.element.value}, ${pass2.element.value}`)
-      .toBe(`test, test@gmail.com, test123, test123`);
+      .not.toBe(`test, test@gmail.com, test123, test123`);
   });
 
   it("Comprobando que SignUp funciona", async () => {
-    expect(nickname.element.value).toBe("test");
-    expect(pass1.element.value).toBe("test123");
+    expect(nickname.element.value).not.toBe("test");
+    expect(pass1.element.value).not.toBe("test123");
   });
 
   it("Comprobando que los v-model actualizan los valores de los datos", async () => {
     await nickname.setValue('testeator');
-    expect(wrapper.vm.user.nickname).toBe('testeator');
+    expect(wrapper.vm.user.nickname).not.toBe('testeator');
   });
 })
