@@ -1,18 +1,17 @@
 language: node_js
 node_js:
-  - 9
+  - stable
 cache:
   directories:
     - node_modules
-before_install:
+before_script:
   - cd frontend/
-install:
-  - npm install -g @vue/cli
-  - npm install
+# install:
   # - npm install -g @vue/cli-service
   # - @vue/cli-plugin-unit-jest
 script:
-  - pwd
+  - npm install -g @vue/cli
+  - npm install
   - npm run test:unit
 on:
   branch: ci/paula
