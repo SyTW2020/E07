@@ -11,6 +11,9 @@ script:
   - npm install
   - npm run test:unit
 on:
-  branch: ci/paula
+  branch: ci/adan
 notifications:
-  slack: sytw-07gamingit:hevaRMSoko92Uf6uDRVLzQ6o
+  slack: 
+    rooms:
+      - sytw-07gamingit:hevaRMSoko92Uf6uDRVLzQ6o#travis-ci
+      - sytwull:9RHWkAunQmp2IhenSjqSWWK4#e07
