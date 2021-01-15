@@ -4,9 +4,11 @@
   "description": "",
   "author": "",
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "webpack --mode production --config ./webpack.config.js",
     "test:unit": "vue-cli-service test:unit",
-    "webpack": "webpack --mode development --watch"
+    "webpack": "webpack --mode development --watch",
+    "start": "node backend/src/index.js",
+    "heroku-postbuild": "npm run build"
   },
   "main": "webpack.config.js",
   "dependencies": {
