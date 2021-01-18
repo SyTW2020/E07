@@ -16,9 +16,7 @@
 // const databaseConnectionOpts = process.env.DATABASE_CONNECTION_OPTIONS;
 
 module.exports = {
-  remoteUrl: 'mongodb+srv://batman:<brucewayne>@cluster0.mmzwj.mongodb.net/<Cluster0>?retryWrites=true&w=majority',
+  remoteUrl: 'mongodb+srv://admin:admin@cluster0.mmzwj.mongodb.net/Cluster0?retryWrites=true&w=majority',
   //remoteUrl: `mongodb://${databaseUser}:${databasePassword}@${databaseHost}:${databasePort}/${databaseName}?${databaseConnectionOpts}`,
   localUrl: 'mongodb://localhost/gamingit'
 };
-
-
