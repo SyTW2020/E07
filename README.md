@@ -5,10 +5,9 @@
 
 
 
-# Gaming It �️
+# Gaming It :joystick:
 
 :rocket: ​Web desplegada: https://gamingit.herokuapp.com/ 
-
 
 
 ## Equipo 07 ✒️ 👩‍💻👩‍💻👨‍💻👩‍💻
@@ -17,7 +16,6 @@
 * Míriam Núñez García 🐵:rainbow::zzz:
 * Adán de la Rosa Lugo 🐵:rainbow: :man_farmer:
 * Paula Elena Expósito Estévez 🐵:rainbow::smiling_imp:🤰
-
 
 
 ### IPs de las MV NGINX 💻
