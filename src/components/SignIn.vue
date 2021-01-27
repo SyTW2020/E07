@@ -5,9 +5,10 @@
       <h1> ¡Inicia sesión Gamer! </h1>
 
       <label> Introduce tu usuario: </label>
-      <input v-model="user.nickname" id="inputNickname" class="form-control" placeholder="Usuario" required="" autofocus=""/><br/>
+      
+      <InputText type="text" v-model="user.nickname" id="inputNickname" class="form-control" placeholder="Usuario" required="" autofocus=""/><br/>
       <label> Introduce tu contraseña </label>
-      <input type="password" v-model="user.password" id="inputPassword" class="form-control" placeholder="Contraseña" required=""/><br/><br/>
+      <InputText type="password" v-model="user.password" id="inputPassword" class="form-control" placeholder="Contraseña" required=""/><br/><br/>
       <button type="submit" class="btn-funky-moon" id="submitButton"> Inicia sesión </button><br/>
       <router-link to="/signup" type="button" class="btn-link"> ¿Olvidaste tu contraseña? </router-link>
       <router-link to="/signup" type="button" class="btn-link"> Regístrate </router-link><br/>
@@ -17,6 +18,8 @@
 </template>
 
 <script>
+import InputText from 'primevue/inputtext';
+
 class User {
   constructor(nickname, password) {
     this.nickname = nickname;
@@ -26,6 +29,9 @@ class User {
 
 export default {
   name: "SignIn",
+    components: {
+      'InputText': InputText
+  },
   data() {
     return {
       user: new User()
@@ -41,8 +47,17 @@ export default {
           return res.json();
         })
         .then(data => {
-          if (data == 404)
+          if (data == 404) {
             window.alert('Usuario o contraseña incorrectos');
+            // const inputs = document.querySelectorAll("InputText");
+            // const msg = document.createElement("div");
+            // inputs.forEach( input => {
+            //   input.className += " p-invalid";
+            //   msg.innerHTML = '<small id="username2-help" class="p-invalid">Usuario o contraseña incorrectos.</small>';
+            //   input.appendChild(msg);
+            //   console.log('holi')
+            // })
+          }
           else {
             this.$store.dispatch('signInAction', {
               token: data.response[0].token,
