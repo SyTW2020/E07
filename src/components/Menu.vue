@@ -3,7 +3,6 @@
     <div class="headerMenu">
       <router-link to="/" class="logo"> <div class="home"><div class="logo-img"></div> GamingIt </div></router-link>
      
-      <!-- Google Icons: https://material.io/resources/icons/?style=baseline -->
       <input class="burger-menu-btn" type="checkbox" id="burger-btn" />
       <label class="burger-menu-icon" for="burger-btn"><div class="icon-container"><i class="material-icons">menu</i></div></label>
 
