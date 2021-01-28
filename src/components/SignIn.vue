@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import InputText from 'primevue/inputtext';
+import { InputText } from '../utils';
 
 class User {
   constructor(nickname, password) {
