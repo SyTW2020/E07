@@ -13,7 +13,7 @@ describe("SignIn.vue", () => {
   });
 
   beforeEach(async () => {
-    await nickname.setValue("test");
+    await nickname.setValue("test"); 
     await pass.setValue("test123");
   });
 

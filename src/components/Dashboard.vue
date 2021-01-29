@@ -1,14 +1,12 @@
 <template>
-    <div class="dashboard wrap flex">
-        <Card v-for="(i,j) in games" :key="j" :name="i" class="card flex">
-            <template #header>
-                <img alt="user header" src="https://i.pinimg.com/originals/77/da/5f/77da5fe07dcc9a82f5c3247a59ce93fb.jpg" @click="goToGame(i)">  <!-- Cambiar por foto en mongo -->
-            </template>
-            <template #title>
-                {{ i.name }}
-            </template>
-        </Card>
-    </div>    
+	<div class="dashboard wrap flex">
+		<Card v-for="(i,j) in games" :key="j" :name="i" class="card flex">
+			<template #header>
+				<img alt="user header" src="https://i.pinimg.com/originals/77/da/5f/77da5fe07dcc9a82f5c3247a59ce93fb.jpg" @click="goToGame(i)">  <!-- Cambiar por foto en mongo -->
+			</template>
+			<template #title>	{{ i.name }} </template>
+		</Card>
+	</div>    
 </template>
 
 <script>
@@ -18,23 +16,23 @@ import MirsBall from './games/MirsBall.vue';
 import Simon from './games/Simon.vue';
 
 export default {
-    name: "Dashboard",
-    methods: {
-        goToGame(game) {
-            this.$router.push(game.data().path);
-        }
-    },
-    components: {
-        Card: Card,
-        TicTacToe: TicTacToe,
-        MirsBall: MirsBall,
-        Simon: Simon
-    },
-    data() {
-        return {
-            games: [TicTacToe, MirsBall, Simon]
-        }
-    }
+	name: "Dashboard",
+	methods: {
+		goToGame(game) {
+			this.$router.push(game.data().path);
+		}
+	},
+	components: {
+		Card: Card,
+		TicTacToe: TicTacToe,
+		MirsBall: MirsBall,
+		Simon: Simon
+	},
+	data() {
+		return {
+			games: [TicTacToe, MirsBall, Simon]
+		}
+	}
 }
 </script>
 
@@ -42,41 +40,40 @@ export default {
 
 /* MOVIL */
 .dashboard{
-    width: 95%;
-    background-color:rgb(0, 0, 0, 0.8);
+	width: 95%;
+	background-color:rgb(0, 0, 0, 0.8);
 }
 
 .flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .wrap {
-    flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .card {
-    width: 300px;
-    height: 300px;
+	width: 300px;
+	height: 300px;
 
-    flex-direction: column;
-    justify-content: space-between;
+	flex-direction: column;
+	justify-content: space-between;
 
-    margin: 30px;
-    padding: 10px;
+	margin: 30px;
+	padding: 10px;
 
-    font-size: 20px;
-    color: white;
-    /* background-color: white; */
-    border-radius: 10px 10px 10px 10px;
-    box-shadow: 1px 1px 12px 1px rgba(0,0,0,0.8);
+	font-size: 20px;
+	color: white;
+	border-radius: 10px 10px 10px 10px;
+	box-shadow: 1px 1px 12px 1px rgba(0,0,0,0.8);
 } 
 
 img {
-    width: 250px;
-    height: 250px;
-    padding: 10px;
+	width: 250px;
+	height: 250px;
+	padding: 10px;
 }
 
 .card:hover { 
@@ -87,10 +84,10 @@ img {
 
 /* ORDENADOR */ 
 @media screen and (min-width: 800px) {
-    .flex {
-        display: flex;
-        justify-content: left;
-    }
+	.flex {
+		display: flex;
+		justify-content: left;
+	}
 } 
 
 </style>

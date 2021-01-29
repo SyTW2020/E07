@@ -1,20 +1,20 @@
 <template>
   <div class="bodyMenu">
     <div class="headerMenu">
-      <router-link to="/" class="logo"> <div class="home"><div class="logo-img"></div> GamingIt </div></router-link>
+      <router-link to="/" class="logo" id="BGamingit"> <div class="home"><div class="logo-img" ></div> GamingIt </div></router-link>
      
       <input class="burger-menu-btn" type="checkbox" id="burger-btn" />
       <label class="burger-menu-icon" for="burger-btn"><div class="icon-container"><i class="material-icons">menu</i></div></label>
 
       <div class="items">
-        <router-link to="/rankings" active-class="active"> Rankings </router-link>
+        <router-link to="/rankings" active-class="active" id="BRanking"> Rankings </router-link>
         <template v-if="$store.getters.token != null">
-          <router-link to="/myuser" active-class="active" class="nav-items"><i class="material-icons">account_circle</i> Perfil </router-link>
+          <router-link to="/myuser" active-class="active" id="BMyuser" class="nav-items"><i class="material-icons">account_circle</i> Perfil </router-link>
           <button @click="userLogOut" active-class="active" class="nav-items"><i class="material-icons">exit_to_app</i> Cerrar sesión </button>
         </template>
         <template v-else>
-          <router-link to="/signin" active-class="active" class="nav-items"><i class="material-icons">account_circle</i> Inicia sesión </router-link>
-          <router-link to="/signup" active-class="active" class="border nav-items"><i class="material-icons">create</i> Regístrate </router-link>
+          <router-link to="/signin" active-class="active" id="BSignin"  class="nav-items"><i class="material-icons">account_circle</i> Inicia sesión </router-link>
+          <router-link to="/signup" active-class="active" id="BSignup" class="border nav-items"><i class="material-icons">create</i> Regístrate </router-link>
         </template>
       </div>
     </div>
@@ -38,7 +38,7 @@ export default {
   overflow: hidden;
   color: #dedede;
   background-color: #1c221f;
-  padding: 10px 50px;
+  /* padding: 10px 50px; */
 
   display: block;
   margin: 0 auto;

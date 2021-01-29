@@ -191,7 +191,7 @@ body{
 	transform: translateY(-4px);
 	box-shadow: 0 5px #999;
 }
-/* Añadido por mi */
+
 #red {
 	background-color: #C9302C;
 }
@@ -205,7 +205,4 @@ body{
 	background-color: #EC971F;
 }
 
-/* .game {
-   background-color: ;
-} */
 </style>

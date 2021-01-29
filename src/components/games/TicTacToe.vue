@@ -5,9 +5,7 @@
         <cell @click="performMove(j, i)" :value="board.cells[j][i]"></cell>
       </div>
     </div>
-    <div class="game-over-text" v-if="gameOver">
-      {{ gameOverText }}
-    </div>
+    <div class="game-over-text" v-if="gameOver"> {{ gameOverText }} </div>
   </div>
 </template>
 
@@ -41,7 +39,7 @@ export default {
         this.$store.dispatch('setTimerAction');
         return;
       }
-      if (!this.board.doMove(x, y, 'x')) {    // NO FUNCIONA
+      if (!this.board.doMove(x, y, 'x')) {
         console.log("movimiento no válido")
         return;
       }
@@ -111,7 +109,6 @@ export default {
   background-color: white;
   width: 700px;
   height: 700px;
-  /* display: flex; */
 }
 
 .boardGame {

@@ -24,9 +24,4 @@ body {
   margin: 0;
 }
 
-.container {
-  height: 100%;
-  width: 100%;
-  flex-wrap: wrap;
-}
 </style>
