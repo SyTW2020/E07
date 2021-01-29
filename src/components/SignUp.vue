@@ -53,8 +53,8 @@ export default {
           body: JSON.stringify(this.user),
           headers: {
             "Accept": "application/json",
-            "Content-type": "application/json",
-          },
+            "Content-type": "application/json"
+          }
         })
           .then((res) => {
             if (res.status != 200)

@@ -12,6 +12,11 @@ export default new Router({
       component: () => import("./views/Home.vue") 
     },
     {
+      path: "/rankings",
+      name: "rankings",
+      component: () => import("./components/Ranking.vue"),
+    },
+    {
       path: "/signin",
       name: "signin",
       component: () => import("./components/SignIn.vue"),

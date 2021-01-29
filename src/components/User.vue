@@ -28,9 +28,9 @@
     {{ user.email }}<br>
     {{ user.nickname }}<br>
     {{ user.name }}<br>
-    {{ user.photo }}<br>
-    {{ user.birthdate }}<br>
-    {{ user.description }}<br>
+    >> {{ user.photo }}<br>
+    >> {{ user.birthdate }}<br>
+    >> {{ user.description }}<br>
 
     <router-link to="/myuseredit"> Modificar </router-link>
 
@@ -58,12 +58,12 @@ export default {
   },
   created: function () {
     fetch(`/users/${this.$store.getters.user}`, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          "x-access-token": this.$store.getters.token
-        } 
-      })
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "x-access-token": this.$store.getters.token
+      } 
+    })
       .then(res => {
         if (res.status != 200)
           return res.status;

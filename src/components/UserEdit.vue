@@ -2,25 +2,28 @@
   <div class="bodyUser">
     <form class="formModifyUser">
       <h1 class="h3 mb-3 font-weight-normal"> Editar perfil </h1>
-      <img class="mb-4 user-photo" alt="" width="96" height="72">   <!-- v-model="user.photo" (Imagen user) Se puede hacer eso?  -->
+      <img class="mb-4 user-photo" alt="" width="96" height="72">   <!--v-model="user.photo" (Imagen user) Se puede hacer eso? -->
 
       <label class="sr-only"> Nickname: </label>
-      <input type="text" v-model="user.nickname" id="inputNickname" class="form-control" placeholder="Nickname" required="" autofocus="">
+      <input type="text" v-model="user.nickname" id="inputNickname" class="form-control">
           
       <label class="sr-only"> Email: </label>
-      <input type="email" v-model="user.email" id="inputEmail" class="form-control" placeholder="Email" required="" autofocus="">
+      <input type="email" v-model="user.email" id="inputEmail" class="form-control">
 
       <label class="sr-only"> Introduce tu nombre: </label>
-      <input type="text" v-model="user.name" id="inputName" class="form-control" placeholder="Nombre">
+      <input type="text" v-model="user.name" id="inputName" class="form-control">
+
+      <label class="sr-only"> Introduce tu contraseña: </label>
+      <input type="password" v-model="user.password" id="inputPass" class="form-control">
       
       <label class="sr-only"> Introduce tu foto: </label>
       <input type="file">
 
       <label class="sr-only"> Introduce tu fecha de nacimiento: </label>
-      <input class="form-control" type="date" value="1993-08-19" id="inputDate">
+      <input class="form-control" type="date" v-model="user.birthDate" id="inputDate">
 
       <label class="sr-only"> Introduce una descripción: </label>
-      <textarea type="text" v-model="user.description" id="inputDescription" class="form-control" placeholder="Nombre"></textarea>
+      <textarea type="text" v-model="user.description" id="inputDescription" class="form-control"></textarea>
       
       <button type="button" @click="modifyUser" class="btn btn-funky-moon"> Guardar </button>
       <button type="button" @click="deleteUser" class="btn btn-danger"> Eliminar cuenta </button>
@@ -30,12 +33,12 @@
 
 <script>
 class User {
-  constructor(email, nickname, name, photo, birthdate, description, password) {
+  constructor() {
     this.email = '';
     this.nickname = '';
     this.name = '';
     this.photo = '';
-    this.birthdate = null;
+    this.birthDate = null;
     this.description = '';
     this.password = '';
   }
@@ -48,10 +51,59 @@ export default {
       user: new User()
     }
   },
+  
+  created: function () {
+    fetch(`/users/${this.$store.getters.user}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "x-access-token": this.$store.getters.token
+      } 
+    })
+      .then(res => {
+        if (res.status != 200)
+          return res.status;
+        return res.json();
+      })
+      .then(data => {
+        this.user.email = data.response[0].userInformation.email;
+        this.user.nickname = data.response[0].userInformation.nickname;
+        this.user.name = data.response[0].userInformation.name;
+        this.user.photo = data.response[0].userInformation.photo;
+        this.user.birthDate = data.response[0].userInformation.birthDate;
+        this.user.description = data.response[0].userInformation.description;
+        this.user.password = data.response[0].userInformation.password;
+      })
+  },
+  
   methods: {
     modifyUser() {
-      
+      console.log(this.user)
+      fetch(`/users/${this.$store.getters.user}`, {
+        method: "PUT",
+        body: JSON.stringify(this.user),
+        headers: {
+          "Accept": "application/json",
+          "Content-type": "application/json",
+          "x-access-token": this.$store.getters.token
+        }
+      })
+        .then(res => {
+          if (res.status == 404)
+            return res.status;
+          return res.json();
+        })
+        .then(data => {
+          if (data == 404)
+            window.alert("Operación no válida");
+          else {
+            window.alert("Usuario modificado");
+            this.$router.push("/myuser");
+          }
+        })
+        .catch(err => console.log(err));
     },
+
     deleteUser() {
       fetch(`/users/${this.$store.getters.user}`, {
         method: "DELETE",
@@ -60,20 +112,20 @@ export default {
           "x-access-token": this.$store.getters.token
         } 
       })
-      .then(res => {
-        if (res.status == 404)
-          return res.status;
-        return res.json();
-      })
-      .then(data => {
-        if (data == 404)
-          window.alert("Operación no válida");
-        else {
-          window.alert("Usuario eliminado");
-          this.$store.dispatch('logOutAction');
-          this.$router.push("/");
-        }
-      })
+        .then(res => {
+          if (res.status == 404)
+            return res.status;
+          return res.json();
+        })
+        .then(data => {
+          if (data == 404)
+            window.alert("Operación no válida");
+          else {
+            window.alert("Usuario eliminado");
+            this.$store.dispatch('logOutAction');
+            this.$router.push("/");
+          }
+        })
     }
   }
 }

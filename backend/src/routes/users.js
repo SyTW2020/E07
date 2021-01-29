@@ -143,12 +143,14 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:nickname', verifyToken, async (req, res) => {
-  const user = await isUser(req.params.nickname, User);
+  let user = await isUser(req.params.nickname, User);
   if (!user)
   	res.status(404).send({ "response": [{ "code": 404, "error": "Este usuario no existe" }] }); 
   else {
     user = await User.findByIdAndUpdate(user._id, req.body, { new: true });
-    user.password = await user.encryptPass(user.password);
+    
+    if (!user.password.startsWith("$2a$"))
+      user.password = await user.encryptPass(user.password);
     await user.save();
 
     res.json({
