@@ -1,7 +1,7 @@
 <template>
   <div class="tictactoe-board">
-    <div v-for="(n, i) in 3">
-      <div v-for="(n, j) in 3">
+    <div v-bind:key="i" v-for="(n, i) in 3">
+      <div v-bind:key="j" v-for="(n, j) in 3">
         <cell @click="performMove(j, i)" :value="board.cells[j][i]"></cell>
       </div>
     </div>
@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import cell from "./Cell.vue";
-import Board from "../../games/Board-TicTacToe";
+import cell from "./TicTacToe_Cell.vue";
+import Board from "../../games/TicTacToe";
 
 export default {
   name: "TicTacToe",
@@ -22,6 +22,7 @@ export default {
   },
   data() {
     return {
+      path: '/tictactoe',
       gameOver: false,
       gameStarted: false,
       gameOverText: '',

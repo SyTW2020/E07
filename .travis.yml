@@ -4,14 +4,17 @@ node_js:
 cache:
   directories:
     - node_modules
-before_script:
-  - cd frontend/
 script:
   - npm install -g @vue/cli
-  - npm install
+  - npm install 
   - npm run test:unit
+  - npm install -D codecov
+  - npm run test:coverage
+  # - bash <(curl -s https://codecov.io/bash) -v -t 6f5987bd-0f38-4561-97a1-5c6a71e60f73
+after-success:
+  - ./node_modules/.bin/codecov --token="6f5987bd-0f38-4561-97a1-5c6a71e60f73"
 on:
-  branch: ci/adan
+  branch: main
 notifications:
   slack: 
     rooms:

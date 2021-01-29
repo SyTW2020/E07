@@ -27,18 +27,9 @@ app.use('/users', require('./routes/users'));
 app.use('/rankings', require('./routes/rankings'));
 
 // Static files
-app.use(express.static(__dirname + '/../../frontend/public')) // Agregamos los ficheros que serán estáticos en la app
+app.use(express.static(__dirname + '/../../public')) // Agregamos los ficheros que serán estáticos en la app
 
 // Server is listening
 app.listen(app.get('port'), () => {
   console.log('Server on port', app.get('port'));
 });
-
-// function createToken(user) {
-//   const payload = {
-//     sub: user.id,
-//     iat: moment().unix(),
-//     exp: moment().add(1,'hour').unix(),
-//   }
-//   return jwt.encode(payload, config.SECRET_TOKEN )
-// }
