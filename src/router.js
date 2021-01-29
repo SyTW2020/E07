@@ -22,9 +22,14 @@ export default new Router({
       component: () => import("./components/SignUp.vue")
     },
     {
-      path: "/myuser",        // CAMBIAR NOMBRES
+      path: "/myuser",
       name: "myuser",
       component: () => import("./components/User.vue")
+    },
+    {
+      path: "/myuseredit",
+      name: "myuseredit",
+      component: () => import("./components/UserEdit.vue")
     },
     {
       path: "/tictactoe",

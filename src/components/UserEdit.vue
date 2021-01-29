@@ -1,8 +1,8 @@
 <template>
   <div class="bodyUser">
-    <!-- <form  @submit.prevent="modifyUser" class="formModifyUser">
+    <form class="formModifyUser">
       <h1 class="h3 mb-3 font-weight-normal"> Editar perfil </h1>
-      <img class="mb-4 user-photo" alt="" width="96" height="72">
+      <img class="mb-4 user-photo" alt="" width="96" height="72">   <!-- v-model="user.photo" (Imagen user) Se puede hacer eso?  -->
 
       <label class="sr-only"> Nickname: </label>
       <input type="text" v-model="user.nickname" id="inputNickname" class="form-control" placeholder="Nickname" required="" autofocus="">
@@ -22,30 +22,22 @@
       <label class="sr-only"> Introduce una descripción: </label>
       <textarea type="text" v-model="user.description" id="inputDescription" class="form-control" placeholder="Nombre"></textarea>
       
-      <button type="button" class="btn btn-funky-moon"> Guardar </button>
-      <button type="button" class="btn btn-danger"> Eliminar cuenta </button>
-    </form> -->
-    {{ user.email }}<br>
-    {{ user.nickname }}<br>
-    {{ user.name }}<br>
-    {{ user.photo }}<br>
-    {{ user.birthdate }}<br>
-    {{ user.description }}<br>
-
-    <router-link to="/myuseredit"> Modificar </router-link>
-
+      <button type="button" @click="modifyUser" class="btn btn-funky-moon"> Guardar </button>
+      <button type="button" @click="deleteUser" class="btn btn-danger"> Eliminar cuenta </button>
+    </form>
   </div>
 </template>
 
 <script>
 class User {
-  constructor() {
+  constructor(email, nickname, name, photo, birthdate, description, password) {
     this.email = '';
     this.nickname = '';
     this.name = '';
     this.photo = '';
     this.birthdate = null;
     this.description = '';
+    this.password = '';
   }
 }
 
@@ -56,27 +48,33 @@ export default {
       user: new User()
     }
   },
-  created: function () {
-    fetch(`/users/${this.$store.getters.user}`, {
-        method: "GET",
+  methods: {
+    modifyUser() {
+      
+    },
+    deleteUser() {
+      fetch(`/users/${this.$store.getters.user}`, {
+        method: "DELETE",
         headers: {
           "Content-type": "application/json",
           "x-access-token": this.$store.getters.token
         } 
       })
       .then(res => {
-        if (res.status != 200)
+        if (res.status == 404)
           return res.status;
         return res.json();
       })
       .then(data => {
-        this.user.email = data.response[0].userInformation.email;
-        this.user.nickname = data.response[0].userInformation.nickname;
-        this.user.name = data.response[0].userInformation.name;
-        this.user.photo = data.response[0].userInformation.photo;
-        this.user.birthdate = data.response[0].userInformation.birthdate;
-        this.user.description = data.response[0].userInformation.description;
+        if (data == 404)
+          window.alert("Operación no válida");
+        else {
+          window.alert("Usuario eliminado");
+          this.$store.dispatch('logOutAction');
+          this.$router.push("/");
+        }
       })
+    }
   }
 }
 </script>
