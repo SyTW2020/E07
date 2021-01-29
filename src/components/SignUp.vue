@@ -53,8 +53,8 @@ export default {
           body: JSON.stringify(this.user),
           headers: {
             "Accept": "application/json",
-            "Content-type": "application/json",
-          },
+            "Content-type": "application/json"
+          }
         })
           .then((res) => {
             if (res.status != 200)
@@ -69,7 +69,7 @@ export default {
                 token: data.response[0].token,
                 nickname: data.response[0].user.nickname
               });
-              this.$router.push('/games');
+              this.$router.push('/');
             } 
           });
       }

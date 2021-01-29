@@ -63,7 +63,7 @@ export default {
               token: data.response[0].token,
               nickname: data.response[0].user.nickname
             });
-            this.$router.push('/games');
+            this.$router.push('/');
           }
         })
         .catch(err => console.log(err));
