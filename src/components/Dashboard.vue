@@ -15,6 +15,7 @@
 import { Card } from '../utils'
 import TicTacToe from './games/TicTacToe.vue';
 import MirsBall from './games/MirsBall.vue';
+import Simon from './games/Simon.vue';
 
 export default {
     name: "Dashboard",
@@ -26,11 +27,12 @@ export default {
     components: {
         Card: Card,
         TicTacToe: TicTacToe,
-        MirsBall: MirsBall
+        MirsBall: MirsBall,
+        Simon: Simon
     },
     data() {
         return {
-            games: [TicTacToe, MirsBall]
+            games: [TicTacToe, MirsBall, Simon]
         }
     }
 }

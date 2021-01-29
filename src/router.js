@@ -35,6 +35,11 @@ export default new Router({
       path: "/mirsball",
       name: "MirsBall",
       component: () => import("./components/games/MirsBall.vue")
+    },
+    {
+      path: "/simon",
+      name: "Simon",
+      component: () => import("./components/games/Simon.vue")
     }
   ]
 });
