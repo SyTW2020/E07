@@ -5,20 +5,17 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    loggedin: false,
     token: null,
     timer: false,
     user: null
   },
   mutations: {
     singIn(state, data) {
-      state.loggedin = true;
       state.token = data.token;
       state.user = data.nickname;
     },
     logOut(state) {
-      state.loggedin = false;
-      state.token = null;     
+      state.token = null;
       state.user = null;
     },
     setTimer(state) {
@@ -37,9 +34,6 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    loggedin(state) {
-      return state.loggedin;
-    },
     token(state) {
       return state.token;
     },

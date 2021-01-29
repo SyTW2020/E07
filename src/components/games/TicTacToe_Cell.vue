@@ -1,7 +1,7 @@
 <template>
-    <div @click="$emit('click')" class="cell">
-      <span v-if="value !== ''">{{ value }}</span>
-    </div>
+  <div @click="$emit('click')" class="cell">
+    <span v-if="value !== ''">{{ value }}</span>
+  </div>
 </template>
 
 <script>

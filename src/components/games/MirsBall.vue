@@ -1,7 +1,7 @@
 <template>
-    <div class=".mirsBalls">
-        <h1> Bolita </h1>
-    </div>
+  <div class=".mirsBalls">
+    <h1> Bolita </h1>
+  </div>
 </template>
 
 <script>

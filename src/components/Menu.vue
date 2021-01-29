@@ -8,7 +8,7 @@
 
       <div class="items">
         <router-link to="/rankings" active-class="active"> Rankings </router-link>
-        <template v-if="$store.getters.loggedin === true">
+        <template v-if="$store.getters.token != null">
           <router-link to="/myuser" active-class="active" class="nav-items"><i class="material-icons">account_circle</i> Perfil </router-link>
           <button @click="userLogOut" active-class="active" class="nav-items"><i class="material-icons">exit_to_app</i> Cerrar sesión </button>
         </template>
