@@ -1,13 +1,14 @@
 <template>
   <div class="bodySignIn">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap" rel="stylesheet">
     <div class="boxSignIn">
       <form @submit.prevent="userSignIn" class="formSignIn"><br/>
-        <img id="signinimg" src="https://cdn.glitch.com/db77d28a-8547-4c40-8473-0852380d676e%2Fmando1.ico?v=1607165029366" width="50" height="50"/>
-        <h1> ¡Inicia sesión Gamer! </h1>
-        <label> Introduce tu usuario: </label>   
-        <InputText type="text" v-model="user.nickname" id="inputNickname" class="form-control p-inputtext-sm" placeholder="Usuario" required="" autofocus=""/><br/>
-        <label> Introduce tu contraseña </label>
-        <InputText type="password" v-model="user.password" id="inputPassword" class="form-control" placeholder="Contraseña" required=""/><br/><br/>
+        <img id="signinimg" src="https://cdn.glitch.com/db77d28a-8547-4c40-8473-0852380d676e%2Fmando1.ico?v=1607165029366" width="70" height="70"/>
+        <h2> ¡Inicia sesión Gamer! </h2>
+        <InputText type="text" v-model="user.nickname" id="inputNickname" class="p-inputtext-lg p-float-label" placeholder="Usuario" required="" autofocus=""/><br/>
+        <InputText type="password" v-model="user.password" id="inputPassword" class="p-inputtext-lg p-float-label" placeholder="Contraseña" required=""/><br/>
+        <small id="username2-help" class="p-invalid msg" style= "display: none;">Usuario y/o contraseña incorrectos.</small><br/>
         <button type="submit" class="btn-funky-moon" id="submitButton"> Inicia sesión </button><br/>
         <router-link to="/signup" type="button" class="btn-link"> ¿Olvidaste tu contraseña? </router-link>
         <router-link to="/signup" type="button" class="btn-link"> Regístrate </router-link><br/>
@@ -18,7 +19,7 @@
 </template>
 
 <script>
-import { InputText } from '../utils';
+import { InputText, InlineMessage } from '../utils';
 
 class User {
   constructor(nickname, password) {
@@ -30,7 +31,8 @@ class User {
 export default {
   name: "SignIn",
     components: {
-      'InputText': InputText
+      'InputText': InputText,
+      'InlineMessage': InlineMessage
   },
   data() {
     return {
@@ -48,15 +50,12 @@ export default {
         })
         .then(data => {
           if (data == 404) {
-            window.alert('Usuario o contraseña incorrectos');
-            // const inputs = document.querySelectorAll("InputText");
-            // const msg = document.createElement("div");
-            // inputs.forEach( input => {
-            //   input.className += " p-invalid";
-            //   msg.innerHTML = '<small id="username2-help" class="p-invalid">Usuario o contraseña incorrectos.</small>';
-            //   input.appendChild(msg);
-            //   console.log('holi')
-            // })
+            const inputs = document.querySelectorAll(".p-inputtext-lg");
+            const msg = document.querySelector(".msg");
+            inputs.forEach( input => {
+              input.className += " p-invalid";
+            })
+            msg.style.display = "block";
           }
           else {
             this.$store.dispatch('signInAction', {
@@ -88,6 +87,7 @@ export default {
   padding: 20px;
   background-color: rgb(0, 0, 0, 0.8);
   display: flex;
+  font-family: 'Bungee Inline', cursive;
 
 }
 .formSignIn {
@@ -101,6 +101,9 @@ export default {
   border-radius: 10px 10px 10px 10px;
   box-shadow: 1px 1px 12px 1px rgba(0,0,0,0.26);
 }
+.msg{
+    font-family: Arial;
+}
 
 .btn-funky-moon {
   background: #a770ef;
@@ -111,14 +114,15 @@ export default {
   border-radius: 35px;
   padding: 10px; /* Cambiar por responsive */
   margin: auto;
+  font-size: 25px;
 } 
 /* ORDENADOR */ 
 @media screen and (min-width: 1000px) {
 	.boxSignIn{
-    width: 40%;
+    width: 50%;
   }
   .formSignIn {
-    width: 60%;
+    width: 70%;
   }
 }
 

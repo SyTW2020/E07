@@ -7,7 +7,6 @@
 			<template #title>	{{ i.name }} </template>
 		</Card>
 	</div>
-
 </template>
 
 <script>
@@ -56,7 +55,6 @@ export default {
 }
 
 .card {
-
 	flex-direction: column;
 	justify-content: space-between;
 
@@ -79,8 +77,8 @@ img {
 
 .card:hover { 
   color: #111; 
-  background: #57E2E5; 
-  box-shadow: 0 0 50px #57E2E5; 
+  background: #4594FB; 
+  box-shadow: 0 0 50px #4594FB; 
 }  
 
 /* ORDENADOR */ 
