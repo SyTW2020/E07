@@ -1,23 +1,24 @@
 <template>
-  <div class="parent">
-    <form @submit.prevent="registerUser" class="form-signup">
-      <div class="flex"> <img class="flex" src="https://cdn.pixabay.com/photo/2020/07/14/15/12/controller-5404616_960_720.png"
-        width="96" height="72"/></div>
-      <h1 class="title flex"> Regístrate </h1>
+  <div class="bodySignUp">
+    <div class="boxSignUp">
+      <form @submit.prevent="registerUser" class="form-signup">
+        <img id="signinimg" src="https://cdn.glitch.com/db77d28a-8547-4c40-8473-0852380d676e%2Fmando1.ico?v=1607165029366" width="70" height="70"/>
+        <h1 class="title flex"> Regístrate </h1>
 
-      <label class="form-label"> Introduce tu nombre de usuario: </label>
-      <input type="text" v-model="user.nickname" id="inputNickname" class="form-input" placeholder="Nombre de usuario" required=""/><br/>
-      <label class="form-label"> Introduce tu correo electrónico: </label>
-      <input type="email" v-model="user.email" id="inputEmail" class="form-input" placeholder="Dirección de correo" required="" autofocus=""/><br/>
-      <label class="form-label"> Introduce tu nombre: </label>
-      <input type="text" v-model="user.name" id="inputName" class="form-input" placeholder="Nombre" required=""/><br/>
-      <label class="form-label"> Introduce tu contraseña: </label>
-      <input type="password" v-model="user.password" id="inputPassword1" class="form-input" placeholder="Contraseña" required=""/><br/>
-      <label class="form-label"> Repite la contraseña: </label>
-      <input type="password" v-model="user.password2" id="inputPassword2" class="form-input" placeholder="Repite la contraseña" required=""/><br/>
-      <div class="flex"> <button type="submit" class="register-btn"> Regístrate </button></div><br/>
-      <p class="copyright flex"> © GamingIt 2020 </p>
-    </form>
+        <label class="form-label"> Introduce tu nombre de usuario: </label>
+        <input type="text" v-model="user.nickname" id="inputNickname" class="form-input" placeholder="Nombre de usuario" required=""/><br/>
+        <label class="form-label"> Introduce tu correo electrónico: </label>
+        <input type="email" v-model="user.email" id="inputEmail" class="form-input" placeholder="Dirección de correo" required="" autofocus=""/><br/>
+        <label class="form-label"> Introduce tu nombre: </label>
+        <input type="text" v-model="user.name" id="inputName" class="form-input" placeholder="Nombre" required=""/><br/>
+        <label class="form-label"> Introduce tu contraseña: </label>
+        <input type="password" v-model="user.password" id="inputPassword1" class="form-input" placeholder="Contraseña" required=""/><br/>
+        <label class="form-label"> Repite la contraseña: </label>
+        <input type="password" v-model="user.password2" id="inputPassword2" class="form-input" placeholder="Repite la contraseña" required=""/><br/>
+        <div class="flex"> <button type="submit" class="register-btn"> Regístrate </button></div><br/>
+        <p class="copyright flex"> © GamingIt 2020 </p>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -83,56 +84,40 @@ export default {
 </script>
 
 <style>
-.parent {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: left;
-
-  background-image: url("https://www.xtrafondos.com/wallpapers/paisaje-retro-de-atardecer-5436.jpg");
-  background-position: center;
-  background-size: cover;
+.bodySignUp {
   height: 100%;
+  display: flex;
+  /*  Image  */
+  background-image: url("https://www.xtrafondos.com/wallpapers/paisaje-retro-de-atardecer-5436.jpg");
+  background-position: right; 
+  background-size: cover;
+}
+
+.boxSignUp {
+  width: 100%;
+  margin: 0;
+  padding: 20px;
+  background-color: rgb(0, 0, 0, 0.8);
+  display: flex;
+  font-family: 'Bungee Inline', cursive;
 }
 
 .form-signup {
+  width: 90%;
   display: flex;
-  flex-direction: column;
-
-  padding: 20px;
+  align-items: center;
+  background-color: white;
   margin: auto;
-  border: 4px outset #f61067;
-  background-color: #1c221f;
-  color: #dedede;
-  width: 330px;
-}
-
-.icon {
-  background-color: black;
+  flex-direction: column;
+  padding:2%;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 1px 1px 12px 1px rgba(0,0,0,0.26);
 }
 
 .flex {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.form-label {
-  display: block;
-  margin: 8px 0 4px 0;
-}
-
-.form-input {
-  width: 100%;
-  height: 30px;
-}
-
-.form-input::-webkit-input-placeholder {
-  font-family: serif;
-}
-
-.copyright {
-  color: #e8e8e8;
-  font-size: 12px;
 }
 
 .register-btn {
@@ -144,4 +129,26 @@ export default {
   padding: 10px; /* Cambiar por responsive */
   margin: auto;
 }
+
+/* ORDENADOR */ 
+@media screen and (min-width: 1000px) {
+	.boxSignUp{
+    width: 50%;
+  }
+  .formSignUp {
+    width: 70%;
+  }
+}
+
+/* Media pantalla */ 
+@media screen and (min-width: 800px) and (max-width: 1000px ){
+	.boxSignUp{
+    width: 50%;
+  }
+  .formSignUp {
+    width: 80%;
+  }
+}
+
+
 </style>

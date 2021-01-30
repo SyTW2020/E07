@@ -88,8 +88,8 @@ export default {
   background-color: rgb(0, 0, 0, 0.8);
   display: flex;
   font-family: 'Bungee Inline', cursive;
-
 }
+
 .formSignIn {
   width: 90%;
   display: flex;
