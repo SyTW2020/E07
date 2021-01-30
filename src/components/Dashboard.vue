@@ -56,19 +56,19 @@ export default {
 }
 
 .card {
-	width: 200px;
-	height: 200px;
 
 	flex-direction: column;
 	justify-content: space-between;
 
 	margin: 30px;
 	padding: 10px;
+	height: 220px;
 
 	font-size: 20px;
 	color: white;
 	border-radius: 10px 10px 10px 10px;
 	box-shadow: 1px 1px 12px 1px rgba(0,0,0,0.8);
+	background-color:rgb(0, 0, 0, 0.8);
 } 
 
 img {
@@ -88,6 +88,15 @@ img {
 	.flex {
 		display: flex;
 		justify-content: left;
+	}
+	img {
+		width: 250px;
+		height: 250px;
+		padding: 10px;
+	}
+	.card {
+		height: 320px;
+		padding: 10px;
 	}
 } 
 
