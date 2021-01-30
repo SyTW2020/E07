@@ -20,7 +20,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin:auto;
 }
 .bodyHome {
   height: 100%;
@@ -29,7 +28,7 @@ export default {
   background-image: url("https://images8.alphacoders.com/105/1054256.jpg");
   background-position: center;
   background-size: cover;
-
+  color: white;
 }
 
 </style>

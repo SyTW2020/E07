@@ -2,10 +2,10 @@
   <div class="bodySignIn">
     <div class="boxSignIn">
       <form @submit.prevent="userSignIn" class="formSignIn"><br/>
-        <img id="signinimg" src="https://cdn.pixabay.com/photo/2020/07/14/15/12/controller-5404616_960_720.png" width="96" height="72"/>
+        <img id="signinimg" src="https://cdn.glitch.com/db77d28a-8547-4c40-8473-0852380d676e%2Fmando1.ico?v=1607165029366" width="50" height="50"/>
         <h1> ¡Inicia sesión Gamer! </h1>
-        <label> Introduce tu usuario: </label>      
-        <InputText type="text" v-model="user.nickname" id="inputNickname" class="form-control" placeholder="Usuario" required="" autofocus=""/><br/>
+        <label> Introduce tu usuario: </label>   
+        <InputText type="text" v-model="user.nickname" id="inputNickname" class="form-control p-inputtext-sm" placeholder="Usuario" required="" autofocus=""/><br/>
         <label> Introduce tu contraseña </label>
         <InputText type="password" v-model="user.password" id="inputPassword" class="form-control" placeholder="Contraseña" required=""/><br/><br/>
         <button type="submit" class="btn-funky-moon" id="submitButton"> Inicia sesión </button><br/>
@@ -83,7 +83,7 @@ export default {
 }
  
 .boxSignIn {
-  width: 40%;
+  width: 100%;
   margin: 0;
   padding: 20px;
   background-color: rgb(0, 0, 0, 0.8);
@@ -91,7 +91,7 @@ export default {
 
 }
 .formSignIn {
-  width: 75%;
+  width: 90%;
   display: flex;
   align-items: center;
   background-color: white;
@@ -100,14 +100,6 @@ export default {
   padding:2%;
   border-radius: 10px 10px 10px 10px;
   box-shadow: 1px 1px 12px 1px rgba(0,0,0,0.26);
-  /* NO BORRAR
-  display: flex;
-  flex-direction: column;
-  max-width: 330px;
-  padding: 20px;
-  margin: auto;
-  border: 4px outset #f61067;
-  background-color: #1c221f;*/
 }
 
 .btn-funky-moon {
@@ -120,10 +112,25 @@ export default {
   padding: 10px; /* Cambiar por responsive */
   margin: auto;
 } 
-@media screen and (min-width: 768px){
-    .boxSingIn {
-      width: 100%;
-    }
+/* ORDENADOR */ 
+@media screen and (min-width: 1000px) {
+	.boxSignIn{
+    width: 40%;
+  }
+  .formSignIn {
+    width: 60%;
+  }
 }
+
+/* Media pantalla */ 
+@media screen and (min-width: 800px) and (max-width: 1000px ){
+	.boxSignIn{
+    width: 50%;
+  }
+  .formSignIn {
+    width: 80%;
+  }
+}
+
 
 </style>

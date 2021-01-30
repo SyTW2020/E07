@@ -1,12 +1,13 @@
 <template>
-	<div class="dashboard wrap flex">
+	<div class="dashboard flex wrap">
 		<Card v-for="(i,j) in games" :key="j" :name="i" class="card flex">
 			<template #header>
 				<img alt="user header" src="https://i.pinimg.com/originals/77/da/5f/77da5fe07dcc9a82f5c3247a59ce93fb.jpg" @click="goToGame(i)">  <!-- Cambiar por foto en mongo -->
 			</template>
 			<template #title>	{{ i.name }} </template>
 		</Card>
-	</div>    
+	</div>
+
 </template>
 
 <script>
@@ -55,8 +56,8 @@ export default {
 }
 
 .card {
-	width: 300px;
-	height: 300px;
+	width: 200px;
+	height: 200px;
 
 	flex-direction: column;
 	justify-content: space-between;
@@ -71,8 +72,8 @@ export default {
 } 
 
 img {
-	width: 250px;
-	height: 250px;
+	width: 150px;
+	height: 150px;
 	padding: 10px;
 }
 
