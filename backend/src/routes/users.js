@@ -147,9 +147,9 @@ router.put('/:nickname', verifyToken, async (req, res) => {
   if (!user)
   	res.status(404).send({ "response": [{ "code": 404, "error": "Este usuario no existe" }] }); 
   else {
+    prevPass = user.password;
     user = await User.findByIdAndUpdate(user._id, req.body, { new: true });
-    
-    if (!user.password.startsWith("$2a$"))
+    if (user.password != prevPass)
       user.password = await user.encryptPass(user.password);
     await user.save();
 
