@@ -11,7 +11,6 @@ import Menu from "./components/Menu.vue";
 import Footer from "./components/Footer.vue";
 import { InputText } from './utils';
 
-
 export default {
   name: "App",
   components: {

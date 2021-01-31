@@ -6,8 +6,8 @@
       <form @submit.prevent="userSignIn" class="formSignIn"><br/>
         <img id="signinimg" src="https://cdn.glitch.com/db77d28a-8547-4c40-8473-0852380d676e%2Fmando1.ico?v=1607165029366" width="70" height="70"/>
         <h2> ¡Inicia sesión Gamer! </h2>
-        <InputText type="text" v-model="user.nickname" id="inputNickname" class="p-inputtext-lg p-float-label" placeholder="Usuario" required="" autofocus=""/><br/>
-        <InputText type="password" v-model="user.password" id="inputPassword" class="p-inputtext-lg p-float-label" placeholder="Contraseña" required=""/><br/>
+        <InputText type="text" v-model="user.nickname" id="inputNickname" class="p-inputtext-lg" placeholder="Usuario" required="" autofocus=""/><br/>
+        <InputText type="password" v-model="user.password" id="inputPassword" class="p-inputtext-lg" placeholder="Contraseña" required=""/><br/>
         <small id="username2-help" class="p-invalid msg" style= "display: none;">Usuario y/o contraseña incorrectos.</small><br/>
         <button type="submit" class="btn-funky-moon" id="submitButton"> Inicia sesión </button><br/>
         <router-link to="/signup" type="button" class="btn-link"> ¿Olvidaste tu contraseña? </router-link>
@@ -30,9 +30,9 @@ class User {
 
 export default {
   name: "SignIn",
-    components: {
-      'InputText': InputText,
-      'InlineMessage': InlineMessage
+  components: {
+    'InputText': InputText,
+    'InlineMessage': InlineMessage
   },
   data() {
     return {
@@ -111,10 +111,10 @@ export default {
   background: linear-gradient(145deg, #fdb99b, #cf8bf3, #a770ef);
   color: #dedede;
   border: 3px solid #eee;
-  border-radius: 35px;
-  padding: 10px; /* Cambiar por responsive */
+  border-radius: 25px;
+  padding: 20px; /* Cambiar por responsive */
   margin: auto;
-  font-size: 25px;
+  font-size: 20px;
 } 
 /* ORDENADOR */ 
 @media screen and (min-width: 1000px) {
