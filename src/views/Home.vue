@@ -18,11 +18,14 @@ export default {
 <style scoped>
 .flex{
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
 }
 .bodyHome {
   height: 100%;
+  min-height:820px;
+  width: 100%;
 
   /*  Image  */
   background-image: url("https://images8.alphacoders.com/105/1054256.jpg");

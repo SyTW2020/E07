@@ -1,37 +1,52 @@
 <template>
   <div class="bodyUser">
-    <form class="formModifyUser">
-      <h1 class="h3 mb-3 font-weight-normal"> Editar perfil </h1>
-      <img class="mb-4 user-photo" alt="" width="96" height="72">   <!--v-model="user.photo" (Imagen user) Se puede hacer eso? -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <div class="boxUser">
+       <div class="userProfile">
+        <h1>¡Hola {{ user.nickname }}!</h1>
+        <div class="cardPhoto" >
+          <label for="file-input">
+            <img alt="user header" class="userPhoto" src="https://i.pinimg.com/originals/77/da/5f/77da5fe07dcc9a82f5c3247a59ce93fb.jpg" width="250" height="250" ><br/>
+            {{ user.photo }}
+          </label>
+          <InputText type="file" id="file-input" class="p-inputtext-sm" accept="image/png, image/jpeg" style="display:none;" v-tooltip="'Cambia tu imagen'"/><br/>
+        </div>
 
-      <label class="sr-only"> Nickname: </label>
-      <input type="text" v-model="user.nickname" id="inputNickname" class="form-control">
-          
-      <label class="sr-only"> Email: </label>
-      <input type="email" v-model="user.email" id="inputEmail" class="form-control">
+        
+        
+        <Button type="button" @click="deleteUser" class="p-button-danger"> Eliminar cuenta </Button>
+       </div>
+      <div class="boxForm">
+        <form  @submit.prevent="modifyUser" class="userForm">
+          <h1 class="h3 mb-3 font-weight-normal"> Editar perfil </h1>
 
-      <label class="sr-only"> Introduce tu nombre: </label>
-      <input type="text" v-model="user.name" id="inputName" class="form-control">
+          <label class="sr-only"> Nickname: </label>
+          <InputText type="text" v-model="user.nickname" id="inputNickname" class="p-inputtext-lg" placeholder="Nickname" required="" autofocus=""/><br/>
+              
+          <label class="sr-only"> Email: </label>
+          <InputText type="email" v-model="user.email" id="inputEmail" class="p-inputtext-lg" placeholder="Email" required="" autofocus=""/><br/>
 
-      <label class="sr-only"> Introduce tu contraseña: </label>
-      <input type="password" v-model="user.password" id="inputPass" class="form-control">
-      
-      <label class="sr-only"> Introduce tu foto: </label>
-      <input type="file">
+          <label class="sr-only"> Introduce tu nombre: </label>
+          <InputText type="text" v-model="user.name" id="inputName" class="p-inputtext-lg" placeholder="Nombre"/><br/>
 
-      <label class="sr-only"> Introduce tu fecha de nacimiento: </label>
-      <input class="form-control" type="date" v-model="user.birthDate" id="inputDate">
+          <label class="sr-only"> Introduce tu nueva contraseña: </label>
+          <InputText type="password" v-model="user.password" id="inputPass" class="p-inputtext-lg" /><br/>
 
-      <label class="sr-only"> Introduce una descripción: </label>
-      <textarea type="text" v-model="user.description" id="inputDescription" class="form-control"></textarea>
-      
-      <button type="button" @click="modifyUser" class="btn btn-funky-moon"> Guardar </button>
-      <button type="button" @click="deleteUser" class="btn btn-danger"> Eliminar cuenta </button>
-    </form>
+          <label class="sr-only"> Introduce tu fecha de nacimiento: </label>
+          <InputText class="p-inputtext-lg" v-model="user.birthDate" id="inputDate"/><br/> <!-- Da problemitas type="date" -->
+
+          <label class="sr-only"> Introduce una descripción: </label>
+          <Textarea type="text" v-model="user.description" id="inputDescription" class="p-inputtext-lg" placeholder="Descripción"></textarea><br/>
+           <Button @click="modifyUser" class="BSave"> Guardar </Button><br/>
+        </form>
+         
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { InputText, InlineMessage, InputMask,  Dropdown, Textarea, Button, Tooltip } from '../utils';
 class User {
   constructor() {
     this.email = '';
@@ -46,6 +61,15 @@ class User {
 
 export default {
   name: "User",
+  components: {
+    'InputText': InputText,
+    'InlineMessage': InlineMessage,
+    'InputMask': InputMask,
+    'Dropdown': Dropdown,
+    'Textarea': Textarea,
+    'Button': Button,
+    'Tooltip': Tooltip
+  },
   data() {
     return {
       user: new User()
@@ -135,68 +159,99 @@ export default {
 .bodyUser {
   height: 100%;
   color: #dedede;
+  background-color: black;
+  display: flex; 
+}
 
-  display: -ms-flexbox;
+.boxUser{
+  width: 96%;
+  height: 96%;
+  background-color: grey;
+  margin: auto;
   display: flex;
-  -ms-flex-align: left;
+  flex-direction:column;
+}
 
-  /*  Image  */
-  background-image: url("https://www.xtrafondos.com/wallpapers/paisaje-retro-de-atardecer-5436.jpg");
-  background-position: center;
-  background-size: cover;
-    
-}
-.containerUser {
-    width: 700px;
-    height: 900px;
-    background-color: red;
-}
-.formModifyUser {
+.userProfile{
+  background-color: darkblue;
   display: flex;
   flex-direction: column;
-
-  max-width: 330px;
+  width:100%;
+  height: 100%;
+  align-items: center;
+  justify-content:center;
   padding: 20px;
   margin: auto;
+}
 
+.userPhoto{
+  height: 150px;
+  width: 150px;
+  margin: 30px auto;
+  border-radius: 40px;
+  box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+  cursor: pointer;
+  transition: 0.4s;
+
+}
+.userPhoto:hover {
+  transform: scale(0.9, 0.9);
+  box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25), 
+    -5px -5px 30px 15px rgba(0,0,0,0.22);
+}
+.boxForm{
+  display: flex;
+  flex-direction: column;
+  width:100%;
+  height: 100%;
+  background-color: white;
+  padding:20px;
+}
+
+
+.userForm {
+  display: flex;
+  flex-direction: column;
+  /* max-width: 700px; */
+  width: 70%;
+
+  height: auto;
+  padding: 20px;
+  margin: auto;
   border: 4px outset #f61067;
   background-color: #1c221f;
 
 }
-.formModifyUser h1 {
+.BSave{
+  width:60%;
   margin: auto;
 }
-.sr-only{
-  color: #dedede; 
-  padding: 10px; /* Cambiar por responsive */
-  margin: auto;
-
-}
-.btn-funky-moon {
-  background: #a770ef;
-  background: -webkit-linear-gradient(145deg, #fdb99b, #cf8bf3, #a770ef);
-  background: linear-gradient(145deg, #fdb99b, #cf8bf3, #a770ef);
-  color: #dedede;
-  border: 3px solid #eee;
-  border-radius: 35px;
-  padding: 10px; /* Cambiar por responsive */
-  margin: auto;
-}
-.btn-danger {
-  background: #a770ef;
-  background: -webkit-linear-gradient(145deg, #fdb99b, #cf8bf3, #a770ef);
-  background: linear-gradient(145deg, #fdb99b, #fc6767, #ec008c);
-  color: #dedede;
-  border: 3px solid #eee;
-  border-radius: 35px;
-  padding: 10px; /* Cambiar por responsive */
-  margin: auto;
-}
-.user-photo {
-    margin: auto;
+h1{
+  margin:auto;
 }
 
-.form-control::-webkit-input-placeholder {
-  font-family: serif;
+
+/* ORDENADOR */ 
+@media screen and (min-width: 1000px) {
+	.boxUser{
+    flex-direction: row;
+  }
+  .userProfile {
+    width: 40%;
+  }
+  .userPhoto{
+    width: 250px;
+    height: 250px;
+  }
+}
+
+/* Media pantalla */ 
+@media screen and (min-width: 800px) and (max-width: 1000px ){
+	/* .boxSignIn{
+    width: 50%;
+  }
+  .formSignIn {
+    width: 80%;
+  } */
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="container">
+  <div id="app" class="flex">
     <Menu></Menu>
     <router-view></router-view>
     <Footer></Footer>
@@ -24,6 +24,11 @@ export default {
 <style>
 body {
   margin: 0;
+}
+.flex{
+  display:flex;
+  flex-direction: column;
+  margin:auto;
 }
 
 </style>
