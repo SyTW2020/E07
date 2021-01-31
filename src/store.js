@@ -7,7 +7,9 @@ export default new Vuex.Store({
   state: {
     token: null,
     timer: false,
-    user: null
+    valueTimer: null,
+    user: null,
+    game: null
   },
   mutations: {
     singIn(state, data) {
@@ -20,6 +22,12 @@ export default new Vuex.Store({
     },
     setTimer(state) {
       state.timer = !state.timer;
+    },
+    setValueTimer(state, value) {
+      state.valueTimer = value;
+    },
+    setGame(state, value) {
+      state.game = value;
     }
   },
   actions: {
@@ -30,7 +38,13 @@ export default new Vuex.Store({
       context.commit('logOut');
     },
     setTimerAction(context) {
-      context.commit('setTimer')
+      context.commit('setTimer');
+    },
+    setValueTimerAction(context, value) {
+      context.commit('setValueTimer', value);
+    },
+    setGameAction(context, value) {
+      context.commit('setGame', value);
     }
   },
   getters: {
@@ -40,8 +54,14 @@ export default new Vuex.Store({
     timer(state) {
       return state.timer;
     },
+    valueTimer(state) {
+      return state.valueTimer;
+    },
     user(state) {
       return state.user;
+    },
+    game(state) {
+      return state.game;
     }
   }
 })

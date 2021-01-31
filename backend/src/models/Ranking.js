@@ -5,7 +5,7 @@ const Ranking = new Schema({
   nickname: String,
   game: String,
   score: Number,
-  date: Date
+  time: Date
 });
 
 module.exports = mongoose.model('Ranking', Ranking);

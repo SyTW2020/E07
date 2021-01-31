@@ -1,22 +1,27 @@
 <template>
-  <div class="tictactoe-board">
-    <div v-bind:key="i" v-for="(n, i) in 3">
-      <div v-bind:key="j" v-for="(n, j) in 3">
-        <cell @click="performMove(j, i)" :value="board.cells[j][i]"></cell>
+  <div>
+    <Timer></Timer><br>
+    <div class="tictactoe-board">
+      <div v-bind:key="i" v-for="(n, i) in 3">
+        <div v-bind:key="j" v-for="(n, j) in 3">
+          <Cell @click="performMove(j, i)" :value="board.cells[j][i]"></Cell>
+        </div>
       </div>
+      <div class="game-over-text" v-if="gameOver"> {{ gameOverText }} </div>
     </div>
-    <div class="game-over-text" v-if="gameOver"> {{ gameOverText }} </div>
   </div>
 </template>
 
 <script>
-import cell from "./TicTacToe_Cell.vue";
+import Cell from "./TicTacToe_Cell.vue";
 import Board from "../../games/TicTacToe";
+import Timer from "../Timer.vue";
 
 export default {
   name: "TicTacToe",
   components: {
-    cell
+    Cell: Cell,
+    Timer: Timer
   },
   data() {
     return {
@@ -24,14 +29,15 @@ export default {
       gameOver: false,
       gameStarted: false,
       gameOverText: '',
-      board: new Board()
+      board: new Board(),
+      score: null
     }
   },
 
   methods: {
     performMove(x, y) {
       if (!this.gameStarted) {
-        this.$store.dispatch('setTimerAction')
+        this.$store.dispatch('setTimerAction');  // true
         this.gameStarted = true;
       }
       if (this.gameOver) {
@@ -40,7 +46,7 @@ export default {
         return;
       }
       if (!this.board.doMove(x, y, 'x')) {
-        console.log("movimiento no válido")
+        window.alert("movimiento no válido");
         return;
       }
       this.$forceUpdate();
@@ -48,8 +54,10 @@ export default {
       if (this.board.isGameOver()) {
         this.gameOver = true;
         this.gameStarted = false;
-        this.$store.dispatch('setTimerAction');
+        this.$store.dispatch('setTimerAction');   // false
         this.gameOverText = this.board.playerHas3InARow('x') ? 'You win' : 'Draw';
+        this.score = this.board.getScore()
+        this.sendResults();
         return;
       }
       let aiMove = this.minimax(this.board.clone(), 'o');
@@ -57,8 +65,10 @@ export default {
       if (this.board.isGameOver()) {
         this.gameOver = true;
         this.gameStarted = false;
-        this.$store.dispatch('setTimerAction');
+        this.$store.dispatch('setTimerAction'); // false
         this.gameOverText = this.board.playerHas3InARow('o') ? 'You lose!' : 'Draw';
+        this.score = this.board.getScore()
+        this.sendResults();
       }
       this.$forceUpdate();
     },
@@ -87,6 +97,27 @@ export default {
         score: bestScore,
         move: bestMove
       }
+    },
+    
+    sendResults() {
+      fetch("/rankings", {
+        method: "POST",
+        body: JSON.stringify({
+          nickname: (this.$store.getters.user != null) ? this.$store.getters.user : "Anónimo",
+          game: this.$options.name,
+          score: -this.score,
+          time: this.$store.getters.valueTimer 
+        }),
+        headers: {
+          "Accept": "application/json",
+          "Content-type": "application/json"
+        }
+      })
+      .then(res => {
+        return res.json()
+      })
+      .then(data => console.log(data.response[0].ranking.score))
+      .catch(err => console.log(err));
     }
   }
 };
