@@ -15,7 +15,8 @@ export default {
 .footer {
 	color: white;
 	width: auto;
-	height: 150px;
+	/* height: auto; */
+	height: 150px; /* */
 	background-color: #1C221F;
 }
 </style>
