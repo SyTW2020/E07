@@ -29,9 +29,8 @@ export default {
         this.timeBegan = new Date();
       }
 
-      if (this.timeStopped !== null) {
+      if (this.timeStopped !== null)
         this.stoppedDuration += (new Date() - this.timeStopped);
-      }
 
       this.started = setInterval(this.clockRunning, 10);	
       this.running = true;
@@ -65,6 +64,8 @@ export default {
         this.zeroPrefix(min, 2) + ":" + 
         this.zeroPrefix(sec, 2) + "." + 
         this.zeroPrefix(ms, 3);
+
+        this.$store.dispatch('setValueTimerAction', timeElapsed);
     },
 
     zeroPrefix(num, digit) {
@@ -76,7 +77,6 @@ export default {
     }
   }
 };
-
 </script>
 
 <style scoped>

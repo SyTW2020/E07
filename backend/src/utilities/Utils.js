@@ -4,12 +4,14 @@ async function isUser(nickname, Model) {
 }
  
 async function rankingsOfUser(nickname, Model) {
-  const ranking = await Model.find({ "nickname": nickname });
+  // Los resultados se ordenan de mayor a menos puntuación, y de más reciente a más antiguo
+  const ranking = await Model.find({ "nickname": nickname }).sort({ "score": 1, "time": -1 });
   return ranking.length != 0 ? ranking : false;
 }
 
 async function rankingsOfGame(game, Model) {
-  const ranking = await Model.find({ "game": game });
+  // Los resultados se ordenan de mayor a menos puntuación, y de más reciente a más antiguo
+  const ranking = await Model.find({ "game": game }).sort({ "score": 1, "time": -1 });
   return ranking.length != 0 ? ranking : false;
 }
 
