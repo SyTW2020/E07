@@ -6,11 +6,11 @@
           <h1>¡Hola {{ user.name }}!</h1>
           <div class="cardPhoto" >
             <label for="file-input">
-              <!-- <img alt="user header" class="userPhoto" src="${user.photo}" width="250" height="250" ><br/> -->
+              <img alt="user header" class="userPhoto" src="${user.photo}" width="250" height="250" >
             </label>
-            <InputText type="file" id="file-input" class="p-inputtext-sm" accept="image/png, image/jpeg" style="display: none;"/><br/>
+            <InputText type="file" id="file-input" class="p-inputtext-sm" accept="image/png, image/jpeg" style="display: none;"/>
           </div>  
-          <Button type="button" @click="deleteUser" class="p-button-danger"> Eliminar cuenta </Button>
+          <Button type="button" @click="deleteConfirm" class="p-button-danger"> Eliminar cuenta </Button>
         </div>
 
         <div class="boxForm">
@@ -18,23 +18,23 @@
           <h1 class="h3 mb-3 font-weight-normal"> Editar perfil </h1>
 
           <label class="sr-only"> Nickname: </label>
-          <InputText type="text" v-model="user.nickname" id="inputNickname" class="p-inputtext-lg" placeholder="Nickname" required="" autofocus=""/><br/>
+          <InputText type="text" v-model="user.nickname" id="inputNickname" class="p-inputtext-lg" placeholder="Nickname" required="" autofocus=""/>
               
           <label class="sr-only"> Email: </label>
-          <InputText type="email" v-model="user.email" id="inputEmail" class="p-inputtext-lg" placeholder="Email" required="" autofocus=""/><br/>
+          <InputText type="email" v-model="user.email" id="inputEmail" class="p-inputtext-lg" placeholder="Email" required="" autofocus=""/>
 
           <label class="sr-only"> Introduce tu nombre: </label>
-          <InputText type="text" v-model="user.name" id="inputName" class="p-inputtext-lg" placeholder="Nombre"/><br/>
+          <InputText type="text" v-model="user.name" id="inputName" class="p-inputtext-lg" placeholder="Nombre"/>
 
           <label class="sr-only"> Introduce tu nueva contraseña: </label>
-          <InputText type="password" v-model="user.password" id="inputPass" class="p-inputtext-lg" /><br/>
+          <InputText type="password" v-model="user.password" id="inputPass" class="p-inputtext-lg" />
 
           <label class="sr-only"> Introduce tu fecha de nacimiento: </label>
-          <InputText class="p-inputtext-lg" v-model="user.birthday" id="inputDate" placeholder="DD-MM-YYYY"/><br/>
+          <InputText class="p-inputtext-lg" v-model="user.birthday" id="inputDate" placeholder="DD-MM-YYYY"/>
 
           <label class="sr-only"> Introduce una descripción: </label>
-          <Textarea type="text" v-model="user.description" id="inputDescription" class="p-inputtext-lg" placeholder="Descripción"></textarea><br/>
-          <Button @click="modifyUser" class="BSave"> Guardar </Button><br/>
+          <Textarea type="text" v-model="user.description" id="inputDescription" class="p-inputtext-lg" placeholder="Descripción"></Textarea><br/>
+          <Button @click="modifyUser" class="BSave"> Guardar </Button>
         </form>
       </div>
     </div>
@@ -54,12 +54,14 @@ export default {
     Textarea,
     Button
   },
+
   data() {
     return {
       user: this.$store.getters.user,
       prevNickname: null
     }
   },
+
   created: function () {
     this.prevNickname = this.$store.getters.user.nickname;
   },
@@ -117,6 +119,11 @@ export default {
             this.$router.push("/");
           }
         })
+    },
+    
+    deleteConfirm() {
+      if(confirm("¿Estás seguro de eliminar tu cuenta?"))
+        this.deleteUser();
     }
   }
 }
@@ -126,27 +133,30 @@ export default {
 .bodyUser {
   height: 100%;
   color: #dedede;
-  background-color: black;
+  background-color: #111111;
   display: flex; 
+  font-family: 'Bungee Inline', cursive;
 }
 
-.boxUser  {
+.boxUser {
   width: 96%;
   height: 96%;
-  background-color: grey;
+  background-image: url("https://i.pinimg.com/originals/6c/b7/10/6cb71054aa563bf9d4d56098405c40e6.jpg");
+  background-size: cover;
   margin: auto;
+  margin-top: 2%;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
 }
 
 .userProfile {
-  background-color: darkblue;
+  background-color: #4F5D75;
   display: flex;
   flex-direction: column;
-  width:100%;
+  width: 96%;
   height: 100%;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
   padding: 20px;
   margin: auto;
 }
@@ -156,71 +166,66 @@ export default {
   width: 150px;
   margin: 30px auto;
   border-radius: 40px;
-  box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+  box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
   cursor: pointer;
   transition: 0.4s;
-
 }
 
 .userPhoto:hover {
   transform: scale(0.9, 0.9);
-  box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25), 
-    -5px -5px 30px 15px rgba(0,0,0,0.22);
+  box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25), -5px -5px 30px 15px rgba(0, 0, 0, 0.22);
 }
 
 .boxForm {
   display: flex;
   flex-direction: column;
-  width:100%;
+  width: 100%;
   height: 100%;
-  background-color: white;
-  padding:20px;
+  background-color: #2D3142;
+  padding: 20px;
+  color: #111111;
+  border: 4px double #FA7E27;
 }
 
 .userForm {
   display: flex;
   flex-direction: column;
-  /* max-width: 700px; */
   width: 70%;
-
   height: auto;
   padding: 20px;
   margin: auto;
-  border: 4px outset #f61067;
-  background-color: #1c221f;
-
+  background-color: white;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 1px 1px 12px 1px rgba(0,0,0,0.26);
 }
 
 .BSave {
-  width:60%;
+  width: 60%;
   margin: auto;
 }
 
 h1 {
-  margin:auto;
+  margin: auto;
 }
 
-/* ORDENADOR */ 
+form label {
+  margin-top: 1%;
+}
+
 @media screen and (min-width: 1000px) {
 	.boxUser{
     flex-direction: row;
   }
   .userProfile {
-    width: 40%;
+    width: 60%;
+    margin-left: 1%;
   }
-  .userPhoto{
+  .userPhoto {
     width: 250px;
     height: 250px;
   }
-}
-
-/* Media pantalla */ 
-@media screen and (min-width: 800px) and (max-width: 1000px ){
-	/* .boxSignIn{
-    width: 50%;
+  .boxForm {
+     margin-left: 1%;
   }
-  .formSignIn {
-    width: 80%;
-  } */
 }
 </style>

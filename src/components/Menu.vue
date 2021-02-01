@@ -10,10 +10,10 @@
         <router-link to="/rankings" active-class="active" id="BRanking" class="nav-items"><i class="material-icons"> insert_chart_outlined </i> Rankings </router-link>
         <template v-if="$store.getters.token != null">
           <router-link to="/myuser" active-class="active" id="BMyuser" class="nav-items"><i class="material-icons"> account_circle </i> Perfil </router-link>
-          <Button @click="userLogOut" active-class="active" class="p-button-danger"><i class="material-icons"> exit_to_app </i> Cerrar sesión </Button>
+          <Button @click="userLogOut" active-class="active" class="p-button-danger nav-items"><i class="material-icons"> exit_to_app </i> Cerrar sesión </Button>
         </template>
         <template v-else>
-          <router-link to="/signin" active-class="active" id="BSignin"  class="nav-items"><i class="material-icons"> account_circle </i> Inicia sesión </router-link>
+          <router-link to="/signin" active-class="active" id="BSignin" class="nav-items"><i class="material-icons"> account_circle </i> Inicia sesión </router-link>
           <router-link to="/signup" active-class="active" id="BSignup" class=" nav-items"><i class="material-icons"> create </i> Regístrate </router-link>
         </template>
       </div>
@@ -84,14 +84,13 @@ export default {
 .items {
   display: none;
   float: left;
-  padding-right: 1%;
-  padding-top: 0.5%;
+  padding-top: 0.25%;
 }
 
 .nav-items {
   display: flex;
   align-items: center;
-  margin-left: 20px;
+  margin-right: 20px;
 }
 
 router-link-active, router-link-exact-active {

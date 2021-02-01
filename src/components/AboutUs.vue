@@ -11,7 +11,6 @@
 				<a href="https://github.com/PaulaExposito">
         	<img src="https://vader.news/__export/1589864317677/sites/gadgets/img/2020/05/19/the100-newsvader.jpg_550774285.jpg" class="teamPhoto">  
 				</a>
-
       </div>  
       <div  class="card teamLeft">
 				<div class="teamText">
@@ -56,21 +55,13 @@ export default {
 </script>
 
 <style scoped>
-/* .flex{
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-} */
 .bodyAbout {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-
   height: 100%;
   width: 100%;
-
-  /*  Image  */
   background-image: url("https://wallpapercave.com/wp/wp5842177.jpg");
   background-position: center;
   background-size: cover;
@@ -79,10 +70,10 @@ export default {
 }
 
 .teamBox {
-    width: 100%;
-    height: 97%;
-	  background-color:rgb(0, 0, 0, 0.8);
-    padding: 10px;
+	width: 100%;
+	height: 97%;
+	background-color:rgb(0, 0, 0, 0.8);
+	padding: 10px;
 }
 
 .card {
@@ -94,60 +85,59 @@ export default {
 	height: 250px;
 	background-color: grey;
 	margin: 5%;
-
-  background: linear-gradient(
-        60deg,
-        #5073b8,
-        #1098ad,
-        #07b39b,
-        #6fba82);
-
 	font-size: 10px;
+  background: linear-gradient(
+		60deg,
+		#5073b8,
+		#1098ad,
+		#07b39b,
+		#6fba82);
 }
 
-.teamText{
+.teamText {
 	width: 40%;
 	margin: 10%;
 }
 
-.teamPhoto{
+.teamPhoto {
 	width: 60%;
   height: 100px;
   width: 100px;
   border-radius: 40px;
-  box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+  box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
   cursor: pointer;
   transition: 0.4s;
   margin: 10%;
-
 }
+
 .teamPhoto:hover {
   transform: scale(0.9, 0.9);
-  box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25), 
-    -5px -5px 30px 15px rgba(0,0,0,0.22);
+  box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25), -5px -5px 30px 15px rgba(0, 0, 0, 0.22);
 }
-.teamLeft { flex-direction: row-reverse; }
+
+.teamLeft {
+	flex-direction: row-reverse;
+}
 
 /* ORDENADOR */ 
 @media screen and (min-width: 1600px) {
-	.card{
+	.card {
 		font-size: 18px;
 	}
-	.teamPhoto{
+	.teamPhoto {
 		height: 200px;
   	width: 200px;
 	}
 }
 
 /* Media pantalla */ 
-@media screen and (min-width: 800px) and (max-width: 1600px ){
-	.card{
+@media screen and (min-width: 800px) and (max-width: 1600px) {
+	.card {
 		font-size: 14px;
 	}
-	.teamPhoto{
+	.teamPhoto {
 		height: 150px;
   	width: 150px;
 	}
 }
-
 </style>

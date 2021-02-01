@@ -14,27 +14,27 @@ import { Card } from '../utils';
 
 export default {
 	name: "Dashboard",
+	components: {
+		Card
+	},
+
+	data() {
+		return {
+			games: ["TicTacToe", "MirsBall", "Simon"]
+		}
+	},
+	
 	methods: {
 		goToGame(game) {
 			this.$store.dispatch('setGameAction', game);
 			this.$router.push('/game');
-		}
-	},
-	components: {
-		Card: Card
-	},
-	data() {
-		return {
-			games: ["TicTacToe", "MirsBall", "Simon"]
 		}
 	}
 }
 </script>
 
 <style scoped>
-
-/* MOVIL */
-.dashboard{
+.dashboard {
 	width: 95%;
 	background-color:rgb(0, 0, 0, 0.8);
 }
@@ -76,7 +76,6 @@ img {
   box-shadow: 0 0 50px #4594FB; 
 }  
 
-/* ORDENADOR */ 
 @media screen and (min-width: 800px) {
 	.flex {
 		display: flex;
@@ -92,5 +91,4 @@ img {
 		padding: 10px;
 	}
 } 
-
 </style>

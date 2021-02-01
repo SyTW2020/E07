@@ -1,7 +1,5 @@
 <template>
   <div class="bodySignIn">
-    <!-- <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap" rel="stylesheet"> -->
     <div class="boxSignIn">
       <form @submit.prevent="userSignIn" class="formSignIn"><br/>
         <img id="signinimg" src="https://cdn.glitch.com/db77d28a-8547-4c40-8473-0852380d676e%2Fmando1.ico?v=1607165029366" width="70" height="70"/>
@@ -31,8 +29,8 @@ class User {
 export default {
   name: "SignIn",
   components: {
-    'InputText': InputText,
-    'InlineMessage': InlineMessage
+    InputText,
+    InlineMessage
   },
   data() {
     return {
@@ -75,7 +73,6 @@ export default {
 .bodySignIn {
   height: 100%;
   display: flex;
-  /*  Image  */
   background-image: url("https://www.xtrafondos.com/wallpapers/paisaje-retro-de-atardecer-5436.jpg");
   background-position: right right;
   background-size: cover;
@@ -85,7 +82,7 @@ export default {
   width: 100%;
   margin: 0;
   padding: 20px;
-  background-color: rgb(0, 0, 0, 0.8);
+  background-color: rgb(17, 17, 17, 0.8);
   display: flex;
   font-family: 'Bungee Inline', cursive;
 }
@@ -101,6 +98,7 @@ export default {
   border-radius: 10px 10px 10px 10px;
   box-shadow: 1px 1px 12px 1px rgba(0,0,0,0.26);
 }
+
 .msg {
   font-family: Arial;
 }
@@ -112,11 +110,11 @@ export default {
   color: #dedede;
   border: 3px solid #eee;
   border-radius: 25px;
-  padding: 20px; /* Cambiar por responsive */
+  padding: 20px; 
   margin: auto;
   font-size: 20px;
 } 
-/* ORDENADOR */ 
+
 @media screen and (min-width: 1000px) {
 	.boxSignIn{
     width: 50%;
@@ -126,8 +124,7 @@ export default {
   }
 }
 
-/* Media pantalla */ 
-@media screen and (min-width: 800px) and (max-width: 1000px ){
+@media screen and (min-width: 800px) and (max-width: 1000px) {
 	.boxSignIn{
     width: 50%;
   }

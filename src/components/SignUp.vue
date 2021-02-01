@@ -34,9 +34,9 @@ class User {
 export default {
   name: "SignUp",
   components: {
-    'InputText': InputText,
-    'InlineMessage': InlineMessage,
-    'Password': Password
+    InputText,
+    InlineMessage,
+    Password
   },
   data() {
     return {
@@ -94,7 +94,6 @@ export default {
   height: 100%;
   width: 100%;
   display: flex;
-  /*  Image  */
   background-image: url("https://www.xtrafondos.com/wallpapers/paisaje-retro-de-atardecer-5436.jpg");
   background-position: right; 
   background-size: cover;
@@ -119,12 +118,6 @@ export default {
   font-family: 'Bungee Inline', cursive;
 }
 
-/* .flex {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-
 .register-btn {
   background: #a770ef;
   background: -webkit-linear-gradient(145deg, #fdb99b, #cf8bf3, #a770ef);
@@ -132,7 +125,7 @@ export default {
   color: #dedede;
   border: 3px solid #eee;
   border-radius: 25px;
-  padding: 20px; /* Cambiar por responsive */
+  padding: 20px; 
   margin: auto;
   font-size: 20px;
 }
