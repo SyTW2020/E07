@@ -7,6 +7,7 @@ import Dropdown from 'primevue/dropdown';
 import Textarea from 'primevue/textarea';
 import Button from 'primevue/button';
 import Tooltip from 'primevue/tooltip';
+import Divider from 'primevue/divider';
 import 'primevue/resources/themes/saga-blue/theme.css'; //theme
 
 export { 
@@ -18,5 +19,6 @@ export {
 	Dropdown, 
 	Button,
 	Textarea,
-	Tooltip
+	Tooltip,
+	Divider
 };
