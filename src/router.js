@@ -28,28 +28,28 @@ export default new Router({
     },
     {
       path: "/myuser",
-      name: "myuser",
+      name: "MyUser",
       component: () => import("./components/User.vue")
     },
     {
-      path: "/myuseredit",
-      name: "myuseredit",
-      component: () => import("./components/UserEdit.vue")
+      path: "/game",
+      name: "Game",
+      component: () => import("./views/Game.vue")
     },
     {
       path: "/tictactoe",
       name: "TicTacToe",
       component: () => import("./components/games/TicTacToe.vue")
     },
-    {
-      path: "/mirsball",
-      name: "MirsBall",
-      component: () => import("./components/games/MirsBall.vue")
-    },
-    {
-      path: "/simon",
-      name: "Simon",
-      component: () => import("./components/games/Simon.vue")
-    }
+    // {
+    //   path: "/mirsball",
+    //   name: "MirsBall",
+    //   component: () => import("./components/games/MirsBall.vue")
+    // },
+    // {
+    //   path: "/simon",
+    //   name: "Simon",
+    //   component: () => import("./components/games/Simon.vue")
+    // }
   ]
 });

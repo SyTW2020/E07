@@ -1,36 +1,31 @@
 <template>
 	<div class="dashboard flex wrap">
-		<Card v-for="(i,j) in games" :key="j" :name="i" class="card flex">
+		<Card v-for="(i, j) in games" :key="j" :name="i" class="card flex">
 			<template #header>
 				<img alt="user header" src="https://i.pinimg.com/originals/77/da/5f/77da5fe07dcc9a82f5c3247a59ce93fb.jpg" @click="goToGame(i)">  <!-- Cambiar por foto en mongo -->
 			</template>
-			<template #title>	{{ i.name }} </template>
+			<template #title>	{{ i }} </template>
 		</Card>
 	</div>
 </template>
 
 <script>
-import { Card } from '../utils'
-import TicTacToe from './games/TicTacToe.vue';
-import MirsBall from './games/MirsBall.vue';
-import Simon from './games/Simon.vue';
+import { Card } from '../utils';
 
 export default {
 	name: "Dashboard",
 	methods: {
 		goToGame(game) {
-			this.$router.push(game.data().path);
+			this.$store.dispatch('setGameAction', game);
+			this.$router.push('/game');
 		}
 	},
 	components: {
-		Card: Card,
-		TicTacToe: TicTacToe,
-		MirsBall: MirsBall,
-		Simon: Simon
+		Card: Card
 	},
 	data() {
 		return {
-			games: [TicTacToe, MirsBall, Simon]
+			games: ["TicTacToe", "MirsBall", "Simon"]
 		}
 	}
 }

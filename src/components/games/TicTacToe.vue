@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Timer></Timer><br>
     <div class="tictactoe-board">
       <div v-bind:key="i" v-for="(n, i) in 3">
         <div v-bind:key="j" v-for="(n, j) in 3">
@@ -15,17 +14,14 @@
 <script>
 import Cell from "./TicTacToe_Cell.vue";
 import Board from "../../games/TicTacToe";
-import Timer from "../Timer.vue";
 
 export default {
   name: "TicTacToe",
   components: {
-    Cell: Cell,
-    Timer: Timer
+    Cell: Cell
   },
   data() {
     return {
-      path: '/tictactoe',
       gameOver: false,
       gameStarted: false,
       gameOverText: '',
@@ -116,7 +112,6 @@ export default {
       .then(res => {
         return res.json()
       })
-      .then(data => console.log(data.response[0].ranking.score))
       .catch(err => console.log(err));
     }
   }
