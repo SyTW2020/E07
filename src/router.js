@@ -32,11 +32,6 @@ export default new Router({
       component: () => import("./components/User.vue")
     },
     {
-      path: "/myuseredit",
-      name: "myuseredit",
-      component: () => import("./components/UserEdit.vue")
-    },
-    {
       path: "/tictactoe",
       name: "TicTacToe",
       component: () => import("./components/games/TicTacToe.vue")

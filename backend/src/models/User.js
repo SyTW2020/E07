@@ -8,7 +8,7 @@ const User = new Schema({
   password: String,
   name: String,
   photo: String,
-  birthDate: Date,
+  birthday: String,
   description: String
 });
 

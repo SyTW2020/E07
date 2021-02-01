@@ -60,7 +60,7 @@ export default {
           else {
             this.$store.dispatch('signInAction', {
               token: data.response[0].token,
-              nickname: data.response[0].user.nickname
+              user: data.response[0].user
             });
             this.$router.push('/');
           }
@@ -101,8 +101,8 @@ export default {
   border-radius: 10px 10px 10px 10px;
   box-shadow: 1px 1px 12px 1px rgba(0,0,0,0.26);
 }
-.msg{
-    font-family: Arial;
+.msg {
+  font-family: Arial;
 }
 
 .btn-funky-moon {
@@ -135,6 +135,4 @@ export default {
     width: 80%;
   }
 }
-
-
 </style>
