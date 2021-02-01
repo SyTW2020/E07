@@ -9,17 +9,17 @@ export default new Router({
     {
       path: "/",
       name: "home",
-      component: () => import("./views/Home.vue"),
+      component: () => import("./views/Home.vue")
     },
     {
       path: "/rankings",
       name: "rankings",
-      component: () => import("./components/Ranking.vue"),
+      component: () => import("./components/Ranking.vue")
     },
     {
       path: "/signin",
       name: "signin",
-      component: () => import("./components/SignIn.vue"),
+      component: () => import("./components/SignIn.vue")
     },
     {
       path: "/signup",
@@ -37,10 +37,15 @@ export default new Router({
       component: () => import("./views/Game.vue")
     },
     {
-      path: "/tictactoe",
-      name: "TicTacToe",
-      component: () => import("./components/games/TicTacToe.vue")
-    },
+      path: "/aboutus",
+      name: "AboutUs",
+      component: () => import("./components/AboutUs.vue")
+    }
+    // {
+    //   path: "/tictactoe",
+    //   name: "TicTacToe",
+    //   component: () => import("./components/games/TicTacToe.vue")
+    // },
     // {
     //   path: "/mirsball",
     //   name: "MirsBall",

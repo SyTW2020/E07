@@ -1,20 +1,20 @@
 <template>
   <div class="bodyMenu">
     <div class="headerMenu">
-      <router-link to="/" class="logo" id="BGamingit"> <div class="home"><div class="logo-img" ></div> GamingIt </div></router-link>
-     
+      <router-link to="/" class="logo" id="BGamingit"><div class="home"><div class="logo-img"></div> GamingIt </div></router-link>
+
       <input class="burger-menu-btn" type="checkbox" id="burger-btn" />
-      <label class="burger-menu-icon" for="burger-btn"><div class="icon-container"><i class="material-icons">menu</i></div></label>
+      <label class="burger-menu-icon" for="burger-btn"><div class="icon-container"><i class="material-icons"> menu </i></div></label>
 
       <div class="items">
-        <router-link to="/rankings" active-class="active" id="BRanking"> Rankings </router-link>
+        <router-link to="/rankings" active-class="active" id="BRanking" class="nav-items"><i class="material-icons"> insert_chart_outlined </i> Rankings </router-link>
         <template v-if="$store.getters.token != null">
-          <router-link to="/myuser" active-class="active" id="BMyuser" class="nav-items"><i class="material-icons">account_circle</i> Perfil </router-link>
-          <button @click="userLogOut" active-class="active" class="nav-items"><i class="material-icons">exit_to_app</i> Cerrar sesión </button>
+          <router-link to="/myuser" active-class="active" id="BMyuser" class="nav-items"><i class="material-icons"> account_circle </i> Perfil </router-link>
+          <Button @click="userLogOut" active-class="active" class="p-button-danger"><i class="material-icons"> exit_to_app </i> Cerrar sesión </Button>
         </template>
         <template v-else>
-          <router-link to="/signin" active-class="active" id="BSignin"  class="nav-items"><i class="material-icons">account_circle</i> Inicia sesión </router-link>
-          <router-link to="/signup" active-class="active" id="BSignup" class="border nav-items"><i class="material-icons">create</i> Regístrate </router-link>
+          <router-link to="/signin" active-class="active" id="BSignin"  class="nav-items"><i class="material-icons"> account_circle </i> Inicia sesión </router-link>
+          <router-link to="/signup" active-class="active" id="BSignup" class=" nav-items"><i class="material-icons"> create </i> Regístrate </router-link>
         </template>
       </div>
     </div>
@@ -22,8 +22,13 @@
 </template>
 
 <script>
+import { Button } from '../utils';
+
 export default {
   name: "Menu",
+  components: {
+    Button
+  },
   methods: {
     userLogOut() {
       this.$store.dispatch('logOutAction');
@@ -38,37 +43,27 @@ export default {
   overflow: hidden;
   color: #dedede;
   background-color: #1c221f;
-  /* padding: 10px 50px; */
-
   display: block;
-  margin: 0 auto;
+  margin: auto;
 }
 
-button {
-  color: #dedede;
-  background-color: #1c221f;
-  border: 0;
-  font-family: serif;
-}
-
-.headerMenu a, .headerMenu button {
+.headerMenu a {
   float: left;
   color: #dedede;
   padding: 12px;
   text-decoration: none;
-  font-size: 20px;
-  line-height: 25px;
-  border-radius: 2px;
+  font-size: 120%;
+  border-radius: 2%;
 }
 
-.headerMenu a:hover, .headerMenu button:hover {
+.headerMenu a:hover {
   background-color: #4d5451;
   color: #dedede;
 }
 
-.headerMenu a.active, .headerMenu button:active {
-  background-color: #4d5451;
-  color: #dedede;
+.headerMenu a.active {
+  color: #4d5451;
+  background-color: #dedede;
 }
 
 .logo {
@@ -78,7 +73,6 @@ button {
 
 .home {
   display: flex;
-  /*margin: 0 0 0 20px;*/
   align-items: center;
 }
 
@@ -90,11 +84,8 @@ button {
 .items {
   display: none;
   float: left;
-}
-
-.border {
-  /*margin: 0 50px 0 0;*/
-  border: 1px solid #dedede;
+  padding-right: 1%;
+  padding-top: 0.5%;
 }
 
 .nav-items {
@@ -111,7 +102,7 @@ i {
   margin-right: 7px;
 }
 
-/* Menú hamburguesa */ 
+/* Menú hamburguesa */
 .icon-container {
   display: flex;
   align-items: center;
@@ -119,20 +110,14 @@ i {
 }
 
 .burger-menu-icon {
-	display: inline-block;
 	float: right;
 }
 
-.burger-menu-icon .material-icons {
-  display: block;
-  position: relative;
-}
-
-.burger-menu-btn {  /* No mostrar el checkbox */
+.burger-menu-btn {  
   display: none;
 }
 
-.burger-menu-btn:checked ~ .items { /* si checked == true items se transforma */
+.burger-menu-btn:checked ~ .items {
   display: block;
 }
 
@@ -145,9 +130,8 @@ i {
   .items {
     display: block;
     float: right;
-    max-height: none;
   }
-  
+
   .burger-menu-icon {
     display: none;
   }

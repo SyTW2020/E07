@@ -47,12 +47,12 @@ import { InputText, InlineMessage, InputMask,  Dropdown, Textarea, Button } from
 export default {
   name: "User",
   components: {
-    'InputText': InputText,
-    'InlineMessage': InlineMessage,
-    'InputMask': InputMask,
-    'Dropdown': Dropdown,
-    'Textarea': Textarea,
-    'Button': Button
+    InputText,
+    InlineMessage,
+    InputMask,
+    Dropdown,
+    Textarea,
+    Button
   },
   data() {
     return {
