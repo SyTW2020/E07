@@ -12,100 +12,90 @@
 
     </div>
 
-    <button @click="allGamesRankings"> Mostrar rankings </button>
+    <!--<button @click="allGamesRankings"> Mostrar rankings </button>-->
 
   </div>
 </template>
 
 <script>
+import "@babel/polyfill";
+
 export default {
   name: "Rankings",
   data() {
 		return {
-      games: [],
-      tictactoe: [] //Paula te va a cambiar el nombre en el futuro :)
+      gamesName: [],
+      tictactoe: [], //Paula te va a cambiar el nombre en el futuro :),
+      gamesRankings: []
 		}
   },
-  // updated: function () {
-  //     console.log("activated")
-  //     allGamesRankings();
-  // },
-  created: function () {
-    fetch(`/games/`)
+
+  created: async function () {
+    await fetch(`/games/`)
       .then(res => {
         return res.json();
       })
       .then(data => {
         for (let x of data.response[0].allGames)
-          this.games.push(x.name); 
+          this.gamesName.push(x.name); 
       })
       .catch(err => console.log(err));
 
     // Bucle aquí para hacer un get de cada juego
-    fetch(`/rankings/TicTacToe`)
-      .then(res => {
-        if (res.status != 200)  // Si recibe 404 es que no hay datos de ese ranking
-          return res.status;
-        return res.json();
-      })
-      .then(data => {
-        if (data == 404)
-          console.log("No hay ranking de este juego");
-        else {
-          console.log(data)
-          for (let x of data.response[0].ranking) {
-            this.tictactoe.push(x);
-            console.log(x.score + x.nickname)
+    for (let y in this.gamesName) {
+      this.gamesRankings.push([]);
+      await fetch(`/rankings/${this.gamesName[y]}`)
+        .then(res => {
+          if (res.status != 200)  // Si recibe 404 es que no hay datos de ese ranking
+            return res.status;
+          return res.json();
+        })
+        .then(data => {
+          if (data == 404)
+            console.log("No hay ranking de este juego");
+          else {
+            console.log(data)
+            for (let x of data.response[0].ranking) {
+              this.gamesRankings[y].push(x);
+            }
           }
-        }
-      })
-      .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
+    }
+
+    this.allGamesRankings();
   },
   methods: {
     allGamesRankings() {
       // Para cada juego llamar a crear tabla:
       // this.getAllGames();
-      this.gameRanking("TicTacToe");   // Hay que rellenar en algún momento mongo con los datos de cada juego
+      for (let x in this.gamesName)
+        this.gameRanking( this.gamesName[x], x);   // Hay que rellenar en algún momento mongo con los datos de cada juego
     },
-    gameRanking(game) {
+    gameRanking(name, index) {
       let gamesRankings = document.getElementById("gamesRankings");
+      let gameTitle = document.createElement("h2")
+      gameTitle.textContent = name;
       let table = document.createElement("table");
       let tableHead = document.createElement("thead");
       let tableBody = document.createElement("tbody");
       let head = ["position", "nickname", "score", "time"];
 
       let row = document.createElement("tr");
-      for (let x of head) {
+      for (let i of head) {
         let cell = document.createElement("td");
-        let text = document.createTextNode(x.toUpperCase());      
+        let text = document.createTextNode(i.toUpperCase());      
         cell.appendChild(text);
         row.appendChild(cell);
       }
       tableHead.appendChild(row);
 
-      console.log(this.tictactoe[0]["nickname"])
-      for (let i = 0; i < this.numberOfRows(game); i++) {
+      for (let i = 0; i < this.numberOfRows(index); i++) {
         row = document.createElement("tr");
 
         for (let j of head) {
           let cell = document.createElement("td");
-          let content;
-          
-          switch(j) {
-            case "position":
-              content = i + 1;
-              break;
-            case "nickname":
-              content = this.tictactoe[i]["nickname"];
-              break;
-            case "score":
-              content = this.tictactoe[i]["score"];
-              break;
-            case "time": 
-              content = this.tictactoe[i]["time"];
-          }
-          
-          
+          let content = j === "position" ? i + 1 : this.gamesRankings[index][i][j];
           let text = document.createTextNode(content);      
           
           cell.appendChild(text);
@@ -116,13 +106,11 @@ export default {
 
       table.appendChild(tableHead);
       table.appendChild(tableBody);
+      gamesRankings.appendChild(gameTitle);
       gamesRankings.appendChild(table);
     },
-    numberOfRows(game) {
-      if (this.tictactoe.length < 10)
-        return this.tictactoe.length;
-      else
-        return 10;
+    numberOfRows(index) {
+      return this.gamesRankings[index].length < 10 ? this.gamesRankings[index].length : 10;
     }
   }
 }
