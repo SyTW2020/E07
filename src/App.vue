@@ -1,5 +1,7 @@
 <template>
   <div id="app" class="flex">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap" rel="stylesheet">
     <Menu></Menu>
     <router-view></router-view>
     <Footer></Footer>
