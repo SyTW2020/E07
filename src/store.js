@@ -14,7 +14,7 @@ export default new Vuex.Store({
   mutations: {
     singIn(state, data) {
       state.token = data.token;
-      state.user = data.nickname;
+      state.user = data.user;
     },
     logOut(state) {
       state.token = null;

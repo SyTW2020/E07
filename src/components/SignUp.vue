@@ -22,12 +22,12 @@
 <script>
 import { InputText, InlineMessage, Password } from '../utils';
 class User {
-  constructor(email = '', name = '', password = '', password2 = '', nickname = '') {
+  constructor(nickname = '', email = '', name = '', password = '', password2 = '') {
+    this.nickname = nickname;
     this.email = email;
     this.name = name;
     this.password = password;
     this.password2 = password2;
-    this.nickname = nickname;
   }
 }
 
@@ -67,14 +67,14 @@ export default {
             return res.json();
           })
           .then(data => {
-            if (data == 404){
+            if (data == 404) {
               const msg = document.querySelector(".msg");
               msg.textContent = "Este usuario ya existe.";
             }
             else {
               this.$store.dispatch('signInAction', {
                 token: data.response[0].token,
-                nickname: data.response[0].user.nickname
+                user: data.response[0].user
               });
               this.$router.push('/');
             } 
@@ -83,7 +83,7 @@ export default {
     },
     
     checkPasswords() {
-      return this.user.password == this.user.password2 ? true: false;
+      return this.user.password == this.user.password2 ? true : false;
     }
   }
 };
@@ -136,6 +136,4 @@ export default {
   margin: auto;
   font-size: 20px;
 }
-
-
 </style>
