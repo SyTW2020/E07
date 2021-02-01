@@ -30,8 +30,8 @@ router.get('/', async (req, res) => {
   });
 });
 
-router.get('/user/:nickname', async (req, res) => {
-  const ranking = await rankingsOfUser(req.params.nickname, Ranking);
+router.get('/:nickname&:game', async (req, res) => {
+  const ranking = await rankingsOfUser(req.params.nickname, req.params.game, Ranking);
   if (!ranking)
     res.status(404).send({ "response": [{ "code": 404, "error": "El usuario no tiene rankings." }] });
   else 
