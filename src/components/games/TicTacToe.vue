@@ -99,7 +99,7 @@ export default {
       fetch("/rankings", {
         method: "POST",
         body: JSON.stringify({
-          nickname: (this.$store.getters.user != null) ? this.$store.getters.user : "Anónimo",
+          nickname: (this.$store.getters.user != null) ? this.$store.getters.user.nickname : "Anónimo",
           game: this.$options.name,
           score: -this.score,
           time: this.$store.getters.valueTimer 
