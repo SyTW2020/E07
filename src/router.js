@@ -41,20 +41,5 @@ export default new Router({
       name: "AboutUs",
       component: () => import("./components/AboutUs.vue")
     }
-    // {
-    //   path: "/tictactoe",
-    //   name: "TicTacToe",
-    //   component: () => import("./components/games/TicTacToe.vue")
-    // },
-    // {
-    //   path: "/mirsball",
-    //   name: "MirsBall",
-    //   component: () => import("./components/games/MirsBall.vue")
-    // },
-    // {
-    //   path: "/simon",
-    //   name: "Simon",
-    //   component: () => import("./components/games/Simon.vue")
-    // }
   ]
 });

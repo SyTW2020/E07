@@ -20,7 +20,7 @@ export default {
 
 	data() {
 		return {
-			games: ["TicTacToe", "MirsBall", "Simon"]
+			games: ["TicTacToe", "Simon", "MirsBall"]
 		}
 	},
 	

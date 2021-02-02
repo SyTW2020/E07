@@ -3,10 +3,9 @@
     <div class="tictactoe-board">
       <div v-bind:key="i" v-for="(n, i) in 3">
         <div v-bind:key="j" v-for="(n, j) in 3">
-          <Cell class="cell" @click="performMove(j, i)" :value="board.cells[j][i]"></Cell>
+          <Cell class="cell" @click="performMove(j, i);" :value="board.cells[j][i]"></Cell>
         </div>
       </div>
-      <!-- <div class="game-over-text" v-if="gameOver"> {{ gameOverText }} </div> -->
     </div>
   </div>
 </template>
@@ -24,25 +23,37 @@ export default {
     return {
       gameOver: false,
       gameStarted: false,
-      gameOverText: '',
       board: new Board(),
       score: null
     }
   },
 
+  mounted() {
+		this.$root.$on('TicTacToe', () => {
+			this.reset();
+		})
+	},
+
   methods: {
+    reset() {
+      this.gameOver = false;
+      this.gameStarted = false;
+      this.board = new Board();
+      this.score = null;
+    },
+
     performMove(x, y) {
       if (!this.gameStarted) {
-        this.$store.dispatch('setTimerAction', true);
         this.gameStarted = true;
+        this.$store.dispatch('setTimerAction', this.gameStarted);
       }
       if (this.gameOver) {
         this.gameStarted = false;
-        this.$store.dispatch('setTimerAction', false);
+        this.$store.dispatch('setTimerAction', this.gameStarted);
         return;
       }
       if (!this.board.doMove(x, y, 'x')) {
-        window.alert("movimiento no válido");
+        window.alert("Movimiento no válido");
         return;
       }
       this.$forceUpdate();
@@ -50,13 +61,12 @@ export default {
       if (this.board.isGameOver()) {
         this.gameOver = true;
         this.gameStarted = false;
-        this.$store.dispatch('setTimerAction', false);
-        this.gameOverText = this.board.playerHas3InARow('x') ? '¡Ganaste! (No ocurrirá)' : 'Empate';
+        this.$store.dispatch('setTimerAction', this.gameStarted);
         this.$store.dispatch('setGameStatusAction', {
-          gameOver: this.gameOver,
-          gameOverText: this.gameOverText
+          msg: this.gameOver,
+          msgText: this.board.playerHas3InARow('x') ? '¡Ganaste! (No ocurrirá)' : 'Empate'
         });
-        this.score = this.board.getScore()
+        this.score = this.board.getScore();
         this.sendResults();
         return;
       }
@@ -66,13 +76,11 @@ export default {
         this.gameOver = true;
         this.gameStarted = false;
         this.$store.dispatch('setTimerAction', false);
-        this.gameOverText = this.board.playerHas3InARow('o') ? '¡Perdiste!' : 'Empate';
-        // this.$store.dispatch('setGameStatusAction', this.gameOverText);
         this.$store.dispatch('setGameStatusAction', {
-          gameOver: this.gameOver,
-          gameOverText: this.gameOverText
+          msg: this.gameOver,
+          msgText: this.board.playerHas3InARow('o') ? '¡Perdiste!' : 'Empate'
         });
-        this.score = this.board.getScore()
+        this.score = this.board.getScore();
         this.sendResults();
       }
       this.$forceUpdate();
@@ -108,7 +116,7 @@ export default {
       fetch("/rankings", {
         method: "POST",
         body: JSON.stringify({
-          nickname: (this.$store.getters.user != null) ? this.$store.getters.user.nickname : "Anónimo",
+          nickname: this.$store.getters.user != null ? this.$store.getters.user.nickname : "Anónimo",
           game: this.$options.name,
           score: -this.score,
           time: this.$store.getters.valueTimer 

@@ -20,9 +20,13 @@ export default {
       running: false
     }
   },
-  created: function () {
-    console.log(this.$route.path)
-  },
+
+  mounted() {
+		this.$root.$on('Timer', () => {
+			this.reset();
+		})
+	},
+
   methods: {
     start() {
       if(this.running) return;
@@ -87,7 +91,6 @@ export default {
   width: auto;
   height: auto;
   padding: 10%;
-  /* background-color: white; */
   background: #0f3854;
   background: radial-gradient(ellipse at center,  #0a2e38  0%, #000000 70%);
   background-size: 100%;
@@ -97,14 +100,14 @@ export default {
 }
 
 .time {
-  font-size: 35px;
+  font-size: 25px;
   color: #daf6ff;
   text-shadow: 0 0 20px rgba(10, 175, 230, 1),  0 0 20px rgba(10, 175, 230, 0);
 }
 
-/* @media screen and (min-width: 1000px) {
+@media screen and (min-width: 1400px) {
 .time {
   font-size: 35px;
   }
-} */
+}
 </style>
