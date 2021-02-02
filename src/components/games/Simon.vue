@@ -1,26 +1,17 @@
 <template>
-  <div class="container">
-  	<div class="header text-center"> <h1>SIMON GAME</h1> </div>
+  <div class="bodySimon">
    	<div id="app">
     	<div class="col-md-6 col-md-offset-3">
 				<div class="text-center well game">
 					<div>
-						<button id="red" type="button" class="btn btn-danger mybutton" :disabled="canPress === false" @click="addInput(1)"></button>
-						<button id="blue" type="button" class="btn btn-primary mybutton" :disabled="canPress === false" @click="addInput(2)"></button>
+						<button id="red" type="button" :disabled="canPress === false" @click="addInput(1)"></button>
+						<button id="blue" type="button" :disabled="canPress === false" @click="addInput(2)"></button>
 					</div>
 					<div>
-						<button id="green" type="button" class="btn btn-success mybutton" :disabled="canPress === false" @click="addInput(3)"></button>
-						<button id="yellow" type="button" class="btn btn-warning mybutton" :disabled="canPress === false" @click="addInput(4)"></button>
-					</div>
-					<div class="well">
-						<div class = "output"> <h3>{{ output }}</h3></div>
+						<button id="green" type="button" :disabled="canPress === false" @click="addInput(3)"></button>
+						<button id="yellow" type="button" :disabled="canPress === false" @click="addInput(4)"></button>
 					</div>
 					<div class="text-center">
-						<div class="btn-group">
-							<button @click="start" :disabled="started == true" class="btn">Start</button>
-							<button id="strictbt" @click="turnStrict" class="btn btn-danger">Strict</button>
-							<button :disabled="canPress === false" @click="reset" class="btn">Reset</button>
-						</div>
 						<p class="author"><br>by <a href="http://robertsonlima.com">All Rights to Robertson Lima</a></p>
 					</div>
 				</div>
@@ -48,54 +39,74 @@ export default {
   name: 'Simon',    
   data() {
     return {
-			path: '/simon',
-			strict: false,
       started: false,
       canPress: false,
       sequence: "",
       input: "",
       inputTurn: 0,
       turn: 0,
-      output: "--", 
       maxTurn: 20
     }
 	},
 
+	mounted() {
+		this.$root.$once('Simon', () => {
+			this.start();
+		});
+	},
+
 	methods: {
-		start: function() {
+		start() {
 			this.reset();
 			this.started = true;
+			this.$store.dispatch('setTimerAction', this.started);
 			this._turn();
 		},
 
-		_turn: function() {
+		reset() {
+			this.started = false;
+			this.canPress = false;
+			this.sequence = "";
+			this.input = "";
+			this.inputTurn = 0;
+			this.turn = 0;
+		},
+
+		_turn() {
 			if (this.turn == this.maxTurn) {
-				this.output = "You won!";
 				this.started = false;
+				this.$store.dispatch('setTimerAction', this.started);
+				this.$store.dispatch('setGameStatusAction', {
+					msg: true,
+					msgText: "¡Ganaste!"
+				});
 				this.canPress = false;
-				setTimeout(this.reset, 5000);
-			} else {
+				this.sendResults(100);
+			} 
+			else {
 				this.canPress = false;
-				this.output = "Turn: " + ++this.turn;
+				this.$store.dispatch('setGameStatusAction', {
+					msg: true,
+					msgText: "Turn: " + this.turn ++
+				});
 				this.sequence += Math.floor(Math.random() * 4 + 1);
 				this.play();
 			}
 		},
 
-		play: function() {
-			var delayBase = 500;
-			var baseDuration = 1000;
-			for (var i = 0; i < this.sequence.length; i++) {
+		play() {
+			var delayBase = 250;
+			var baseDuration = 250;
+			for (var i = 0; i < this.sequence.length; i ++) {
 				var bt = document.getElementById(SEQUENCE[this.sequence.charAt(i)]);
 				var audio = new Audio(SONG[this.sequence.charAt(i)]);
 				this.flash(bt, audio, delayBase, baseDuration);
 				delayBase += baseDuration;
 			}
-			var self = this;
 			setInterval(this.getInput, delayBase);
 		},
 
-		flash: function(element, audio, delay, flashDuration) {
+		flash(element, audio, delay, flashDuration) {
 			//set press
 			setTimeout(function() {
 				element.classList.add("btActive");
@@ -107,11 +118,11 @@ export default {
 			}, delay + flashDuration - 100);
 		},
 
-		getInput: function() {
+		getInput() {
 			this.canPress = true;
 		},
 		
-		addInput: function(bt) {
+		addInput(bt) {
 			if (this.canPress === true) {
 				this.input = this.input + bt;
 				var beep = new Audio(SONG[bt]);
@@ -120,89 +131,71 @@ export default {
 			}
 		},
 
-		check: function() {
+		check() {
 			this.canPress = false;
 			var turn = this.inputTurn;
 			if (this.input.charAt(turn) == this.sequence.charAt(turn)) {
-				this.inputTurn++;
+				this.inputTurn ++;
 				if (this.inputTurn == this.sequence.length) {
 					this.input = "";
 					this.inputTurn = 0;
-					setTimeout(this._turn, 2000);
+					setTimeout(this._turn, 500);
 				}
-			} else {
-				if (this.strict) {
-					this.output = "You've lost!";
-					setTimeout(this.reset, 5000);
-				} else {
-					this.input = "";
-					this.inputTurn = 0;
-					this.output = "You missed. Try again!";
-					setTimeout(this.play, 2000);;
-				}
+			} 
+			else {
+				this.$store.dispatch('setGameStatusAction', {
+					msg: true,
+					msgText: "¡Perdiste!"
+				});
+				this.$store.dispatch('setTimerAction', false);
+				this.sendResults(0);
 			}
 		},
 
-		reset: function() {
-			this.sequence = "";
-			this.input = "";
-			this.inputTurn = 0;
-			this.turn = 0;
-			this.started = false;
-			this.output = "--";
-			this.canPress = false;
-		},
-
-		turnStrict: function() {
-			this.strict = !this.strict;
-			var bt = document.getElementById("strictbt");
-			if (this.strict) {
-				bt.classList.remove("btn-danger");
-				bt.classList.add("btn-success");
-			} else {
-				bt.classList.remove("btn-success");
-				bt.classList.add("btn-danger");
-			}
-		}
+		sendResults(score) {
+      fetch("/rankings", {
+        method: "POST",
+        body: JSON.stringify({
+          nickname: this.$store.getters.user != null ? this.$store.getters.user.nickname : "Anónimo",
+          game: this.$options.name,
+          score: score,
+          time: this.$store.getters.valueTimer 
+        }),
+        headers: {
+          "Accept": "application/json",
+          "Content-type": "application/json"
+        }
+      })
+      .then(res => {
+        return res.json()
+      })
+      .catch(err => console.log(err));
+    }
 	}
 };
 </script>
 
 <style scoped>
-body {
-	background-color: black;
-}
-
-.header h1 {
-	font-family: "Bungee";
-	color: teal;
-	font-size: 70px;
-}
-
-.output {
-	font-family: "Bungee";
-}
-
-.mybutton {
+button {
 	height: 120px;
 	width: 120px;
 	margin: 3px;
 }
 
-.mybutton:active {
+button:active {
 	border: 10px;
 	transform: translateY(-4px);
-	box-shadow: 0 5px #999;
+	box-shadow: 0 0 50px #4594FB;
 }
 
-.mybutton:disabled {
+button:disabled {
 	opacity: 1;
 }
 
 .btActive {
 	border: 10px;
 	transform: translateY(-4px);
-	box-shadow: 0 5px #999;
+	box-shadow: 0 0 50px #4594FB;
 }
 
 #red {

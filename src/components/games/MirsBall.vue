@@ -1,20 +1,14 @@
 <template>
-  <div class=".mirsBalls">
-    <h1> Bolita </h1>
+  <div class="bodyBall">
+    <h1> Próximamente ... </h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'MirsBall',    
-  data() {
-    return {
-      path: '/mirsball',
-    }
-  }
+  name: 'MirsBall'
 };
 </script>
 
 <style scoped>
-
 </style>

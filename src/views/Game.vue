@@ -11,11 +11,11 @@
         </div>
         <div class="boardScore">
           <Timer></Timer>
-          <div class="gameOverText" v-if="$store.getters.gameStatus.gameOver == true">
-            <h1> {{ $store.getters.gameStatus.gameOverText }} </h1>
+          <div class="gameOverText" v-if="$store.getters.gameStatus.msg == true">
+            <h1> {{ $store.getters.gameStatus.msgText }} </h1>
           </div>
           <div class="buttons">
-            <Button class="BRestart"> Restart </Button>
+            <Button class="BRestart" @click="reset"> Start / Restart </Button>
             <Button class="BBack" @click="goBack"> Back </Button>
           </div>
         </div>
@@ -28,7 +28,7 @@
 import Timer from "../components/Timer.vue"
 import TicTacToe from "../components/games/TicTacToe.vue"
 import Simon from "../components/games/Simon.vue"
-import { Button} from '../utils';
+import { Button } from '../utils';
 
 export default {
   name: "Game",
@@ -41,8 +41,8 @@ export default {
 
   created: function () {
     this.$store.dispatch('setGameStatusAction', {
-      gameOver: false,
-      gameOverText: ''
+      msg: false,
+      msgText: ''
     });
   },
 
@@ -50,6 +50,13 @@ export default {
     goBack() {
       this.$router.push('/');
       this.$store.dispatch('setTimerAction', false);
+    },
+    reset() {
+      if (this.$store.getters.game === "TicTacToe")
+        this.$root.$emit('TicTacToe');
+      else
+        this.$root.$emit('Simon');
+      this.$root.$emit('Timer');
     }
   }
 }
@@ -119,12 +126,12 @@ export default {
   margin: auto;
   display: flex;
   justify-content: center;
-
 }
 
 .BBack, .BRestart {
   font-family: 'Bungee Inline', cursive;
   margin: 4%;
+  background-color: #2E939D;
 }
 
 @media screen and (min-width: 1000px) {
@@ -142,7 +149,6 @@ export default {
   }
   .buttons{
     width: 70%;
-    /* display:flex; */
     flex-direction: column;
   }
 }
