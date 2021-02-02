@@ -10,7 +10,7 @@ import Tooltip from 'primevue/tooltip';
 import Divider from 'primevue/divider';
 import 'primevue/resources/themes/saga-blue/theme.css'; //theme
 import OverlayPanel from 'primevue/overlaypanel';
-
+import Avatar from 'primevue/avatar';
 
 export { 
   InputText, 
@@ -23,5 +23,6 @@ export {
 	Textarea,
 	Tooltip,
 	Divider,
-	OverlayPanel
+	OverlayPanel,
+	Avatar
 };

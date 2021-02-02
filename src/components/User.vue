@@ -6,23 +6,20 @@
           <h1>¡Hola {{ user.name }}!</h1>
           <div class="cardPhoto" >
             <label for="file-input">
-              <img id="userPhoto" width="250" height="250" class="userPhoto" :src="$store.getters.user.photo">
-              <!-- <img alt="user header" class="userPhoto" src="${user.photo}" width="250" height="250"> -->
-              <!-- <img alt="user header" class="userPhoto"src="https://www.tonica.la/__export/1600900571471/sites/debate/img/2020/09/23/supergirl-llegara-su-fin-sexta-temporada_crop1600900539073.jpg_423682103.jpg" id="photo" width="250" height="250">
-  -->       </label>
-            <!-- <InputText type="file" @change="onFileChanged" id="file-input" class="p-inputtext-sm" accept="image/png, image/jpeg" style="display: none;"/> -->
-          </div> 
-
-          <Button type="button" @click="deleteConfirm" class="p-button-danger"> Eliminar cuenta </Button>
-          <Button type="button" label="Toggle" @click="chooseImage" class="BSave">Cambiar Foto </Button>
-          
+              <img id="userPhoto" width="100" height="100" class="userPhoto" :src="$store.getters.user.photo" @click="chooseImage" label="Toggle" title="Cambia tu avatar">
+            </label>
+          </div>
           <OverlayPanel ref="op">
             <div v-bind:key="i" v-for="(n, i) in avatars" class="avatarsContainer">
               <img :src="getUrl(i)" @click="changeAvatar(i)" alt="n" class="avatar">
             </div>
           </OverlayPanel>
-
-
+          <!-- <div class="boxAvatars" style="display: none;"> 
+            <div v-bind:key="i" v-for="(n, i) in avatars" class="avatarsContainer" >
+              <img :src="getUrl(i)" @click="changeAvatar(i)" alt="n" class="avatar" title="Cambia tu avatar">
+            </div>
+          </div> -->
+          <Button type="button" @click="deleteConfirm" class="p-button-danger"> Eliminar cuenta </Button>
         </div>
 
         <div class="boxForm">
@@ -39,7 +36,7 @@
           <InputText type="text" v-model="user.name" id="inputName" class="p-inputtext-lg" placeholder="Nombre"/>
 
           <label class="sr-only"> Introduce tu nueva contraseña: </label>
-          <InputText type="password" v-model="user.password" id="inputPass" class="p-inputtext-lg" />
+          <InputText type="password" v-model="user.password" id="inputPass" class="p-inputtext-lg"/>
 
           <label class="sr-only"> Introduce tu fecha de nacimiento: </label>
           <InputText class="p-inputtext-lg" v-model="user.birthday" id="inputDate" placeholder="DD-MM-YYYY"/>
@@ -57,7 +54,6 @@
 import { InputText, InlineMessage, InputMask,  Dropdown, Textarea, Button, OverlayPanel } from '../utils';
 import "@babel/polyfill";
 import * as avatars from "../assets/avatares";
-
 
 export default {
   name: "User",
@@ -78,9 +74,11 @@ export default {
       avatars
     }
   },
+
   created: function () {
     this.prevNickname = this.$store.getters.user.nickname;
   },
+  
   methods: {
     getUrl(index) {
       return this.avatars[index];
@@ -111,7 +109,7 @@ export default {
             });
             this.user = this.$store.getters.user;
             window.alert("Usuario modificado");
-            // this.$toast.add({severity:'info', summary: 'Imagen Cambiada', detail: event.data.name, life: 3000}); Si da tiempo hacemos que furule.
+            // this.$toast.add({ severity:'info', summary: 'Imagen Cambiada', detail: event.data.name, life: 3000 });
           }
         })
         .catch(err => console.log(err));
@@ -135,7 +133,6 @@ export default {
             window.alert("Operación no válida");
           else {
             window.alert("Usuario eliminado");
-
             this.$store.dispatch('logOutAction');
             this.$router.push("/");
           }
@@ -149,15 +146,19 @@ export default {
 
     chooseImage(event) {
       this.$refs.op.toggle(event);
+      // const avatars = document.querySelector(".boxAvatars");
+      // if (avatars.style.display == "flex")
+      //   avatars.style.display = "none";
+      // else
+      //   avatars.style.display = "flex";
+      // avatars.style.flexDirection = "column";
     },
 
-    changeAvatar(name){
+    changeAvatar(name) {
       this.user.photo = this.avatars[name];
       this.modifyUser();
-
-      let image = document.getElementById('userPhoto');
+      let image = document.querySelector('#userPhoto');
       image.url = this.user.photo;
-
       this.$refs.op.hide();
     }
   }
@@ -206,10 +207,18 @@ export default {
   transition: 0.4s;
 }
 
-.userPhoto:hover {
+.userPhoto:hover, .avatar:hover {
   transform: scale(0.9, 0.9);
   box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25), -5px -5px 30px 15px rgba(0, 0, 0, 0.22);
 }
+
+/* .boxAvatars {
+  width: 100%;
+  height: auto;
+  background-color: darkcyan;
+  display: flex;
+  flex-direction: column;
+} */
 
 .boxForm {
   display: flex;
@@ -243,20 +252,21 @@ h1 {
   margin: auto;
 }
 
-form label {
-  margin-top: 1%;
+p {
+  display: none;
 }
 
-
-.avatarsContainer {
-  display: flex;
-  width: 350px;
+form label {
+  margin-top: 1%;
 }
 
 .avatar {
   width: 100px;
   height: 100px;
-  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+  transition: 0.4s;
 }
 
 @media screen and (min-width: 1000px) {
