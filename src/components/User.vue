@@ -6,11 +6,23 @@
           <h1>¡Hola {{ user.name }}!</h1>
           <div class="cardPhoto" >
             <label for="file-input">
-              <img alt="user header" class="userPhoto" src="${user.photo}" width="250" height="250" >
-            </label>
-            <InputText type="file" id="file-input" class="p-inputtext-sm" accept="image/png, image/jpeg" style="display: none;"/>
-          </div>  
+              <img id="userPhoto" width="250" height="250" class="userPhoto" :src="$store.getters.user.photo">
+              <!-- <img alt="user header" class="userPhoto" src="${user.photo}" width="250" height="250"> -->
+              <!-- <img alt="user header" class="userPhoto"src="https://www.tonica.la/__export/1600900571471/sites/debate/img/2020/09/23/supergirl-llegara-su-fin-sexta-temporada_crop1600900539073.jpg_423682103.jpg" id="photo" width="250" height="250">
+  -->       </label>
+            <!-- <InputText type="file" @change="onFileChanged" id="file-input" class="p-inputtext-sm" accept="image/png, image/jpeg" style="display: none;"/> -->
+          </div> 
+
           <Button type="button" @click="deleteConfirm" class="p-button-danger"> Eliminar cuenta </Button>
+          <Button type="button" label="Toggle" @click="chooseImage" class="BSave">Cambiar Foto </Button>
+          
+          <OverlayPanel ref="op">
+            <div v-bind:key="i" v-for="(n, i) in avatars" class="avatarsContainer">
+              <img :src="getUrl(i)" @click="changeAvatar(i)" alt="n" class="avatar">
+            </div>
+          </OverlayPanel>
+
+
         </div>
 
         <div class="boxForm">
@@ -42,7 +54,10 @@
 </template>
 
 <script>
-import { InputText, InlineMessage, InputMask,  Dropdown, Textarea, Button } from '../utils';
+import { InputText, InlineMessage, InputMask,  Dropdown, Textarea, Button, OverlayPanel } from '../utils';
+import "@babel/polyfill";
+import * as avatars from "../assets/avatares";
+
 
 export default {
   name: "User",
@@ -52,21 +67,25 @@ export default {
     InputMask,
     Dropdown,
     Textarea,
-    Button
+    Button,
+    OverlayPanel
   },
 
   data() {
     return {
       user: this.$store.getters.user,
-      prevNickname: null
+      prevNickname: null,
+      avatars
     }
   },
-
   created: function () {
     this.prevNickname = this.$store.getters.user.nickname;
   },
-
   methods: {
+    getUrl(index) {
+      return this.avatars[index];
+    },
+
     modifyUser() {
       fetch(`/users/${this.prevNickname}`, {
         method: "PUT",
@@ -92,6 +111,7 @@ export default {
             });
             this.user = this.$store.getters.user;
             window.alert("Usuario modificado");
+            // this.$toast.add({severity:'info', summary: 'Imagen Cambiada', detail: event.data.name, life: 3000}); Si da tiempo hacemos que furule.
           }
         })
         .catch(err => console.log(err));
@@ -115,6 +135,7 @@ export default {
             window.alert("Operación no válida");
           else {
             window.alert("Usuario eliminado");
+
             this.$store.dispatch('logOutAction');
             this.$router.push("/");
           }
@@ -124,6 +145,20 @@ export default {
     deleteConfirm() {
       if(confirm("¿Estás seguro de eliminar tu cuenta?"))
         this.deleteUser();
+    },
+
+    chooseImage(event) {
+      this.$refs.op.toggle(event);
+    },
+
+    changeAvatar(name){
+      this.user.photo = this.avatars[name];
+      this.modifyUser();
+
+      let image = document.getElementById('userPhoto');
+      image.url = this.user.photo;
+
+      this.$refs.op.hide();
     }
   }
 }
@@ -210,6 +245,18 @@ h1 {
 
 form label {
   margin-top: 1%;
+}
+
+
+.avatarsContainer {
+  display: flex;
+  width: 350px;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
 }
 
 @media screen and (min-width: 1000px) {
