@@ -1,7 +1,7 @@
 <template>
   <div class="bodyMenu">
     <div class="headerMenu">
-      <router-link to="/" class="logo" id="BGamingit"><div class="home"><div class="logo-img"></div> GamingIt </div></router-link>
+      <router-link to="/" class="logo" id="BGamingit"><div class="home" @click="$store.dispatch('setTimerAction', false);"><div class="logo-img"></div> GamingIt </div></router-link>
 
       <input class="burger-menu-btn" type="checkbox" id="burger-btn" />
       <label class="burger-menu-icon" for="burger-btn"><div class="icon-container"><i class="material-icons"> menu </i></div></label>

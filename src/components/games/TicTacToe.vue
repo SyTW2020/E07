@@ -3,10 +3,10 @@
     <div class="tictactoe-board">
       <div v-bind:key="i" v-for="(n, i) in 3">
         <div v-bind:key="j" v-for="(n, j) in 3">
-          <Cell @click="performMove(j, i)" :value="board.cells[j][i]"></Cell>
+          <Cell class="cell" @click="performMove(j, i)" :value="board.cells[j][i]"></Cell>
         </div>
       </div>
-      <div class="game-over-text" v-if="gameOver"> {{ gameOverText }} </div>
+      <!-- <div class="game-over-text" v-if="gameOver"> {{ gameOverText }} </div> -->
     </div>
   </div>
 </template>
@@ -18,7 +18,7 @@ import Board from "../../games/TicTacToe";
 export default {
   name: "TicTacToe",
   components: {
-    Cell: Cell
+    Cell
   },
   data() {
     return {
@@ -33,12 +33,12 @@ export default {
   methods: {
     performMove(x, y) {
       if (!this.gameStarted) {
-        this.$store.dispatch('setTimerAction');  // true
+        this.$store.dispatch('setTimerAction', true);
         this.gameStarted = true;
       }
       if (this.gameOver) {
         this.gameStarted = false;
-        this.$store.dispatch('setTimerAction');
+        this.$store.dispatch('setTimerAction', false);
         return;
       }
       if (!this.board.doMove(x, y, 'x')) {
@@ -50,8 +50,12 @@ export default {
       if (this.board.isGameOver()) {
         this.gameOver = true;
         this.gameStarted = false;
-        this.$store.dispatch('setTimerAction');   // false
-        this.gameOverText = this.board.playerHas3InARow('x') ? 'You win' : 'Draw';
+        this.$store.dispatch('setTimerAction', false);
+        this.gameOverText = this.board.playerHas3InARow('x') ? '¡Ganaste! (No ocurrirá)' : 'Empate';
+        this.$store.dispatch('setGameStatusAction', {
+          gameOver: this.gameOver,
+          gameOverText: this.gameOverText
+        });
         this.score = this.board.getScore()
         this.sendResults();
         return;
@@ -61,8 +65,13 @@ export default {
       if (this.board.isGameOver()) {
         this.gameOver = true;
         this.gameStarted = false;
-        this.$store.dispatch('setTimerAction'); // false
-        this.gameOverText = this.board.playerHas3InARow('o') ? 'You lose!' : 'Draw';
+        this.$store.dispatch('setTimerAction', false);
+        this.gameOverText = this.board.playerHas3InARow('o') ? '¡Perdiste!' : 'Empate';
+        // this.$store.dispatch('setGameStatusAction', this.gameOverText);
+        this.$store.dispatch('setGameStatusAction', {
+          gameOver: this.gameOver,
+          gameOverText: this.gameOverText
+        });
         this.score = this.board.getScore()
         this.sendResults();
       }
@@ -122,19 +131,11 @@ export default {
 .tictactoe-board {
   display: flex;
   flex-wrap: wrap;
-  width: 204px;
-  height: 204px;
 }
 
-.flexcontainer{
+.flexcontainer {
   display: flex;
   margin: auto;
-}
-
-.bodyTicTacToe {
-  background-color: white;
-  width: 700px;
-  height: 700px;
 }
 
 .boardGame {

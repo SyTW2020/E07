@@ -2,7 +2,7 @@
   <div id="clock">
     <span class="time">{{ time }}</span>
     <template v-if="$store.getters.timer === true"> {{ start() }} </template>
-    <template v-else> {{ stop() }} </template> 
+    <template v-else> {{ stop() }} </template>
   </div>
 </template>
 
@@ -19,6 +19,9 @@ export default {
       started: null,
       running: false
     }
+  },
+  created: function () {
+    console.log(this.$route.path)
   },
   methods: {
     start() {
@@ -80,5 +83,28 @@ export default {
 </script>
 
 <style scoped>
+#clock {
+  width: auto;
+  height: auto;
+  padding: 10%;
+  /* background-color: white; */
+  background: #0f3854;
+  background: radial-gradient(ellipse at center,  #0a2e38  0%, #000000 70%);
+  background-size: 100%;
+  font-family: 'Bungee Inline', cursive;
+  border-style: outset;
+  border-color:  #064759;
+}
 
+.time {
+  font-size: 35px;
+  color: #daf6ff;
+  text-shadow: 0 0 20px rgba(10, 175, 230, 1),  0 0 20px rgba(10, 175, 230, 0);
+}
+
+/* @media screen and (min-width: 1000px) {
+.time {
+  font-size: 35px;
+  }
+} */
 </style>

@@ -36,6 +36,7 @@ const SEQUENCE = {
 	3: "green",
 	4: "yellow"
 };
+
 const SONG = {
 	1: "https://s3.amazonaws.com/freecodecamp/simonSound1.mp3",
 	2: "https://s3.amazonaws.com/freecodecamp/simonSound2.mp3",
@@ -59,19 +60,20 @@ export default {
       maxTurn: 20
     }
 	},
+
 	methods: {
 		start: function() {
 			this.reset();
 			this.started = true;
 			this._turn();
 		},
+
 		_turn: function() {
 			if (this.turn == this.maxTurn) {
 				this.output = "You won!";
 				this.started = false;
 				this.canPress = false;
 				setTimeout(this.reset, 5000);
-				
 			} else {
 				this.canPress = false;
 				this.output = "Turn: " + ++this.turn;
@@ -79,6 +81,7 @@ export default {
 				this.play();
 			}
 		},
+
 		play: function() {
 			var delayBase = 500;
 			var baseDuration = 1000;
@@ -91,6 +94,7 @@ export default {
 			var self = this;
 			setInterval(this.getInput, delayBase);
 		},
+
 		flash: function(element, audio, delay, flashDuration) {
 			//set press
 			setTimeout(function() {
@@ -102,9 +106,11 @@ export default {
 				element.classList.remove("btActive");
 			}, delay + flashDuration - 100);
 		},
+
 		getInput: function() {
 			this.canPress = true;
 		},
+		
 		addInput: function(bt) {
 			if (this.canPress === true) {
 				this.input = this.input + bt;
@@ -113,6 +119,7 @@ export default {
 				this.check();
 			}
 		},
+
 		check: function() {
 			this.canPress = false;
 			var turn = this.inputTurn;
@@ -145,6 +152,7 @@ export default {
 			this.output = "--";
 			this.canPress = false;
 		},
+
 		turnStrict: function() {
 			this.strict = !this.strict;
 			var bt = document.getElementById("strictbt");
@@ -161,33 +169,38 @@ export default {
 </script>
 
 <style scoped>
-body{
+body {
 	background-color: black;
 }
-.header h1{
+
+.header h1 {
 	font-family: "Bungee";
 	color: teal;
 	font-size: 70px;
 }
+
 .output {
 	font-family: "Bungee";
 }
+
 .mybutton {
 	height: 120px;
 	width: 120px;
 	margin: 3px;
 }
-.mybutton:active{
-	border:10px;
+
+.mybutton:active {
+	border: 10px;
 	transform: translateY(-4px);
 	box-shadow: 0 5px #999;
 }
+
 .mybutton:disabled {
-	opacity:1;
+	opacity: 1;
 }
 
 .btActive {
-	border:10px;
+	border: 10px;
 	transform: translateY(-4px);
 	box-shadow: 0 5px #999;
 }
@@ -195,14 +208,16 @@ body{
 #red {
 	background-color: #C9302C;
 }
+
 #blue {
 	background-color: #286090;
 }
+
 #green {
 	background-color: #449D44;
 }
+
 #yellow {
 	background-color: #EC971F;
 }
-
 </style>
