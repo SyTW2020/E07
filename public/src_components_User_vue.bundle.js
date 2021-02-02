@@ -26,7 +26,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"avatar1\": () => /* reexport safe */ _assets_supergirl_jpg__WEBPACK_IMPORTED_MODULE_0__.default,\n/* harmony export */   \"avatar2\": () => /* reexport safe */ _assets_BradPit_jpg__WEBPACK_IMPORTED_MODULE_1__.default,\n/* harmony export */   \"avatar3\": () => /* reexport safe */ _assets_Geralt_jpg__WEBPACK_IMPORTED_MODULE_2__.default,\n/* harmony export */   \"avatar4\": () => /* reexport safe */ _assets_sorpresa_jpeg__WEBPACK_IMPORTED_MODULE_3__.default,\n/* harmony export */   \"avatar5\": () => /* reexport safe */ _assets_grinch_jpg__WEBPACK_IMPORTED_MODULE_4__.default\n/* harmony export */ });\n/* harmony import */ var _assets_supergirl_jpg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../assets/supergirl.jpg */ \"./src/assets/supergirl.jpg\");\n/* harmony import */ var _assets_BradPit_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../assets/BradPit.jpg */ \"./src/assets/BradPit.jpg\");\n/* harmony import */ var _assets_Geralt_jpg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../assets/Geralt.jpg */ \"./src/assets/Geralt.jpg\");\n/* harmony import */ var _assets_sorpresa_jpeg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../assets/sorpresa.jpeg */ \"./src/assets/sorpresa.jpeg\");\n/* harmony import */ var _assets_grinch_jpg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../assets/grinch.jpg */ \"./src/assets/grinch.jpg\");\n\n\n\n\n\n\n//# sourceURL=webpack://gamingit/./src/assets/avatares.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"avatar1\": () => /* reexport safe */ _assets_supergirl_jpg__WEBPACK_IMPORTED_MODULE_0__.default,\n/* harmony export */   \"avatar2\": () => /* reexport safe */ _assets_BradPit_jpg__WEBPACK_IMPORTED_MODULE_1__.default,\n/* harmony export */   \"avatar3\": () => /* reexport safe */ _assets_Geralt_jpg__WEBPACK_IMPORTED_MODULE_2__.default,\n/* harmony export */   \"avatar5\": () => /* reexport safe */ _assets_grinch_jpg__WEBPACK_IMPORTED_MODULE_3__.default\n/* harmony export */ });\n/* harmony import */ var _assets_supergirl_jpg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../assets/supergirl.jpg */ \"./src/assets/supergirl.jpg\");\n/* harmony import */ var _assets_BradPit_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../assets/BradPit.jpg */ \"./src/assets/BradPit.jpg\");\n/* harmony import */ var _assets_Geralt_jpg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../assets/Geralt.jpg */ \"./src/assets/Geralt.jpg\");\n/* harmony import */ var _assets_grinch_jpg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../assets/grinch.jpg */ \"./src/assets/grinch.jpg\");\n\n\n\n\n\n//# sourceURL=webpack://gamingit/./src/assets/avatares.js?");
 
 /***/ }),
 
@@ -71,17 +71,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"4e60f29fade79d0c947d1de120d98e58.jpg\");\n\n//# sourceURL=webpack://gamingit/./src/assets/grinch.jpg?");
-
-/***/ }),
-
-/***/ "./src/assets/sorpresa.jpeg":
-/*!**********************************!*
-  !*** ./src/assets/sorpresa.jpeg ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"16f761ded4591f76737b5941e781949c.jpeg\");\n\n//# sourceURL=webpack://gamingit/./src/assets/sorpresa.jpeg?");
 
 /***/ }),
 
