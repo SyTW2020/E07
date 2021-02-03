@@ -37,7 +37,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"TicTacToe\": () => /* reexport safe */ _assets_tictactoe_jpg__WEBPACK_IMPORTED_MODULE_0__.default,\n/* harmony export */   \"Simon\": () => /* reexport safe */ _assets_simon_jpg__WEBPACK_IMPORTED_MODULE_1__.default,\n/* harmony export */   \"MirsBall\": () => /* reexport safe */ _assets_work_jpg__WEBPACK_IMPORTED_MODULE_2__.default\n/* harmony export */ });\n/* harmony import */ var _assets_tictactoe_jpg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../assets/tictactoe.jpg */ \"./src/assets/tictactoe.jpg\");\n/* harmony import */ var _assets_simon_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../assets/simon.jpg */ \"./src/assets/simon.jpg\");\n/* harmony import */ var _assets_work_jpg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../assets/work.jpg */ \"./src/assets/work.jpg\");\n\n\n\n\n//# sourceURL=webpack://gamingit/./src/assets/games.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"TicTacToe\": () => /* reexport default from dynamic */ _assets_tictactoe_jpg__WEBPACK_IMPORTED_MODULE_0___default.a,\n/* harmony export */   \"Simon\": () => /* reexport default from dynamic */ _assets_simon_jpg__WEBPACK_IMPORTED_MODULE_1___default.a,\n/* harmony export */   \"MirsBall\": () => /* reexport default from dynamic */ _assets_work_jpg__WEBPACK_IMPORTED_MODULE_2___default.a\n/* harmony export */ });\n/* harmony import */ var _assets_tictactoe_jpg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../assets/tictactoe.jpg */ \"./src/assets/tictactoe.jpg\");\n/* harmony import */ var _assets_tictactoe_jpg__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_assets_tictactoe_jpg__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _assets_simon_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../assets/simon.jpg */ \"./src/assets/simon.jpg\");\n/* harmony import */ var _assets_simon_jpg__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_assets_simon_jpg__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _assets_work_jpg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../assets/work.jpg */ \"./src/assets/work.jpg\");\n/* harmony import */ var _assets_work_jpg__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_assets_work_jpg__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\n\n//# sourceURL=webpack://gamingit/./src/assets/games.js?");
 
 /***/ }),
 
@@ -67,10 +67,9 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /*!******************************!*
   !*** ./src/assets/simon.jpg ***!
   \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"1558d1c868354ab20156bbd7cf9716c8.jpg\");\n\n//# sourceURL=webpack://gamingit/./src/assets/simon.jpg?");
+eval("module.exports = __webpack_require__.p + \"47db575eb4aa218d0d74ae69d4bbbc9f.jpg\";\n\n//# sourceURL=webpack://gamingit/./src/assets/simon.jpg?");
 
 /***/ }),
 
@@ -78,10 +77,9 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /*!**********************************!*
   !*** ./src/assets/tictactoe.jpg ***!
   \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"58c76adbdcc61e5cee8d05111f77132c.jpg\");\n\n//# sourceURL=webpack://gamingit/./src/assets/tictactoe.jpg?");
+eval("module.exports = __webpack_require__.p + \"3454d620e6f7b6d16b2cef1711c30a40.jpg\";\n\n//# sourceURL=webpack://gamingit/./src/assets/tictactoe.jpg?");
 
 /***/ }),
 
@@ -89,10 +87,9 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /*!*****************************!*
   !*** ./src/assets/work.jpg ***!
   \*****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"54c28e851c7fbe6301eee0d4396f59a1.jpg\");\n\n//# sourceURL=webpack://gamingit/./src/assets/work.jpg?");
+eval("module.exports = __webpack_require__.p + \"77c626170526e2a1d427b187e04da48a.jpg\";\n\n//# sourceURL=webpack://gamingit/./src/assets/work.jpg?");
 
 /***/ }),
 
