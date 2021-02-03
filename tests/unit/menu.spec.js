@@ -1,6 +1,94 @@
 import Menu from "../../src/components/Menu.vue";
-import { shallowMount, createLocalVue } from '@vue/test-utils'
-import flushPromises from 'flush-promises';
+import { mount, createLocalVue } from "@vue/test-utils";
+import Vuex from 'vuex';
+import VueRouter from 'vue-router';
+
+const localVue = createLocalVue();
+localVue.use(Vuex);
+// localVue.use(VueRouter);
+// const router = new VueRouter();
+
+describe("Menu", () => {
+  let $store, $route, wrapper;
+
+  beforeEach(() => {
+    $store = new Vuex.Store({
+      state: { token: null },
+      getters: {
+        token(state) {
+          return state.token;
+        }
+      }
+    })
+
+    $route = [
+      {
+        path: "/",
+        name: "home",
+        component: () => import("./views/Home.vue")
+      },
+      {
+        path: "/rankings",
+        name: "rankings",
+        component: () => import("./components/Ranking.vue")
+      },
+      {
+        path: "/signin",
+        name: "signin",
+        component: () => import("./components/SignIn.vue")
+      },
+      {
+        path: "/signup",
+        name: "signup",
+        component: () => import("./components/SignUp.vue")
+      }
+    ]
+
+    wrapper = mount(Menu, {
+      localVue,
+      stubs: ['router-link', 'router-view'],
+      mocks: {
+        $store,
+        $route
+      }
+    })
+  })
+
+  it("Se espera que exista una ruta a home.", async () => {
+    wrapper.find("#BGamingit").trigger("click");
+    expect(wrapper.vm.$route[0].path).toBe('/')
+  });
+
+  it("Se espera que exista una ruta a rankings.", async () => {
+    wrapper.find("#BGamingit").trigger("click");
+    expect(wrapper.vm.$route[1].path).toBe('/rankings')
+  });
+
+  it("Se espera que exista una ruta a iniciar sesión.", async () => {
+    wrapper.find("#BGamingit").trigger("click");
+    expect(wrapper.vm.$route[2].path).toBe('/signin')
+  });
+
+  it("Se espera que exista una ruta a registrarte.", async () => {
+    wrapper.find("#BGamingit").trigger("click");
+    expect(wrapper.vm.$route[3].path).toBe('/signup')
+  });
+});
+
+
+
+
+
+
+
+
+
+// ---------------------------------------------------------------------------------------------------------------------------------------
+
+
+// import Menu from "../../src/components/Menu.vue";
+// import { shallowMount, createLocalVue } from '@vue/test-utils'
+// import flushPromises from 'flush-promises';
 // import VueRouter from 'vue-router'
 // import Vuex from 'vuex';
 // const localVue = createLocalVue()
@@ -12,45 +100,48 @@ import flushPromises from 'flush-promises';
 // }
 
 
-describe("Menu", () => {
-  let wrapper, replaceMock;
+// describe("Menu", () => {
+//   let wrapper, replaceMock;
 
-  beforeAll(() => {
-    // $route = {
-    //   path: '/rankings'
-    // }
-    replaceMock = jest.fn();
-    wrapper = shallowMount(Menu, {
-      mocks: {
-        $route: {
-          params: {
-            id: 1
-          }
-        },
-        $router: {
-          replace: replaceMock, 
-        }
-      },
-      stubs: ['router-link', 'router-view'],
-    });
-    // console.log(wrapper.$route)
-  });
+//   beforeAll(() => {
+//     // $route = {
+//     //   path: '/rankings'
+//     // }
+//     replaceMock = jest.fn();
+//     wrapper = shallowMount(Menu, {
+//       mocks: {
+//         $route: {
+//           params: {
+//             id: 1
+//           }
+//         },
+//         $router: {
+//           replace: replaceMock, 
+//         }
+//       },
+//       stubs: ['router-link', 'router-view'],
+//     });
+//     // console.log(wrapper.$route)
+//   });
 
-  it("Comprobando que SignIn funciona", async () => {
-    // let ranking = await wrapper.find("#BRanking").push('/rankings');
-    // await flushPromises();
-    // let input = wrapper.find("#burger-btn");
-    // console.log(ranking)
-    // console.log(input)
-    wrapper.find("#BRanking").trigger("click");
-    console.log(Menu)
-    // console.log(wrapper.$route)
-    // let algo = wrapper.push('/rankings')
-    console.log(wrapper)
-    console.log(replaceMock)
-    expect(replaceMock).toHaveBeenCalledWith("/");
-  });
-})
+//   it("Comprobando que SignIn funciona", async () => {
+//     // let ranking = await wrapper.find("#BRanking").push('/rankings');
+//     // await flushPromises();
+//     // let input = wrapper.find("#burger-btn");
+//     // console.log(ranking)
+//     // console.log(input)
+//     wrapper.find("#BRanking").trigger("click");
+//     console.log(Menu)
+//     // console.log(wrapper.$route)
+//     // let algo = wrapper.push('/rankings')
+//     console.log(wrapper)
+//     console.log(replaceMock)
+//     expect(this.$route.path).toBe("/rankings");
+//   });
+// })
+
+
+// ---------------------------------------------------------------------------------------------------------------------------------------
 
 // import Menu from "../../src/components/Menu.vue";
 // import { shallowMount, createLocalVue } from "@vue/test-utils";
