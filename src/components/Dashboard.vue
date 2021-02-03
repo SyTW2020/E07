@@ -12,7 +12,7 @@
 <script>
 import { Card } from '../utils';
 import * as imgGames from "../assets/games";
-
+ 
 export default {
 	name: "Dashboard",
 	components: {

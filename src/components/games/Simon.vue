@@ -19,7 +19,7 @@
    	</div>
 	</div>
 </template>
-
+ 
 <script>
 const SEQUENCE = {
 	1: "red",
@@ -81,7 +81,8 @@ export default {
 					msgText: "¡Ganaste!"
 				});
 				this.canPress = false;
-				this.sendResults(100);
+				this.sendResults();
+				setInterval(this.start(), 5000);
 			} 
 			else {
 				this.canPress = false;
@@ -146,17 +147,17 @@ export default {
 					msgText: "¡Perdiste!"
 				});
 				this.$store.dispatch('setTimerAction', false);
-				this.sendResults(0);
+				this.sendResults();
 			}
 		},
 
-		sendResults(score) {
+		sendResults() {
       fetch("/rankings", {
         method: "POST",
         body: JSON.stringify({
           nickname: this.$store.getters.user != null ? this.$store.getters.user.nickname : "Anónimo",
           game: this.$options.name,
-          score: score,
+          score: this.turn,
           time: this.$store.getters.valueTimer 
         }),
         headers: {

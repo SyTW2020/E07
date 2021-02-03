@@ -10,7 +10,7 @@
 				</div>
 				<a href="https://github.com/PaulaExposito" id="Paula">
         	<img src="https://vader.news/__export/1589864317677/sites/gadgets/img/2020/05/19/the100-newsvader.jpg_550774285.jpg" class="teamPhoto">  
-				</a>
+				</a> 
       </div>  
       <div class="card teamLeft">
 				<div class="teamText">

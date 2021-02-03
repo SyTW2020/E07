@@ -14,5 +14,5 @@ describe('Dashboard', () => {
   
   it('Dashboard montado en wrapper', () => {
     expect(wrapper.vm.games).not.toBe(undefined);
-	});
+  }); 
 });

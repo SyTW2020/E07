@@ -15,7 +15,7 @@
             <h1> {{ $store.getters.gameStatus.msgText }} </h1>
           </div>
           <div class="buttons">
-            <Button class="BRestart" @click="reset"> Start / Restart </Button>
+            <Button class="BRestart" @click="reset"> Start </Button>
             <Button class="BBack" @click="goBack"> Back </Button>
           </div>
         </div>

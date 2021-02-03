@@ -31,7 +31,7 @@ export default {
 
   mounted() {
 		this.$root.$on('TicTacToe', () => {
-			this.reset();
+			this.reset(); 
 		})
 	},
 
