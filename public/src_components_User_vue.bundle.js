@@ -26,7 +26,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"avatar1\": () => /* reexport default from dynamic */ _assets_asco_jpg__WEBPACK_IMPORTED_MODULE_0___default.a,\n/* harmony export */   \"avatar2\": () => /* reexport default from dynamic */ _assets_geralt_jpg__WEBPACK_IMPORTED_MODULE_1___default.a,\n/* harmony export */   \"avatar3\": () => /* reexport default from dynamic */ _assets_grinch_jpg__WEBPACK_IMPORTED_MODULE_2___default.a,\n/* harmony export */   \"avatar4\": () => /* reexport default from dynamic */ _assets_stitch_jpg__WEBPACK_IMPORTED_MODULE_3___default.a,\n/* harmony export */   \"avatar5\": () => /* reexport default from dynamic */ _assets_supergirl_jpg__WEBPACK_IMPORTED_MODULE_4___default.a,\n/* harmony export */   \"avatar6\": () => /* reexport default from dynamic */ _assets_tarzan_jpg__WEBPACK_IMPORTED_MODULE_5___default.a\n/* harmony export */ });\n/* harmony import */ var _assets_asco_jpg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../assets/asco.jpg */ \"./src/assets/asco.jpg\");\n/* harmony import */ var _assets_asco_jpg__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_assets_asco_jpg__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _assets_geralt_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../assets/geralt.jpg */ \"./src/assets/geralt.jpg\");\n/* harmony import */ var _assets_geralt_jpg__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_assets_geralt_jpg__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _assets_grinch_jpg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../assets/grinch.jpg */ \"./src/assets/grinch.jpg\");\n/* harmony import */ var _assets_grinch_jpg__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_assets_grinch_jpg__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _assets_stitch_jpg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../assets/stitch.jpg */ \"./src/assets/stitch.jpg\");\n/* harmony import */ var _assets_stitch_jpg__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_assets_stitch_jpg__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _assets_supergirl_jpg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../assets/supergirl.jpg */ \"./src/assets/supergirl.jpg\");\n/* harmony import */ var _assets_supergirl_jpg__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_assets_supergirl_jpg__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var _assets_tarzan_jpg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../assets/tarzan.jpg */ \"./src/assets/tarzan.jpg\");\n/* harmony import */ var _assets_tarzan_jpg__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_assets_tarzan_jpg__WEBPACK_IMPORTED_MODULE_5__);\n\n\n\n\n\n\n\n//# sourceURL=webpack://gamingit/./src/assets/avatares.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"avatar1\": () => /* reexport safe */ _assets_asco_jpg__WEBPACK_IMPORTED_MODULE_0__.default,\n/* harmony export */   \"avatar2\": () => /* reexport safe */ _assets_geralt_jpg__WEBPACK_IMPORTED_MODULE_1__.default,\n/* harmony export */   \"avatar3\": () => /* reexport safe */ _assets_grinch_jpg__WEBPACK_IMPORTED_MODULE_2__.default,\n/* harmony export */   \"avatar4\": () => /* reexport safe */ _assets_stitch_jpg__WEBPACK_IMPORTED_MODULE_3__.default,\n/* harmony export */   \"avatar5\": () => /* reexport safe */ _assets_supergirl_jpg__WEBPACK_IMPORTED_MODULE_4__.default,\n/* harmony export */   \"avatar6\": () => /* reexport safe */ _assets_tarzan_jpg__WEBPACK_IMPORTED_MODULE_5__.default\n/* harmony export */ });\n/* harmony import */ var _assets_asco_jpg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../assets/asco.jpg */ \"./src/assets/asco.jpg\");\n/* harmony import */ var _assets_geralt_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../assets/geralt.jpg */ \"./src/assets/geralt.jpg\");\n/* harmony import */ var _assets_grinch_jpg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../assets/grinch.jpg */ \"./src/assets/grinch.jpg\");\n/* harmony import */ var _assets_stitch_jpg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../assets/stitch.jpg */ \"./src/assets/stitch.jpg\");\n/* harmony import */ var _assets_supergirl_jpg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../assets/supergirl.jpg */ \"./src/assets/supergirl.jpg\");\n/* harmony import */ var _assets_tarzan_jpg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../assets/tarzan.jpg */ \"./src/assets/tarzan.jpg\");\n\n\n\n\n\n\n\n//# sourceURL=webpack://gamingit/./src/assets/avatares.js?");
 
 /***/ }),
 
@@ -45,9 +45,10 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /*!*****************************!*
   !*** ./src/assets/asco.jpg ***!
   \*****************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"2c1a516662ea07c5cc2462ac0d17c982.jpg\";\n\n//# sourceURL=webpack://gamingit/./src/assets/asco.jpg?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"16f916580f953b097e1d774cbcce2327.jpg\");\n\n//# sourceURL=webpack://gamingit/./src/assets/asco.jpg?");
 
 /***/ }),
 
@@ -55,9 +56,10 @@ eval("module.exports = __webpack_require__.p + \"2c1a516662ea07c5cc2462ac0d17c98
 /*!*******************************!*
   !*** ./src/assets/geralt.jpg ***!
   \*******************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"d5dd8d87b4a834c973f58a67d15888a5.jpg\";\n\n//# sourceURL=webpack://gamingit/./src/assets/geralt.jpg?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"7a3eea70081c694ded48f9549f9f9fce.jpg\");\n\n//# sourceURL=webpack://gamingit/./src/assets/geralt.jpg?");
 
 /***/ }),
 
@@ -65,9 +67,10 @@ eval("module.exports = __webpack_require__.p + \"d5dd8d87b4a834c973f58a67d15888a
 /*!*******************************!*
   !*** ./src/assets/grinch.jpg ***!
   \*******************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"acba027c467a7efc765a007702f2da3b.jpg\";\n\n//# sourceURL=webpack://gamingit/./src/assets/grinch.jpg?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"f60aa606aa56b50d0ef8b32132a6d958.jpg\");\n\n//# sourceURL=webpack://gamingit/./src/assets/grinch.jpg?");
 
 /***/ }),
 
@@ -75,9 +78,10 @@ eval("module.exports = __webpack_require__.p + \"acba027c467a7efc765a007702f2da3
 /*!*******************************!*
   !*** ./src/assets/stitch.jpg ***!
   \*******************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"4bffda0d2a1df2b739f17c6e9056e05b.jpg\";\n\n//# sourceURL=webpack://gamingit/./src/assets/stitch.jpg?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"4e2b06bc5cfc1d32381182579d60b6a0.jpg\");\n\n//# sourceURL=webpack://gamingit/./src/assets/stitch.jpg?");
 
 /***/ }),
 
@@ -85,9 +89,10 @@ eval("module.exports = __webpack_require__.p + \"4bffda0d2a1df2b739f17c6e9056e05
 /*!**********************************!*
   !*** ./src/assets/supergirl.jpg ***!
   \**********************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"ebc9d8e6ead5e4f8242b16c91f8c0550.jpg\";\n\n//# sourceURL=webpack://gamingit/./src/assets/supergirl.jpg?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"52063f18a57c0ee35d5868b16f3e05b0.jpg\");\n\n//# sourceURL=webpack://gamingit/./src/assets/supergirl.jpg?");
 
 /***/ }),
 
@@ -95,9 +100,10 @@ eval("module.exports = __webpack_require__.p + \"ebc9d8e6ead5e4f8242b16c91f8c055
 /*!*******************************!*
   !*** ./src/assets/tarzan.jpg ***!
   \*******************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"be493b82189533134cc03c1c7ce4107b.jpg\";\n\n//# sourceURL=webpack://gamingit/./src/assets/tarzan.jpg?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"6ffbe162f7847104a27cc2fc124e5f8a.jpg\");\n\n//# sourceURL=webpack://gamingit/./src/assets/tarzan.jpg?");
 
 /***/ }),
 

@@ -40,6 +40,11 @@ export default {
       this.gameStarted = false;
       this.board = new Board();
       this.score = null;
+      this.$store.dispatch('setTimerAction', this.gameStarted);
+      this.$store.dispatch('setGameStatusAction', {
+        msg: this.gameOver,
+        msgText: ''
+      });
     },
 
     performMove(x, y) {

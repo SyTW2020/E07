@@ -2,15 +2,16 @@
 	<div class="dashboard flex wrap">
 		<Card v-for="(i, j) in games" :key="j" :name="i" class="card flex">
 			<template #header>
-				<img alt="user header" src="https://i.pinimg.com/originals/77/da/5f/77da5fe07dcc9a82f5c3247a59ce93fb.jpg" @click="goToGame(i)">  <!-- Cambiar por foto en mongo -->
+				<img alt="user header" :src="getUrl(i)" @click="goToGame(i)">
 			</template>
-			<template #title>	{{ i }} </template>
+			<template #title> <h3> {{ i }} </h3> </template>
 		</Card>
 	</div>
 </template>
 
 <script>
 import { Card } from '../utils';
+import * as imgGames from "../assets/games";
 
 export default {
 	name: "Dashboard",
@@ -20,7 +21,8 @@ export default {
 
 	data() {
 		return {
-			games: ["TicTacToe", "Simon", "MirsBall"]
+			games: ["TicTacToe", "Simon", "MirsBall"],
+			imgGames
 		}
 	},
 	
@@ -28,6 +30,10 @@ export default {
 		goToGame(game) {
 			this.$store.dispatch('setGameAction', game);
 			this.$router.push('/game');
+		},
+
+		getUrl(index) {
+			return this.imgGames[index];
 		}
 	}
 }
@@ -37,6 +43,12 @@ export default {
 .dashboard {
 	width: 95%;
 	background-color:rgb(0, 0, 0, 0.8);
+}
+
+h3 {
+	font-family: 'Bungee Inline', cursive;
+	font-size: 20px;
+	margin-top: -10px;
 }
 
 .flex {
@@ -52,11 +64,9 @@ export default {
 .card {
 	flex-direction: column;
 	justify-content: space-between;
-
 	margin: 30px;
 	padding: 10px;
 	height: 220px;
-
 	font-size: 20px;
 	color: white;
 	border-radius: 10px 10px 10px 10px;
@@ -67,7 +77,7 @@ export default {
 img {
 	width: 150px;
 	height: 150px;
-	padding: 10px;
+	padding: 5px;
 }
 
 .card:hover { 
@@ -84,11 +94,9 @@ img {
 	img {
 		width: 250px;
 		height: 250px;
-		padding: 10px;
 	}
 	.card {
 		height: 320px;
-		padding: 10px;
 	}
 } 
 </style>
