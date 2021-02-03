@@ -1,18 +1,70 @@
+<template>
+  <div class="container flex">
+    <h1 class="title"> RANKINGS TITLE </h1>
+    <div class="boxRankings flex">
+      <div class="userRankingContainer">
+ <!--       <template v-if="$store.getters.user != null">
+          <h2 class="title"> Rankings de {{ $store.getters.user.name }} </h2>
+          <div id="userRankings"></div>
+        </template> -->
+        <div v-bind:key="i" v-for="(n, i) in gamesName">
+           <!-- this.ranking( this.gamesName[x], x, false); -->
+          <h3 class="gameTitle">{{ gamesName[i] }} </h3>
+          <table class="table">
+            <thead class="thead">
+              <tr class="row">
+                <div v-bind:key="y" v-for="y in headerUser.length">
+                  <td class="cell"> {{ headerUser[y - 1] }} </td>
+                </div>      
+              </tr>
+            </thead>
+            <tbody class="tbody" id="userRankingBody">
 
-      <template>
-  <div class="container">
-    <template v-if="$store.getters.user != null">
-      <h1> Rankings por usuario </h1>
-      <h3> Holi {{ $store.getters.user.name }} </h3>
-      <div id="userRankings">
+  <!--            <div v-bind:key="x" v-for="x in 4">
+                <tr class="row">
+                  <div v-bind:key="y" v-for="y in headerUser.length">
+                    <td class="cell">
+                      <div v-if="headerUser[y] === 'position'"> {{ x + 1 }} </div>
+                      <div v-else> {{userGamesRankings}}  </div> 
+                    </td>
+                  </div>      
+                </tr>
+              </div> -->
+            </tbody>
+          </table>
+        </div>
+      </div> 
+
+      <div class="gamesRankingContainer">
+        <h2 class="title"> Rankings por juego </h2>
+        <div id="gamesRankings" class="Tcontainer">
+          <div v-bind:key="i" v-for="(n, i) in gamesName">
+            <h3 class="gameTitle"> {{ gamesName[i] }} </h3>
+            <table class="table">
+              <thead class="thead">
+                <tr class="row">
+                  <div v-bind:key="x" v-for="x in headerGames.length">
+                    <td class="cell">{{ headerGames[x - 1] }} </td>
+                  </div>
+                </tr>
+              </thead>
+              <tbody class="tbody" id="gameRankingBody">
+                <div v-bind:key="x" v-for="x in 4">
+                  <tr class="row">
+                    <div v-bind:key="y" v-for="y in headerGames.length">
+                      <td class="cell"> 
+                        <!-- <div v-if="headerGames[y] === 'position'"> {{ x + 1 }} </div>
+                        <div v-else> {{ gamesRankings[] }}  </div>  -->
+                      </td>
+                    </div>      
+                  </tr>
+                </div>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-    </template>
-    <hr>
-
-    <h1> Rankings por juego </h1>
-    <div id="gamesRankings">
     </div>
-
   </div>
 </template>
 
@@ -25,18 +77,22 @@ export default {
 		return {
       gamesName: [],
       gamesRankings: [],
-      userGamesRankings: []
+      userGamesRankings: [],
+      headerUser: ["position", "score", "time"],
+      headerGames: ["position", "nickname", "score", "time"],
+      userRankingRows: null,
+      gameRankingRows: null,
 		}
   },
   created: async function () {
     await this.getGames();
 
-    // RANKINGS POR JUEGO
+    // // RANKINGS POR JUEGO
     await this.getRankingsByGame();
     for (let x in this.gamesName)
       this.ranking( this.gamesName[x], x, false);
 
-    // RANKINGS POR USUARIO
+    // // RANKINGS POR USUARIO
     if (this.$store.getters.user != null) {
       await this.getRankingsByUser();
       for (let x in this.userGamesRankings)
@@ -98,29 +154,20 @@ export default {
       }
     },
     ranking(name, index, user = false) {
-      let ranking = !user ? document.getElementById("gamesRankings") : document.getElementById("userRankings");
-      let gameTitle = document.createElement("h2");
-      gameTitle.textContent = name;
-      let table = document.createElement("table");
-      let tableHead = document.createElement("thead");
-      let tableBody = document.createElement("tbody");
-      let head = !user ? ["position", "nickname", "score", "time"] : ["position", "score", "time"];
-
-      let row = document.createElement("tr");
-      for (let i of head) {
-        let cell = document.createElement("td");
-        let text = document.createTextNode(i.toUpperCase());      
-        cell.appendChild(text);
-        row.appendChild(cell);
-      }
-      tableHead.appendChild(row);
+      let tableBody = (!user) ? document.getElementById("gameRankingBody") : document.getElementById("userRankingBody");
+      // tableBody.classList.add("tbody");
 
       let numberOfRows = !user ? this.numberOfGameRankingRows(index) : this.numberOfUserRankingRows(index);
+      let head = !user ? this.headerGames : this.headerUser;
+      
       for (let i = 0; i < numberOfRows; i++) {
-        row = document.createElement("tr");
+        let row = document.createElement("tr");
+        // row.classList.add("row");
 
         for (let j of head) {
           let cell = document.createElement("td");
+          // cell.classList.add("cell");
+      
           let content;
           if (!user)
             content = j === "position" ? i + 1 : this.gamesRankings[index][i][j];
@@ -135,10 +182,7 @@ export default {
         tableBody.appendChild(row);
       }
 
-      table.appendChild(tableHead);
-      table.appendChild(tableBody);
-      ranking.appendChild(gameTitle);
-      ranking.appendChild(table);
+
     },
     numberOfGameRankingRows(index) {
       return this.gamesRankings[index].length < 10 ? this.gamesRankings[index].length : 10;
@@ -151,11 +195,69 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  height: 1000px;
+.flex {
+  display: flex;
+  justify-content: center;
 }
 
-thead {
-  background: green;
+.container {
+  width: 100%;
+  background-color: grey;
 }
+
+.title {
+  background-color: white;
+  font-family: 'Bungee Inline', cursive;
+  text-align: center;
+}
+
+.boxRankings {
+  width: 85%;
+  background-color: darkblue;
+  display: flex;
+  align-content: center;
+  flex-direction:row;
+}
+
+.userRankingContainer {
+  width: 50%;
+  background-color: darkred;
+  min-height: 200px;
+}
+
+.gamesRankingContainer {
+  width: 50%;
+  min-height: 200px;
+  background-color: darkgreen;
+}
+
+.table {
+  width: 100%;
+}
+
+/* .Tcontainer{
+  display: flex;
+  width: 85%;
+} */
+
+.gameTitle {
+  color: white;
+  font-family: 'Bungee Inline', cursive;
+}
+
+.row {
+  display: flex;
+  flex-direction:row;
+  width: 500px;
+}
+
+.cell {
+  background: orange;
+  border: solid black 1px;
+  width: 50px;
+  height: 20px;
+}
+/* thead {
+  background: green;
+} */
 </style>
