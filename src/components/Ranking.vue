@@ -132,71 +132,62 @@ export default {
       if (user)
         document.querySelector(".userRankingContainer").style.display = "block";
 
-      console.log(this.userGamesRankings[index])
       if (user && this.userGamesRankings[index].length == 0) {
         document.getElementById("userRankings" + index).style.display = "none";
       }
-  else {
-      let tableBody = (!user) ? document.getElementById("tbodyGame"+index) : document.getElementById("tbodyUser"+index);
-      tableBody.style = `
-        background: white;
-      `;
-
-      let numberOfRows = !user ? this.numberOfGameRankingRows(index) : this.numberOfUserRankingRows(index);
-      let head = !user ? this.headerGames : this.headerUser;
-      
-      for (let i = 0; i < numberOfRows; i++) {
-        let row = document.createElement("tr");
-        row.style = `
-          background: black;
-          display:flex;
-          flex-direction:row;
-          width: 100%;
-          align-content: center;
-        `
-        // row.classList.add("row");
-
-        for (let j of head) {
-          let cell = document.createElement("td");
-          cell.style = `
-            background: #097694;
-            border: outset #097694 3px;
-            align-content: center;
+      else {
+        let tableBody = (!user) ? document.getElementById("tbodyGame"+index) : document.getElementById("tbodyUser"+index);
+   
+        let numberOfRows = !user ? this.numberOfGameRankingRows(index) : this.numberOfUserRankingRows(index);
+        let head = !user ? this.headerGames : this.headerUser;
+        
+        for (let i = 0; i < numberOfRows; i++) {
+          let row = document.createElement("tr");
+          row.style = `
+            display:flex;
+            flex-direction:row;
             width: 100%;
-            font-family: 'Bungee Inline', cursive;
-            font-size: 13px;
-            text-align: center;
-          `;
-          // cell.classList.add("cell");
+            align-content: center;
+          `
+
+          for (let j of head) {
+            let cell = document.createElement("td");
+            cell.style = `
+              background: #097694;
+              border: outset #097694 3px;
+              align-content: center;
+              width: 100%;
+              font-family: 'Bungee Inline', cursive;
+              font-size: 13px;
+              text-align: center;
+            `;
+        
+            let content;
+            if (!user) {
+              if ( j === "position" )
+                content = i + 1;
+              else if ( j === "time" )
+                content = this.getTime(this.gamesRankings[index][i][j]);
+              else
+                content = this.gamesRankings[index][i][j];
+            }
+            else {
+              if ( j === "position" )
+                content = i + 1;
+              else if ( j === "time" )
+                content = this.getTime(this.userGamesRankings[index][i][j]);
+              else
+                content = this.userGamesRankings[index][i][j];
+            }
+
+            let text = document.createTextNode(content);
       
-          let content;
-          if (!user) {
-            if ( j === "position" )
-              content = i + 1;
-            else if ( j === "time" )
-              content = this.getTime(this.gamesRankings[index][i][j]);
-            else
-              content = this.gamesRankings[index][i][j];
+            cell.appendChild(text);
+            row.appendChild(cell);
           }
-          else {
-            if ( j === "position" )
-              content = i + 1;
-            else if ( j === "time" )
-              content = this.getTime(this.userGamesRankings[index][i][j]);
-            else
-              content = this.userGamesRankings[index][i][j];
-          }
-
-          let text = document.createTextNode(content);
-    
-          cell.appendChild(text);
-          row.appendChild(cell);
-        }
-        tableBody.appendChild(row);
+          tableBody.appendChild(row);
+       }
       }
-  }
-      // table.appendChild(tableBody);
-
     },
     numberOfGameRankingRows(index) {
       return this.gamesRankings[index].length < 10 ? this.gamesRankings[index].length : 10;
@@ -235,7 +226,6 @@ export default {
 .boxRankings {
   width: 85%;
   background-color: rgb(0, 0, 0, 0.8);
-  /* background-color: darkblue; */
   height: 90%;
   display: flex;
   align-content: center;
@@ -255,19 +245,11 @@ export default {
   margin: 1%;
 }
 
-/* .Tcontainer{
-  display: flex;
-  width: 85%;
-} */
-
 .table {
   display:flex;
   width: 100%;
-  /*height: 100%;*/
   flex-direction: column;
-
 }
-
 
 .gameTitle {
   font-family: 'Bungee Inline', cursive;
@@ -279,17 +261,13 @@ export default {
   display: flex;
   flex-direction:row;
   width: 100%;
-  height: 100%;
-  background: blue;
 }
 
 .cell {
   background: #04354e;
-  border-style: outset ;
   border: outset #097694 3px;
-  width:100%;
-  /* height: 70%; */
   align-content: center;
+  width:100%;
   font-family: 'Bungee Inline', cursive;
   font-size: 15px;
   text-align: center;
@@ -297,26 +275,17 @@ export default {
 }
 
 @media screen and (max-width: 1000px) {
-.container {
-  background-size: cover;
-  
-}
-.boxRankings{
-  flex-direction: column;
-}
+  .container {
+    background-size: cover;
+    
+  }
+  .boxRankings{
+    flex-direction: column;
+  }
 
-.userRankingContainer, .gamesRankingContainer {
-  width: 98%;
-  margin-bottom: 7%;
-}
-/*
-.boxRankings {
-  width: 85%;
-  background-color: darkblue;
-  height: 90%;
-  display: flex;
-  align-content: center;
-}
-*/
+  .userRankingContainer, .gamesRankingContainer {
+    width: 98%;
+    margin-bottom: 7%;
+  }
 }
 </style>
