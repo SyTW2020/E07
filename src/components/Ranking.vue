@@ -2,66 +2,41 @@
   <div class="container flex">
     <h1 class="title"> RANKINGS TITLE </h1>
     <div class="boxRankings flex">
-      <div class="userRankingContainer">
- <!--       <template v-if="$store.getters.user != null">
-          <h2 class="title"> Rankings de {{ $store.getters.user.name }} </h2>
-          <div id="userRankings"></div>
-        </template> -->
-        <div v-bind:key="i" v-for="(n, i) in gamesName">
-           <!-- this.ranking( this.gamesName[x], x, false); -->
-          <h3 class="gameTitle">{{ gamesName[i] }} </h3>
-          <table class="table">
-            <thead class="thead">
-              <tr class="row">
-                <div v-bind:key="y" v-for="y in headerUser.length">
-                  <td class="cell"> {{ headerUser[y - 1] }} </td>
-                </div>      
-              </tr>
-            </thead>
-            <tbody class="tbody" id="userRankingBody">
 
-  <!--            <div v-bind:key="x" v-for="x in 4">
+      <div class="userRankingContainer">
+        <template v-if="$store.getters.user != null">
+          <h2 class="title"> Tus rankings {{ $store.getters.user.name }} </h2>
+
+          <div v-bind:key="i" v-for="(n, i) in gamesName" :id="'userRankings'+i" class="Tcontainer">
+            <h3 class="gameTitle">{{ gamesName[i] }} </h3>
+            <table class="table" :id="'tableUserGame'+i">
+              <thead class="thead">
                 <tr class="row">
-                  <div v-bind:key="y" v-for="y in headerUser.length">
-                    <td class="cell">
-                      <div v-if="headerUser[y] === 'position'"> {{ x + 1 }} </div>
-                      <div v-else> {{userGamesRankings}}  </div> 
-                    </td>
+                  <div v-bind:key="x" v-for="x in headerUser.length"  class="rowContainer">
+                    <td class="cell"> {{ headerUser[x - 1] }} </td>
                   </div>      
                 </tr>
-              </div> -->
-            </tbody>
-          </table>
-        </div>
-      </div> 
+              </thead>
+              <tbody class="tbody" :id="'tbodyUser'+i"></tbody>
+            </table>
+          </div>
+        </template> 
+      </div>
 
       <div class="gamesRankingContainer">
         <h2 class="title"> Rankings por juego </h2>
-        <div id="gamesRankings" class="Tcontainer">
-          <div v-bind:key="i" v-for="(n, i) in gamesName">
-            <h3 class="gameTitle"> {{ gamesName[i] }} </h3>
-            <table class="table">
-              <thead class="thead">
-                <tr class="row">
-                  <div v-bind:key="x" v-for="x in headerGames.length">
-                    <td class="cell">{{ headerGames[x - 1] }} </td>
-                  </div>
-                </tr>
-              </thead>
-              <tbody class="tbody" id="gameRankingBody">
-                <div v-bind:key="x" v-for="x in 4">
-                  <tr class="row">
-                    <div v-bind:key="y" v-for="y in headerGames.length">
-                      <td class="cell"> 
-                        <!-- <div v-if="headerGames[y] === 'position'"> {{ x + 1 }} </div>
-                        <div v-else> {{ gamesRankings[] }}  </div>  -->
-                      </td>
-                    </div>      
-                  </tr>
+        <div v-bind:key="i" v-for="(n, i) in gamesName" id="gamesRankings" class="Tcontainer">
+          <h3 class="gameTitle"> {{ gamesName[i] }} </h3>
+          <table class="table" :id="'tableGame'+ i" >
+            <thead class="thead">
+              <tr class="row">
+                <div v-bind:key="x" v-for="x in headerGames.length" class="rowContainer">
+                  <td class="cell">{{ headerGames[x - 1] }} </td>
                 </div>
-              </tbody>
-            </table>
-          </div>
+              </tr>
+            </thead>
+            <tbody class="tbody" :id="'tbodyGame' + i"></tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -89,10 +64,10 @@ export default {
 
     // // RANKINGS POR JUEGO
     await this.getRankingsByGame();
-    for (let x in this.gamesName)
-      this.ranking( this.gamesName[x], x, false);
+    for (let x in this.gamesRankings)
+      this.ranking(this.gamesName[x], x, false);
 
-    // // RANKINGS POR USUARIO
+    // RANKINGS POR USUARIO
     if (this.$store.getters.user != null) {
       await this.getRankingsByUser();
       for (let x in this.userGamesRankings)
@@ -154,34 +129,73 @@ export default {
       }
     },
     ranking(name, index, user = false) {
-      let tableBody = (!user) ? document.getElementById("gameRankingBody") : document.getElementById("userRankingBody");
-      // tableBody.classList.add("tbody");
+      if (user)
+        document.querySelector(".userRankingContainer").style.display = "block";
+
+      console.log(this.userGamesRankings[index])
+      if (user && this.userGamesRankings[index].length == 0) {
+        document.getElementById("userRankings" + index).style.display = "none";
+      }
+  else {
+      let tableBody = (!user) ? document.getElementById("tbodyGame"+index) : document.getElementById("tbodyUser"+index);
+      tableBody.style = `
+        background: white;
+      `;
 
       let numberOfRows = !user ? this.numberOfGameRankingRows(index) : this.numberOfUserRankingRows(index);
       let head = !user ? this.headerGames : this.headerUser;
       
       for (let i = 0; i < numberOfRows; i++) {
         let row = document.createElement("tr");
+        row.style = `
+          background: black;
+          display:flex;
+          flex-direction:row;
+          width: 100%;
+          align-content: center;
+        `
         // row.classList.add("row");
 
         for (let j of head) {
           let cell = document.createElement("td");
+          cell.style = `
+            background: #097694;
+            border: outset #097694 3px;
+            align-content: center;
+            width: 100%;
+            font-family: 'Bungee Inline', cursive;
+            font-size: 13px;
+            text-align: center;
+          `;
           // cell.classList.add("cell");
       
           let content;
-          if (!user)
-            content = j === "position" ? i + 1 : this.gamesRankings[index][i][j];
-          else
-            content = j === "position" ? i + 1 : this.userGamesRankings[index][i][j];
+          if (!user) {
+            if ( j === "position" )
+              content = i + 1;
+            else if ( j === "time" )
+              content = this.getTime(this.gamesRankings[index][i][j]);
+            else
+              content = this.gamesRankings[index][i][j];
+          }
+          else {
+            if ( j === "position" )
+              content = i + 1;
+            else if ( j === "time" )
+              content = this.getTime(this.userGamesRankings[index][i][j]);
+            else
+              content = this.userGamesRankings[index][i][j];
+          }
 
-          let text = document.createTextNode(content);      
-          
+          let text = document.createTextNode(content);
+    
           cell.appendChild(text);
           row.appendChild(cell);
         }
         tableBody.appendChild(row);
       }
-
+  }
+      // table.appendChild(tableBody);
 
     },
     numberOfGameRankingRows(index) {
@@ -190,6 +204,9 @@ export default {
     numberOfUserRankingRows(index) {
       return this.userGamesRankings[index].length < 5 ? this.userGamesRankings[index].length : 5;
     },
+    getTime(time) {
+      return time.slice(11, 23);
+    }
   }
 }
 </script>
@@ -202,37 +219,40 @@ export default {
 
 .container {
   width: 100%;
-  background-color: grey;
+  padding-bottom:5%;
+  background-image: url(https://wallpapercave.com/wp/wp4809783.jpg);
+  background-size: cover;
+  background-position: right right;
 }
 
 .title {
-  background-color: white;
   font-family: 'Bungee Inline', cursive;
   text-align: center;
+  color: white;
+  text-shadow: 0 0 20px rgba(10, 175, 230, 1),  0 0 20px rgba(10, 175, 230, 0);
 }
 
 .boxRankings {
   width: 85%;
-  background-color: darkblue;
+  background-color: rgb(0, 0, 0, 0.8);
+  /* background-color: darkblue; */
+  height: 90%;
   display: flex;
   align-content: center;
   flex-direction:row;
 }
 
 .userRankingContainer {
+  margin:1%;
   width: 50%;
-  background-color: darkred;
   min-height: 200px;
+  display: none;
 }
 
 .gamesRankingContainer {
   width: 50%;
   min-height: 200px;
-  background-color: darkgreen;
-}
-
-.table {
-  width: 100%;
+  margin: 1%;
 }
 
 /* .Tcontainer{
@@ -240,24 +260,63 @@ export default {
   width: 85%;
 } */
 
-.gameTitle {
-  color: white;
-  font-family: 'Bungee Inline', cursive;
+.table {
+  display:flex;
+  width: 100%;
+  /*height: 100%;*/
+  flex-direction: column;
+
 }
 
-.row {
+
+.gameTitle {
+  font-family: 'Bungee Inline', cursive;
+  color: white;
+  text-shadow: 0 0 20px rgba(10, 175, 230, 1),  0 0 20px rgba(10, 175, 230, 0);
+}
+
+.rowContainer, .row {
   display: flex;
   flex-direction:row;
-  width: 500px;
+  width: 100%;
+  height: 100%;
+  background: blue;
 }
 
 .cell {
-  background: orange;
-  border: solid black 1px;
-  width: 50px;
-  height: 20px;
+  background: #04354e;
+  border-style: outset ;
+  border: outset #097694 3px;
+  width:100%;
+  /* height: 70%; */
+  align-content: center;
+  font-family: 'Bungee Inline', cursive;
+  font-size: 15px;
+  text-align: center;
+  color: white;
 }
-/* thead {
-  background: green;
-} */
+
+@media screen and (max-width: 1000px) {
+.container {
+  background-size: cover;
+  
+}
+.boxRankings{
+  flex-direction: column;
+}
+
+.userRankingContainer, .gamesRankingContainer {
+  width: 98%;
+  margin-bottom: 7%;
+}
+/*
+.boxRankings {
+  width: 85%;
+  background-color: darkblue;
+  height: 90%;
+  display: flex;
+  align-content: center;
+}
+*/
+}
 </style>
