@@ -1,15 +1,14 @@
 <template>
   <div class="container flex">
-    <h1 class="title"> RANKINGS TITLE </h1>
+    <h1 class="title"> RANKINGS </h1>
     <div class="boxRankings flex">
-
       <div class="userRankingContainer">
         <template v-if="$store.getters.user != null">
           <h2 class="title"> Tus rankings {{ $store.getters.user.name }} </h2>
 
-          <div v-bind:key="i" v-for="(n, i) in gamesName" :id="'userRankings'+i" class="Tcontainer">
+          <div v-bind:key="i" v-for="(n, i) in gamesName" :id="'userRankings' + i" class="Tcontainer">
             <h3 class="gameTitle">{{ gamesName[i] }} </h3>
-            <table class="table" :id="'tableUserGame'+i">
+            <table class="table" :id="'tableUserGame' + i">
               <thead class="thead">
                 <tr class="row">
                   <div v-bind:key="x" v-for="x in headerUser.length"  class="rowContainer">
@@ -17,7 +16,7 @@
                   </div>      
                 </tr>
               </thead>
-              <tbody class="tbody" :id="'tbodyUser'+i"></tbody>
+              <tbody class="tbody" :id="'tbodyUser' + i"></tbody>
             </table>
           </div>
         </template> 
@@ -27,7 +26,7 @@
         <h2 class="title"> Rankings por juego </h2>
         <div v-bind:key="i" v-for="(n, i) in gamesName" id="gamesRankings" class="Tcontainer">
           <h3 class="gameTitle"> {{ gamesName[i] }} </h3>
-          <table class="table" :id="'tableGame'+ i" >
+          <table class="table" :id="'tableGame' + i" >
             <thead class="thead">
               <tr class="row">
                 <div v-bind:key="x" v-for="x in headerGames.length" class="rowContainer">
@@ -277,12 +276,10 @@ export default {
 @media screen and (max-width: 1000px) {
   .container {
     background-size: cover;
-    
   }
   .boxRankings{
     flex-direction: column;
   }
-
   .userRankingContainer, .gamesRankingContainer {
     width: 98%;
     margin-bottom: 7%;

@@ -107,12 +107,10 @@ export default {
 		},
 
 		flash(element, audio, delay, flashDuration) {
-			//set press
 			setTimeout(function() {
 				element.classList.add("btActive");
 				audio.play();
 			}, delay);
-			//set release
 			setTimeout(function() {
 				element.classList.remove("btActive");
 			}, delay + flashDuration - 100);

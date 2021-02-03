@@ -16,8 +16,8 @@ import { InputText } from './utils';
 export default {
   name: "App",
   components: {
-    Menu: Menu,
-    Footer: Footer,
+    Menu,
+    Footer,
     InputText
   }
 };
@@ -27,10 +27,10 @@ export default {
 body {
   margin: 0;
 }
-.flex{
+
+.flex {
   display:flex;
   flex-direction: column;
   margin:auto;
 }
-
 </style>

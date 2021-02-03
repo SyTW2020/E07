@@ -15,7 +15,7 @@
         <div class="flex">
           <button type="submit" class="register-btn"> Regístrate </button>
         </div><br/>
-        <p class="copyright flex"> © GamingIt 2020 </p>
+        <p class="copyright flex"> © GamingIt 2021 </p>
       </form>
     </div>
   </div>

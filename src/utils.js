@@ -15,7 +15,7 @@ import Avatar from 'primevue/avatar';
 export { 
   InputText, 
 	Card, 
-	InlineMessage, 
+	InlineMessage,
 	Password, 
 	InputMask, 
 	Dropdown, 

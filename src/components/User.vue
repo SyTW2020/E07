@@ -262,7 +262,7 @@ form label {
     height: 250px;
   }
   .boxForm {
-     margin-left: 1%;
+    margin-left: 1%;
   }
 }
 </style>

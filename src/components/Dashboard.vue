@@ -25,18 +25,11 @@ export default {
 			imgGames
 		}
 	},
-
-	// props: {
-	// 	ToGame: {
-	// 		type: Function
-	// 	}
-	// },
 	
 	methods: {
 		goToGame(game) {
 			this.$store.dispatch('setGameAction', game);
 			this.$router.push('/game');
-			// this.ToGame(game);	
 		},
 
 		getUrl(index) {

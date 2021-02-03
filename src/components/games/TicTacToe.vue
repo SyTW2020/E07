@@ -19,6 +19,7 @@ export default {
   components: {
     Cell
   },
+
   data() {
     return {
       gameOver: false,

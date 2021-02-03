@@ -10,7 +10,7 @@
         <button type="submit" class="btn-funky-moon" id="submitButton"> Inicia sesión </button><br/>
         <router-link to="/signup" type="button" class="btn-link"> ¿Olvidaste tu contraseña? </router-link>
         <router-link to="/signup" type="button" class="btn-link"> Regístrate </router-link><br/>
-        <p id="copyright" class="copyright"> © Gaming It 2020 </p>
+        <p id="copyright" class="copyright"> © Gaming It 2021 </p>
       </form>
     </div>
   </div>

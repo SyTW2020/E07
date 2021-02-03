@@ -18,7 +18,7 @@ describe("Menu sin iniciar sesión", () => {
           return state.token;
         }
       }
-    })
+    });
 
     wrapper = mount(Menu, {
       localVue,
@@ -26,7 +26,7 @@ describe("Menu sin iniciar sesión", () => {
       mocks: {
         $store
       }
-    })
+    });
   });
 
   it('Menu montado en wrapper', () => {
@@ -53,7 +53,7 @@ describe("Menu sin iniciar sesión", () => {
           return state.token;
         }
       }
-    })
+    });
 
     wrapper = mount(Menu, {
       localVue,
@@ -61,7 +61,7 @@ describe("Menu sin iniciar sesión", () => {
       mocks: {
         $store
       }
-    })
+    });
   });
 
   it('Menu montado en wrapper', () => {

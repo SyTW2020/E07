@@ -53,19 +53,16 @@ export default class Board {
   }
   
   playerHas3InARow(player) {
-    // Filas Horizontales
     for (let i = 0; i < 3; i++) {
       if (this.cells[0][i] === player && this.cells[1][i] === player && this.cells[2][i] === player) {
         return true;
       }
     }
-    // Filas Verticales
     for (let i = 0; i < 3; i++) {
       if (this.cells[i][0] === player && this.cells[i][1] === player && this.cells[i][2] === player) {
         return true;
       }
     }
-    // Diagonales
     if (this.cells[0][0] === player && this.cells[1][1] === player && this.cells[2][2] === player) {
       return true;
     }

@@ -63,7 +63,6 @@ export default {
 </script>
 
 <style scoped>
-
 .bodyGame {
   display: flex;
   width: auto;
@@ -103,7 +102,6 @@ export default {
   background-color: rgba(0, 0, 0, 0.97);
   justify-content: center;
   align-items: center;
-  /* height: 80%; */
 }
 
 .boardGame, .boardScore {
