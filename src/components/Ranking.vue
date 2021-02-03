@@ -7,7 +7,7 @@
         <template v-if="$store.getters.user != null">
           <h2 class="title"> Tus rankings {{ $store.getters.user.name }} </h2>
 
-          <div v-bind:key="i" v-for="(n, i) in gamesName" id="userRankings" class="Tcontainer">
+          <div v-bind:key="i" v-for="(n, i) in gamesName" :id="'userRankings'+i" class="Tcontainer">
             <h3 class="gameTitle">{{ gamesName[i] }} </h3>
             <table class="table" :id="'tableUserGame'+i">
               <thead class="thead">
@@ -29,7 +29,7 @@
           <h3 class="gameTitle"> {{ gamesName[i] }} </h3>
           <table class="table" :id="'tableGame'+ i" >
             <thead class="thead">
-              <tr class="row" style="background: yellow;">
+              <tr class="row">
                 <div v-bind:key="x" v-for="x in headerGames.length" class="rowContainer">
                   <td class="cell">{{ headerGames[x - 1] }} </td>
                 </div>
@@ -129,13 +129,18 @@ export default {
       }
     },
     ranking(name, index, user = false) {
-      // let table = (!user) ? document.getElementById("tableGame"+index) : document.getElementById("tableUserGame"+index);
+      if (user)
+        document.querySelector(".userRankingContainer").style.display = "block";
+
+      console.log(this.userGamesRankings[index])
+      if (user && this.userGamesRankings[index].length == 0) {
+        document.getElementById("userRankings" + index).style.display = "none";
+      }
+  else {
       let tableBody = (!user) ? document.getElementById("tbodyGame"+index) : document.getElementById("tbodyUser"+index);
-      // tableBody.classList.add("tbody");
       tableBody.style = `
         background: white;
       `;
-
 
       let numberOfRows = !user ? this.numberOfGameRankingRows(index) : this.numberOfUserRankingRows(index);
       let head = !user ? this.headerGames : this.headerUser;
@@ -154,8 +159,8 @@ export default {
         for (let j of head) {
           let cell = document.createElement("td");
           cell.style = `
-            background: darkred;
-            border: 3px solid black;
+            background: #097694;
+            border: outset #097694 3px;
             align-content: center;
             width: 100%;
             font-family: 'Bungee Inline', cursive;
@@ -189,7 +194,7 @@ export default {
         }
         tableBody.appendChild(row);
       }
-
+  }
       // table.appendChild(tableBody);
 
     },
@@ -215,18 +220,22 @@ export default {
 .container {
   width: 100%;
   padding-bottom:5%;
-  background-color: grey;
+  background-image: url(https://wallpapercave.com/wp/wp4809783.jpg);
+  background-size: cover;
+  background-position: right right;
 }
 
 .title {
-  background-color: white;
   font-family: 'Bungee Inline', cursive;
   text-align: center;
+  color: white;
+  text-shadow: 0 0 20px rgba(10, 175, 230, 1),  0 0 20px rgba(10, 175, 230, 0);
 }
 
 .boxRankings {
   width: 85%;
-  background-color: darkblue;
+  background-color: rgb(0, 0, 0, 0.8);
+  /* background-color: darkblue; */
   height: 90%;
   display: flex;
   align-content: center;
@@ -236,14 +245,13 @@ export default {
 .userRankingContainer {
   margin:1%;
   width: 50%;
-  background-color: darkred;
   min-height: 200px;
+  display: none;
 }
 
 .gamesRankingContainer {
   width: 50%;
   min-height: 200px;
-  background-color: darkgreen;
   margin: 1%;
 }
 
@@ -257,13 +265,14 @@ export default {
   width: 100%;
   /*height: 100%;*/
   flex-direction: column;
-  background: darkorange;
+
 }
 
 
 .gameTitle {
-  color: white;
   font-family: 'Bungee Inline', cursive;
+  color: white;
+  text-shadow: 0 0 20px rgba(10, 175, 230, 1),  0 0 20px rgba(10, 175, 230, 0);
 }
 
 .rowContainer, .row {
@@ -275,13 +284,39 @@ export default {
 }
 
 .cell {
-  background: orange;
-  border: solid black 3px;
+  background: #04354e;
+  border-style: outset ;
+  border: outset #097694 3px;
   width:100%;
   /* height: 70%; */
   align-content: center;
   font-family: 'Bungee Inline', cursive;
   font-size: 15px;
   text-align: center;
+  color: white;
+}
+
+@media screen and (max-width: 1000px) {
+.container {
+  background-size: cover;
+  
+}
+.boxRankings{
+  flex-direction: column;
+}
+
+.userRankingContainer, .gamesRankingContainer {
+  width: 98%;
+  margin-bottom: 7%;
+}
+/*
+.boxRankings {
+  width: 85%;
+  background-color: darkblue;
+  height: 90%;
+  display: flex;
+  align-content: center;
+}
+*/
 }
 </style>
