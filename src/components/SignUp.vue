@@ -12,7 +12,9 @@
         <InputText type="password" v-model="user.password" id="inputPassword1" class="p-inputtext-lg" placeholder="Contraseña" required=""/><br/>
         <InputText type="password" v-model="user.password2" id="inputPassword2" class="p-inputtext-lg" placeholder="Repite la contraseña" required=""/><br/>
         <small id="username2-help" class="msg" ></small><br/>
-        <div class="flex"> <button type="submit" class="register-btn"> Regístrate </button></div><br/>
+        <div class="flex">
+          <button type="submit" class="register-btn"> Regístrate </button>
+        </div><br/>
         <p class="copyright flex"> © GamingIt 2020 </p>
       </form>
     </div>
@@ -46,6 +48,7 @@ export default {
 
   methods: {
     registerUser() {
+      console.log('giku')
       if (!this.checkPasswords()) {
         const msg = document.querySelector(".msg");
         msg.textContent = "Las contraseñas no coinciden.";

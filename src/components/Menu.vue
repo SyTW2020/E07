@@ -101,7 +101,6 @@ i {
   margin-right: 7px;
 }
 
-/* Menú hamburguesa */
 .icon-container {
   display: flex;
   align-items: center;
@@ -125,12 +124,10 @@ i {
     display: flex;
     justify-content: space-between;
   }
-
   .items {
     display: block;
     float: right;
   }
-
   .burger-menu-icon {
     display: none;
   }

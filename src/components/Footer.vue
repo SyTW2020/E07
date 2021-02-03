@@ -12,7 +12,7 @@
 				</div>
 			</div>
 			<div class="footerDown">
-				<p> &copy; Gaming It 2020 </p>
+				<p> &copy; Gaming It 2021 </p>
 			</div>
 		</div>
 	</div>
@@ -70,5 +70,4 @@ a:hover {
   font-family: 'Bungee Inline', cursive;
 	color: black;
 }
-
 </style>

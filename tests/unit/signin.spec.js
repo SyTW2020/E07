@@ -1,13 +1,14 @@
-import SignIn from "../../src/components/SignIn.vue";
-import { mount } from "@vue/test-utils";
+import SignIn from "../../src/components/SignIn";
+import { mount, createLocalVue } from "@vue/test-utils";
 
-describe("SignIn.vue", () => {
+describe("SignIn", () => {
   let wrapper, nickname, pass;
 
   beforeAll(() => {
     wrapper = mount(SignIn, {
-      stubs: ['router-link']
+      stubs: ['router-link', 'router-view']
     });
+
     nickname = wrapper.find("#inputNickname");
     pass = wrapper.find("#inputPassword");
   });
@@ -15,6 +16,10 @@ describe("SignIn.vue", () => {
   beforeEach(async () => {
     await nickname.setValue("test"); 
     await pass.setValue("test123");
+  });
+
+  it('User montado en wrapper', () => {
+    expect(wrapper.vm.user).not.toBe(undefined);
   });
 
   it("Comprobando que SignIn funciona", async () => {

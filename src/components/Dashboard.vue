@@ -1,8 +1,8 @@
 <template>
 	<div class="dashboard flex wrap">
 		<Card v-for="(i, j) in games" :key="j" :name="i" class="card flex">
-			<template #header>
-				<img alt="user header" :src="getUrl(i)" @click="goToGame(i)">
+			<template #header @click="gToGame(i)">
+				<img alt="user header" :src="getUrl(i)" :id="i" @click="goToGame(i)">
 			</template>
 			<template #title> <h3> {{ i }} </h3> </template>
 		</Card>
@@ -25,11 +25,18 @@ export default {
 			imgGames
 		}
 	},
+
+	// props: {
+	// 	ToGame: {
+	// 		type: Function
+	// 	}
+	// },
 	
 	methods: {
 		goToGame(game) {
 			this.$store.dispatch('setGameAction', game);
 			this.$router.push('/game');
+			// this.ToGame(game);	
 		},
 
 		getUrl(index) {
@@ -72,7 +79,7 @@ h3 {
 	border-radius: 10px 10px 10px 10px;
 	box-shadow: 1px 1px 12px 1px rgba(0,0,0,0.8);
 	background-color:rgb(0, 0, 0, 0.8);
-} 
+}
 
 img {
 	width: 150px;
@@ -84,7 +91,7 @@ img {
   color: #111; 
   background: #4594FB; 
   box-shadow: 0 0 50px #4594FB; 
-}  
+}
 
 @media screen and (min-width: 800px) {
 	.flex {
