@@ -23,7 +23,7 @@ export default {
 
   mounted() {
 		this.$root.$on('Timer', () => {
-			this.reset();
+      this.reset();
 		})
 	},
 

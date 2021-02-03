@@ -1,13 +1,12 @@
-import SignUp from "../../src/components/SignUp.vue";
+import SignUp from "../../src/components/SignUp";
 import { mount } from "@vue/test-utils";
 
 describe('SignUp.vue', () => {
   let wrapper, nickname, email, pass1, pass2;
 
   beforeAll(() => {
-    wrapper = mount(SignUp, {
-      stubs: ['router-link']
-    });
+    wrapper = mount(SignUp);
+
     nickname = wrapper.find("#inputNickname");
     email = wrapper.find("#inputEmail");
     pass1 = wrapper.find("#inputPassword1");
@@ -21,8 +20,11 @@ describe('SignUp.vue', () => {
     await pass2.setValue("test123");
   });
 
+  it('User montado en wrapper', () => {
+    expect(wrapper.vm.user).not.toBe(undefined);
+  });
+
   it("Comprobando que los campos para Registrarse contiene la información correctamente", async () => {
-    await wrapper.find('button').trigger("click")
     expect(`${nickname.element.value}, ${email.element.value}, ${pass1.element.value}, ${pass2.element.value}`)
       .toBe(`test, test@gmail.com, test123, test123`);
   });

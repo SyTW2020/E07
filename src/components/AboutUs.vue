@@ -1,5 +1,5 @@
 <template>
-  <div class = "bodyAbout">
+  <div class="bodyAbout">
 		<link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap" rel="stylesheet">
     <div class = "teamBox">
@@ -8,34 +8,34 @@
         	<h1> Paula Expósito Estévez </h1>
 					<h2> Cerebro conjunto de Gaming It </h2>
 				</div>
-				<a href="https://github.com/PaulaExposito">
+				<a href="https://github.com/PaulaExposito" id="Paula">
         	<img src="https://vader.news/__export/1589864317677/sites/gadgets/img/2020/05/19/the100-newsvader.jpg_550774285.jpg" class="teamPhoto">  
 				</a>
       </div>  
-      <div  class="card teamLeft">
+      <div class="card teamLeft">
 				<div class="teamText">
         	<h1> Míriam Núñez García </h1>
 					<h2> Cerebro conjunto de Gaming It </h2>
 				</div>
-				<a href="https://github.com/mnzgarcia">
+				<a href="https://github.com/mnzgarcia" id="Miriam">
         	<img src="https://pyxis.nymag.com/v1/imgs/f2c/caf/790143795c3c58b07b6221e11d3f2afcc1-21-clark-100.rsquare.w700.jpg" class="teamPhoto">  
 				</a>
-      </div>  
-      <div  class="card">
+      </div> 
+      <div class="card">
 				<div class="teamText">
         	<h1> Adán de la Rosa Lugo </h1>
 					<h2> Cerebro conjunto de Gaming It </h2>
 				</div>
-				<a href="https://github.com/AdanRL">
+				<a href="https://github.com/AdanRL" id="Adan">
         	<img src="https://a1cf74336522e87f135f-2f21ace9a6cf0052456644b80fa06d4f.ssl.cf2.rackcdn.com/images/characters_opt/p-The-100-Ricky-Whittle.jpg" class="teamPhoto">
 				</a>  
       </div>  
-      <div  class="card teamLeft">
+      <div class="card teamLeft">
 				<div class="teamText ">
         	<h1> Elena Sacramento Delgado </h1>
 					<h2> Cerebro conjunto de Gaming It </h2>
 				</div>
-				<a href="https://github.com/elenamsd">
+				<a href="https://github.com/elenamsd" id="Elena">
         	<img src="https://i.pinimg.com/originals/77/da/5f/77da5fe07dcc9a82f5c3247a59ce93fb.jpg" class="teamPhoto"> 
 				</a> 
       </div> 
@@ -44,13 +44,8 @@
 </template>
 
 <script>
-import { Card } from '../utils';
-
 export default {
-  name: "Home",
-  components: {
-    Card
-	}
+  name: "AboutUs"
 };
 </script>
 
@@ -119,7 +114,6 @@ export default {
 	flex-direction: row-reverse;
 }
 
-/* ORDENADOR */ 
 @media screen and (min-width: 1600px) {
 	.card {
 		font-size: 18px;
@@ -130,7 +124,6 @@ export default {
 	}
 }
 
-/* Media pantalla */ 
 @media screen and (min-width: 800px) and (max-width: 1600px) {
 	.card {
 		font-size: 14px;

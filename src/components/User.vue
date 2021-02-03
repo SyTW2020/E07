@@ -1,28 +1,23 @@
 <template>
   <div class="bodyUser">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-      <div class="boxUser">
-        <div class="userProfile">
-          <h1>¡Hola {{ user.name }}!</h1>
-          <div class="cardPhoto" >
-            <label for="file-input">
-              <img id="userPhoto" width="100" height="100" class="userPhoto" :src="$store.getters.user.photo" @click="chooseImage" label="Toggle" title="Cambia tu avatar">
-            </label>
-          </div>
-          <OverlayPanel ref="op">
-            <div v-bind:key="i" v-for="(n, i) in avatars" class="avatarsContainer">
-              <img :src="getUrl(i)" @click="changeAvatar(i)" alt="n" class="avatar">
-            </div>
-          </OverlayPanel>
-          <!-- <div class="boxAvatars" style="display: none;"> 
-            <div v-bind:key="i" v-for="(n, i) in avatars" class="avatarsContainer" >
-              <img :src="getUrl(i)" @click="changeAvatar(i)" alt="n" class="avatar" title="Cambia tu avatar">
-            </div>
-          </div> -->
-          <Button type="button" @click="deleteConfirm" class="p-button-danger"> Eliminar cuenta </Button>
+    <div class="boxUser">
+      <div class="userProfile">
+        <h1>¡Hola {{ user.name }}!</h1>
+        <div class="cardPhoto" >
+          <label for="file-input">
+            <img id="userPhoto" width="100" height="100" class="userPhoto" :src="$store.getters.user.photo" @click="chooseImage" label="Toggle" title="Cambia tu avatar">
+          </label>
         </div>
+        <OverlayPanel ref="op">
+          <div v-bind:key="i" v-for="(n, i) in avatars" class="avatarsContainer">
+            <img :src="getUrl(i)" @click="changeAvatar(i)" alt="n" class="avatar">
+          </div>
+        </OverlayPanel>
+        <Button type="button" @click="deleteConfirm" class="p-button-danger"> Eliminar cuenta </Button>
+      </div>
 
-        <div class="boxForm">
+      <div class="boxForm">
         <form  @submit.prevent="modifyUser" class="userForm">
           <h1 class="h3 mb-3 font-weight-normal"> Editar perfil </h1>
 
@@ -109,7 +104,6 @@ export default {
             });
             this.user = this.$store.getters.user;
             window.alert("Usuario modificado");
-            // this.$toast.add({ severity:'info', summary: 'Imagen Cambiada', detail: event.data.name, life: 3000 });
           }
         })
         .catch(err => console.log(err));
@@ -146,12 +140,6 @@ export default {
 
     chooseImage(event) {
       this.$refs.op.toggle(event);
-      // const avatars = document.querySelector(".boxAvatars");
-      // if (avatars.style.display == "flex")
-      //   avatars.style.display = "none";
-      // else
-      //   avatars.style.display = "flex";
-      // avatars.style.flexDirection = "column";
     },
 
     changeAvatar(name) {
@@ -211,14 +199,6 @@ export default {
   transform: scale(0.9, 0.9);
   box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25), -5px -5px 30px 15px rgba(0, 0, 0, 0.22);
 }
-
-/* .boxAvatars {
-  width: 100%;
-  height: auto;
-  background-color: darkcyan;
-  display: flex;
-  flex-direction: column;
-} */
 
 .boxForm {
   display: flex;

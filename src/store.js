@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
@@ -13,7 +13,7 @@ export default new Vuex.Store({
     gameStatus: null
   },
   mutations: {
-    singIn(state, data) {
+    signIn(state, data) {
       state.token = data.token;
       state.user = data.user;
     },
@@ -36,7 +36,7 @@ export default new Vuex.Store({
   },
   actions: {
     signInAction(context, data) {
-      context.commit('singIn', data);
+      context.commit('signIn', data);
     },
     logOutAction(context) {
       context.commit('logOut');
@@ -74,4 +74,4 @@ export default new Vuex.Store({
       return state.gameStatus;
     }
   }
-})
+});

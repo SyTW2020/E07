@@ -28,17 +28,17 @@ export default new Router({
     },
     {
       path: "/myuser",
-      name: "MyUser",
+      name: "myuser",
       component: () => import("./components/User.vue")
     },
     {
       path: "/game",
-      name: "Game",
+      name: "game",
       component: () => import("./views/Game.vue")
     },
     {
       path: "/aboutus",
-      name: "AboutUs",
+      name: "aboutus",
       component: () => import("./components/AboutUs.vue")
     }
   ]
